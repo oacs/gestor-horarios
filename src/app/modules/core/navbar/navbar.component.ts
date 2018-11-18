@@ -6,8 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  openned : boolean;
 
-  constructor() { }
+  constructor() { 
+    this.openned = false;
+  }
+
+  toggleMenu() {
+    if(this.openned == true)
+      this.openned = false;
+    else  
+      this.openned = true;
+  }
 
   ngOnInit() {
   }
