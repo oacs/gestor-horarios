@@ -1,4 +1,4 @@
-import { HomeComponent } from './modules/core/home/home.component';
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TestAlgoritmoComponent } from './algoritmo/test-algoritmo/test-algoritmo.component';
@@ -20,6 +20,10 @@ const routes: Routes = [
         path: 'gestor',
         loadChildren: () => GestorModule
     },
+    {
+        path: 'test',
+        component: TestAlgoritmoComponent
+    }
 ];
 
 @NgModule({

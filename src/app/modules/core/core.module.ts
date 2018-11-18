@@ -15,7 +15,8 @@ const routes: Route[] = [
     RouterModule.forChild(routes)
   ],
   exports: [
-    AdministradorDragComponent
+    AdministradorDragComponent,
+    NavbarComponent
   ],
   declarations: [ HomeComponent, NavbarComponent, AdministradorDragComponent]
 })
