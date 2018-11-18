@@ -25,7 +25,10 @@ export class Clase extends Disponibilidad {
     }
   }
 
-  public static ClaseFactory(salonIn: Salon, dia: number, hora: number, duracion: number): Clase | undefined {
+  public static ClaseFactory(dia: number, hora: number, duracion: number, salonIn?: Salon): Clase | undefined {
+    if (!salonIn){
+      salonIn = new Salon("Salon_Unico_" + (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase());
+    }
     if ((hora + duracion <= salonIn.horasLength()) && (hora + duracion >= 0)) {
       if ((dia < salonIn.diasLength()) && (dia >= 0)) {
         if (0.0 !== salonIn.getHoras(dia, hora, duracion)) {

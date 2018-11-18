@@ -47,8 +47,8 @@ export class TestAlgoritmoComponent implements OnInit {
     ];
 
     // esta funcion esta para facilitar la Impresion en consolo no es necesaria en el algoridmo
-    function insetClass(salonIn: Salon, diaIn: number, horaIn: number, DuracionIn: number, sccnIn: Seccion) {
-      clsIn = Clase.ClaseFactory(salonIn, diaIn, horaIn, DuracionIn); // <- Así se crea una clase
+    function insetClass(diaIn: number, horaIn: number, DuracionIn: number, sccnIn: Seccion, salonIn?: Salon) {
+      clsIn = Clase.ClaseFactory(diaIn, horaIn, DuracionIn,salonIn); // <- Así se crea una clase
       if (clsIn) {
         // ↓↓↓ Así se agrega la clase, se guarda el numero de error para impremirlo
         clsFg = crngm.addClase(sccnIn, clsIn);
@@ -94,7 +94,7 @@ export class TestAlgoritmoComponent implements OnInit {
     profs[1].setWeekZeros();
     profs[1].setTodoElDia(DIAS.Lunes, 1.0);
     profs[1].setTodoElDia(DIAS.Miercoles, 1.0);
-    profs[1].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '], 5, 0.5);
+    profs[1].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '], 5, 2);
 
     // Humberto Human (de Lunrtes a Viernes de 07:00am a 04:00pm con los Vierdos como 2° opcion)
     profs[2].setWeekOnes();
@@ -110,13 +110,13 @@ export class TestAlgoritmoComponent implements OnInit {
     profs[2].setHoras(DIAS.Jueves, HORAS['  7:00:00 AM -  8:00:00 AM '], 5, 1.0);
     profs[2].setHoras(DIAS.Jueves, HORAS['  7:00:00 AM -  8:00:00 AM '] + 5, 14 - 5, 0.0);
 
-    profs[2].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '], 5, 0.5);
+    profs[2].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '], 5, 2);
     profs[2].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '] + 5, 14 - 5, 0.0);
 
     // Common Dintong (de Lunes a Jueves todo el dia,los Viernes de 07:00am a 04:00pm todo como 2° opcion)
     profs[3].setWeekOnes();
 
-    profs[3].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '], 9, 0.5);
+    profs[3].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '], 9, 2);
     profs[3].setHoras(DIAS.Viernes, HORAS['  7:00:00 AM -  8:00:00 AM '] + 9, 14 - 9, 0.0);
 
 
@@ -173,38 +173,41 @@ export class TestAlgoritmoComponent implements OnInit {
     // Creacion y agregado de Clases
     // anadir clases al cronograma
 
+    // IMPORTANTE!!!! la funccion insertClass no esta impliemntada en la clases del algoritmo
+    // esta para facilitar la insersion en la prueba, chequear la definicion al principio del
+    // de condigo para ver como se hace realmente.c
 
     // plastilina 1[01]
-    insetClass(slns[0], DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[0]);
-    insetClass(slns[0], DIAS.Lunes, HORAS['  9:00:00 AM - 10:00:00 AM '], 2, sccns[0]);
-    insetClass(slns[0], DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[0]);
+    insetClass(DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[0], slns[0]);
+    insetClass(DIAS.Lunes, HORAS['  9:00:00 AM - 10:00:00 AM '], 2, sccns[0], slns[0]);
+    insetClass(DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[0], slns[0]);
 
     // plastilina 1[02]
-    insetClass(slns[0], DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[1]);
-    insetClass(slns[1], DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[1]);
-    insetClass(slns[1], DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[1]);
+    insetClass(DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[1], slns[0]);
+    insetClass(DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[1], slns[1]);
+    insetClass(DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[1], slns[1]);
 
-    insetClass(slns[0], DIAS.Martes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[2]);
-    insetClass(slns[2], DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[2]);
-    insetClass(slns[0], DIAS.Jueves, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[2]);
+    insetClass(DIAS.Martes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[2], slns[0]);
+    insetClass(DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[2], slns[2]);
+    insetClass(DIAS.Jueves, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[2], slns[0]);
 
     // plastilina 2[01]
-    insetClass(slns[1], DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[3]);
-    insetClass(slns[1], DIAS.Martes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[3]);
-    insetClass(slns[1], DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '] + 2, 2, sccns[3]);
-    insetClass(slns[1], DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '] + 2, 2, sccns[3]);
+    insetClass(DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[3], slns[1]);
+    insetClass(DIAS.Martes, HORAS['  7:00:00 AM -  8:00:00 AM '], 2, sccns[3], slns[1]);
+    insetClass(DIAS.Lunes, HORAS['  7:00:00 AM -  8:00:00 AM '] + 2, 2, sccns[3], slns[1]);
+    insetClass(DIAS.Miercoles, HORAS['  7:00:00 AM -  8:00:00 AM '] + 2, 2, sccns[3], slns[1]);
 
-    insetClass(slns[1], DIAS.Lunes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 3, sccns[4]);
-    insetClass(slns[1], DIAS.Lunes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[4]);
-    insetClass(slns[1], DIAS.Miercoles, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[4]);
-    insetClass(slns[1], DIAS.Viernes, HORAS[' 11:00:00 AM - 12:00:00 PM '] - 1, 2, sccns[4]);
-    insetClass(slns[1], DIAS.Viernes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 1, sccns[4]);
+    insetClass(DIAS.Lunes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 3, sccns[4], slns[1]);
+    insetClass(DIAS.Lunes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[4], slns[1]);
+    insetClass(DIAS.Miercoles, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[4], slns[1]);
+    insetClass(DIAS.Viernes, HORAS[' 11:00:00 AM - 12:00:00 PM '] - 1, 2, sccns[4], slns[1]);
+    insetClass(DIAS.Viernes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 1, sccns[4], slns[1]);
 
-    insetClass(slns[2], DIAS.Lunes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[8]);
-    insetClass(slns[2], DIAS.Martes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[8]);
+    insetClass(DIAS.Lunes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[8], slns[2]);
+    insetClass(DIAS.Martes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 2, sccns[8], slns[2]);
 
-    insetClass(slns[1], DIAS.Martes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 1, sccns[6]);
-    insetClass(slns[1], DIAS.Martes, HORAS['  9:00:00 AM - 10:00:00 AM '], 1, sccns[6]);
+    insetClass(DIAS.Martes, HORAS[' 11:00:00 AM - 12:00:00 PM '], 1, sccns[6], slns[1]);
+    insetClass(DIAS.Martes, HORAS['  9:00:00 AM - 10:00:00 AM '], 1, sccns[6], slns[1]);
 
 
     const clsOut: Clase | undefined = sccns[6].clases.splice(0)[0];
@@ -212,13 +215,14 @@ export class TestAlgoritmoComponent implements OnInit {
       stringErrorOut += '\n removienda clase: ' + clsOut.tituloToString() + '\n';
     }
 
-    insetClass(slns[1], DIAS.Martes, HORAS['  9:00:00 AM - 10:00:00 AM '], 2, sccns[6]);
-    insetClass(slns[1], DIAS.Jueves, HORAS['  9:00:00 AM - 10:00:00 AM '], 2, sccns[6]);
+    // insercion si difinir clase lo que hace es que se crea un salon con un nombre unico.
+    insetClass(DIAS.Jueves, HORAS['  9:00:00 AM - 10:00:00 AM '], 2, sccns[10]);
+    insetClass(DIAS.Viernes, HORAS['  9:00:00 AM - 10:00:00 AM '], 2, sccns[10]);
+    insetClass(DIAS.Miercoles, HORAS['  9:00:00 AM - 10:00:00 AM '], 1, sccns[10]);
 
-    const dispFinal: Disponibilidad = new Disponibilidad();
-    dispFinal.setWeekOnes();
+    this.consoleStr = stringErrorOut + (crngm.toString().replace(/\n/g, '<br>'));
 
-    this.consoleStr = stringErrorOut + (crngm.ToString().replace(/\n/g, '<br>'));
+    this.consoleStr += "<br>" + crngm.getCruceProf(profs[3]).toString().replace(/\n/g, '<br>');
 
   }
 

@@ -49,6 +49,8 @@ export class Disponibilidad {
   public setHora(dia: number, hora: number, disp: number) {
     if ( (0 <= disp) && (disp <= 1) ) {
       this.rejilla[dia][hora] = disp;
+    } else {
+      this.rejilla[dia][hora] =  Math.abs(1/disp);
     }
 
   }

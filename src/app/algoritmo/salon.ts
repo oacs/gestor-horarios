@@ -13,4 +13,5 @@ export class Salon extends Disponibilidad {
   public toString(): string {
     return 'Salon: ' + this.code + '\n' + super.toString();
   }
+  
 }

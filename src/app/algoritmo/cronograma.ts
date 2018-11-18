@@ -20,10 +20,10 @@ export class Cronograma {
   }
 
   /**
-   * ToString
+   * toString
    * Retorna string con Info del cronogrma tipado para consola
    */
-  public ToString(): string {
+  public toString(): string {
     return 'Cronograma: ' + this.nombre + ', Pensum:' + this.pensum.nombre + '\n' +
       this.getSeccionToString();
   }
@@ -441,6 +441,22 @@ export class Cronograma {
     }
     return dispFinal;
   }
+
+  /**
+   * insetClass Inserta una clase, con esta funcion es de forma ma "comoda".
+   * 
+   */
+  public insetClass(diaIn: number, horaIn: number, DuracionIn: number, sccnIn: Seccion, salonIn?: Salon):boolean {
+      let clsIn: Clase | undefined;
+      let clsFg: number;
+      clsIn = Clase.ClaseFactory(diaIn, horaIn, DuracionIn,salonIn); // <- Así se crea una clase
+      if (clsIn) {
+        // ↓↓↓ Así se agrega la clase, se guarda el numero de error para impremirlo
+        this.addClase(sccnIn, clsIn);
+        return true;
+      }
+    return false;
+    }
 
 }
 
