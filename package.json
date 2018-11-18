@@ -37,6 +37,7 @@
     "e2e": "npm run postinstall:web && ng e2e"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.118",
     "angular-font-awesome": "^3.1.2",
     "font-awesome": "^4.7.0"
   },
