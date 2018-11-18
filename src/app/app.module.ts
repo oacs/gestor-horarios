@@ -18,8 +18,10 @@ import { ElectronService } from './providers/electron.service';
 import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { TestAlgoritmoComponent } from './algoritmo/test-algoritmo/test-algoritmo.component';
+import { CoreModule } from './modules/core/core.module';
+import { PensumModule } from './modules/pensum/pensum.module';
+import { GestorModule } from './modules/gestor/gestor.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -29,7 +31,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     WebviewDirective,
     TestAlgoritmoComponent
   ],
@@ -38,6 +39,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    // Features
+    CoreModule,
+    PensumModule,
+    GestorModule,
+    //
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

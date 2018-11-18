@@ -1,18 +1,25 @@
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './modules/core/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TestAlgoritmoComponent } from './algoritmo/test-algoritmo/test-algoritmo.component';
+import { CoreModule } from './modules/core/core.module';
+import { PensumModule } from './modules/pensum/pensum.module';
+import { GestorModule } from './modules/gestor/gestor.module';
 
 
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        loadChildren: () => CoreModule
     },
     {
-        path: 'test',
-        component: TestAlgoritmoComponent
-    }
+        path: 'pensum',
+        loadChildren: () => PensumModule
+    },
+    {
+        path: 'gestor',
+        loadChildren: () => GestorModule
+    },
 ];
 
 @NgModule({
