@@ -7,14 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   openned : boolean;
+  
 
   constructor() { 
     this.openned = false;
   }
 
   toggleMenu() {
-    if(this.openned == true)
+    if(this.openned == true){
+      // let shand = document.getElementsByClassName('nav-icons') as HTMLCollectionOf<HTMLElement>;
+      // shand[0].style.animation = "alternate";
       this.openned = false;
+
+    }
     else  
       this.openned = true;
   }
