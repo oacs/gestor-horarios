@@ -23,6 +23,23 @@ export interface Prelacion {
   id_prelante: string;
   id: string;
 }
+export interface Materia {
+  nombre: string;
+  semestre: number;
+}
+
+// tslint:disable-next-line:class-name
+export interface Materia_x_Pensum {
+  id_pensum: number;
+  id_materia: number;
+
+  delete();
+  save();
+}
+
+export interface Pensum {
+  fecha: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +65,7 @@ export class DatabaseService {
     });
   }
 
-  public crearPensum( pensum: Pensum): boolean {
+  public crearPensum(pensum: Pensum): boolean {
     let flag = false;
     this.db.insertTableContent('customers', pensum, (succ, msg) => {
       // succ - boolean, tells if the call is successful
