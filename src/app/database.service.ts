@@ -24,20 +24,23 @@ export interface Prelacion {
   id: string;
 }
 export interface Materia {
+  id: string;
   nombre: string;
-  semestre: number;
+  semestre: string;
 }
 
 // tslint:disable-next-line:class-name
 export interface Materia_x_Pensum {
-  id_pensum: number;
-  id_materia: number;
+  id: string;
+  id_pensum: string;
+  id_materia: string;
 
   delete();
   save();
 }
 
 export interface Pensum {
+  id: string;
   fecha: string;
 }
 
