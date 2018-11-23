@@ -10,6 +10,23 @@ export interface Seccion {
   periodo: string;
 }
 
+export interface Materia {
+  nombre   : string;
+  semestre :number;
+}
+
+export interface Materia_x_Pensum {
+  id_pensum : number;
+  id_materia: number;
+
+  delete();
+  save();
+}
+
+export interface Pensum {
+  fecha : string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,8 +40,16 @@ export class DatabaseService {
       console.log('Success: ' + succ);
       console.log('Message: ' + msg);
     });
+    
+    this.db.createTable('materia',(succ, msg) => {
 
+    });
+    this.db.createTable('materia_x_pensum',(succ, msg) => {
+
+    });
+    this.db.createTable('pensum',(succ, msg) => {
+
+    });
     console.log(db);
-
   }
 }
