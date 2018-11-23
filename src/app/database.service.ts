@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import * as database from '../../../../node_modules/electron-db';
-
+import * as database from '../../node_modules/electron-db';
+import { NumericDictionary } from 'lodash';
 const db = database;
 
+export interface Seccion {
+  id: string;
+  numero: string;
+  horaio: string;
+  periodo: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class PensumService {
+export class DatabaseService {
 
   public db;
   constructor() {
