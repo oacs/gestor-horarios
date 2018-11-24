@@ -1,0 +1,25 @@
+div.columnContainer {
+    display: flex;
+    justify-content: space-evenly;
+    height: calc(100% - 200px);
+    margin: 0% 10% 0% 10%;
+}
+
+div.columnContainer div.column {
+    text-align: center;
+    background-color: rgba(0,0,0,0.03);
+    height: 100%;
+    width: 8%;
+    box-shadow: 0 3px 4px 0 rgba(255, 255, 255, 0.2), 0 3px 3px -2px rgba(255, 255, 255, .3), 0 1px 8px 0 rgba(255, 255, 255, .19);
+}
+
+div.columnContainer div.column h1 {
+    color: rgba(0,0,0,0.6);
+    font-weight: 400;
+    font-size: 21px;
+    padding-top: 23px;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */    
+}

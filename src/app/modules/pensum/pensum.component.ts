@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
+import { Materia } from '../../models/materia';
+
 @Component({
   selector: 'app-pensum',
   templateUrl: './pensum.component.html',
@@ -14,8 +16,16 @@ import { NgModule } from '@angular/core';
 })
 
 export class PensumComponent implements OnInit {
+  materias : Materia[] ;
 
-  constructor() { }
+  constructor() {
+    this.materias = [ 
+    new Materia('Matematica'), 
+    new Materia('Introducción'), 
+    new Materia('Plastilina'), 
+    new Materia('Trigonometría'),
+    new Materia('Programación') ]
+  }
 
   ngOnInit() {
   }
