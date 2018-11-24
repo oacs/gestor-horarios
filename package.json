@@ -39,6 +39,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.118",
     "angular-font-awesome": "^3.1.2",
+    "electron-db": "^0.8.1",
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {

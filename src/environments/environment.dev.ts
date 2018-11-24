@@ -5,5 +5,6 @@
 
 export const AppConfig = {
   production: false,
-  environment: 'DEV'
+  environment: 'DEV',
+  tables: ['pensum', 'seccion', 'profesor', 'prelacion', 'materia', 'materia_x_pensum']
 };

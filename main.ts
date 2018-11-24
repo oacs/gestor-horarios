@@ -7,7 +7,6 @@ const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
 function createWindow() {
-
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
@@ -20,6 +19,8 @@ function createWindow() {
   });
 
   if (serve) {
+
+    console.log(app.getPath('userData'));
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
     });

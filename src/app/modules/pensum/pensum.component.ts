@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
+
 import { Materia } from '../../models/materia';
+
+import { DatabaseService } from '../../database.service';
 
 @Component({
   selector: 'app-pensum',
@@ -18,13 +21,13 @@ import { Materia } from '../../models/materia';
 export class PensumComponent implements OnInit {
   materias : Materia[] ;
 
-  constructor() {
+  constructor(private dbService: DatabaseService) { 
     this.materias = [ 
-    new Materia('Matematica'), 
-    new Materia('Introducción'), 
-    new Materia('Plastilina'), 
-    new Materia('Trigonometría'),
-    new Materia('Programación') ]
+      new Materia('Matematica'), 
+      new Materia('Introducción'), 
+      new Materia('Plastilina'), 
+      new Materia('Trigonometría'),
+      new Materia('Programación') ]
   }
 
   ngOnInit() {
