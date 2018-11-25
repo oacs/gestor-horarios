@@ -81,8 +81,20 @@ export class DatabaseService {
     return flag;
   }
 
-  public getMaterias(): Observable<Materia> {
-    return this.http.get<Materia>('http://localhost:3000');
+  public getMaterias(): Observable<Materia[]> {
+    return this.http.get<Materia[]>(AppConfig.api + 'materias');
+  }
+
+  public getMateria(id: number): Observable<Materia> {
+    return this.http.get<Materia>(AppConfig.api + 'materias/' + id);
+  }
+
+  public updateMateria(materia: Materia): any {
+    return this.http.put(AppConfig.api + 'materias/' + materia.id, materia );
+  }
+
+  public insertMateria(materia: Materia): Observable<any> {
+    return this.http.post(AppConfig.api + 'materias/', materia );
   }
 
 }

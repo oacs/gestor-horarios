@@ -1,5 +1,5 @@
 {
-  "name": "angular-electron",
+  "name": "gestor-horarios",
   "version": "4.2.2",
   "description": "Angular 6 with Electron (Typescript + SASS + Hot Reload)",
   "homepage": "https://github.com/maximegris/angular-electron",
@@ -32,6 +32,7 @@
     "electron:local": "npm run build:prod && electron .",
     "electron:linux": "npm run build:prod && npx electron-builder build --linux",
     "electron:windows": "npm run build:prod && npx electron-builder build --windows",
+    "electron:windows32": "npm run build:prod && npx electron-builder build --windows --ia32",
     "electron:mac": "npm run build:prod && npx electron-builder build --mac",
     "test": "npm run postinstall:web && ng test",
     "e2e": "npm run postinstall:web && ng e2e"
@@ -40,9 +41,11 @@
     "@types/express": "^4.16.0",
     "@types/lodash": "^4.14.118",
     "angular-font-awesome": "^3.1.2",
+    "body-parser": "^1.18.3",
     "electron-db": "^0.8.1",
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
+    "multer": "^1.4.1",
     "sqlite3": "^4.0.4"
   },
   "devDependencies": {

@@ -2,9 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 
-import { Materia } from '../../database.service';
-
-import { DatabaseService } from '../../database.service';
+import { DatabaseService, Materia } from '../../database.service';
 
 @Component({
   selector: 'app-pensum',
@@ -31,6 +29,7 @@ export class PensumComponent implements OnInit {
   }
 
   constructor(private dbService: DatabaseService) { 
+
     this.materias = [ 
       { id: '1', nombre:'Matematicas', semestre: '1' },
       { id: '2', nombre:'Plastilina', semestre: '2' },
@@ -95,7 +94,20 @@ export class PensumComponent implements OnInit {
   ngOnInit() {
     this.dbService.getMaterias().subscribe( data => {
       console.log(data);
+      this.materias = data;
     });
+
+    // this.dbService.getMateria(1).subscribe( data => {
+    //   console.log(data);
+    // });
+
+    // this.dbService.insertMateria({id: '4', nombre: 'introduccion',  semestre: '1'}).subscribe(data => {
+    //   console.log(data);
+    // });
+
+    // this.dbService.updateMateria({id: '1', nombre: 'castellano',  semestre: '1'}).subscribe(data => {
+    //   console.log(data);
+    // });
   }
 
 }
