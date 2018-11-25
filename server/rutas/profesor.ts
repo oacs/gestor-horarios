@@ -31,17 +31,17 @@ router.delete('/:id', function (req, res) {
 
 router.put('/:id', function (req, res) {
     if (req.body.nombre) {
-        db.run("UPDATE profesor SET nombre = $nombre WHERE id = $id", {
+        db.run('UPDATE profesor SET nombre = $nombre WHERE id = $id', {
             $id: req.params.id,
             $nombre: req.body.nombre
-        }), info => {
+        }, info => {
             console.log(info);
             res.send(info);
-        };
+        });
     }
 
     if (req.body.correo) {
-        db.run("UPDATE profesor SET correo = $correo WHERE id = $id", {
+        db.run('UPDATE profesor SET correo = $correo WHERE id = $id', {
             $id: req.params.id,
             $correo: req.body.correo
         }, info => {
@@ -51,20 +51,20 @@ router.put('/:id', function (req, res) {
     }
 
     if (req.body.disp) {
-        db.run("UPDATE profesor SET disp = $disp WHERE id = $id", {
+        db.run('UPDATE profesor SET disp = $disp WHERE id = $id', {
             $id: req.params.id,
             $nombre: req.body.disp
-        }), info => {
+        }, info => {
             console.log(info);
             res.send(info);
-        };
+        });
     }
 });
 
 router.post('/', function (req, res) {
 
     console.log(req.body);
-    db.run("insert into profesor(id, disp, nombre, correo)  values ($id, $disp, $nombre, $correo)", {
+    db.run('insert into profesor(id, disp, nombre, correo)  values ($id, $disp, $nombre, $correo)', {
         $id: req.body.id,
         $disp: req.body.disp,
         $nombre: req.body.nombre,

@@ -31,17 +31,17 @@ router.delete('/:id', function (req, res) {
 
 router.put('/:id', function (req, res) {
     if (req.body.numero) {
-        db.run("UPDATE seccion SET numero = $numero WHERE id = $id", {
+        db.run('UPDATE seccion SET numero = $numero WHERE id = $id', {
             $id: req.params.id,
             $numero: req.body.numero
-        }), info => {
+        }, info => {
             console.log(info);
             res.send(info);
-        };
+        });
     }
 
     if (req.body.horario) {
-        db.run("UPDATE seccion SET horario = $horario WHERE id = $id", {
+        db.run('UPDATE seccion SET horario = $horario WHERE id = $id', {
             $id: req.params.id,
             $horario: req.body.horario
         }, info => {
@@ -51,7 +51,7 @@ router.put('/:id', function (req, res) {
     }
 
     if (req.body.periodo) {
-        db.run("UPDATE seccion SET periodo = $periodo WHERE id = $id", {
+        db.run('UPDATE seccion SET periodo = $periodo WHERE id = $id', {
             $id: req.params.id,
             $periodo: req.body.periodo
         }, info => {
@@ -64,7 +64,7 @@ router.put('/:id', function (req, res) {
 router.post('/', function (req, res) {
 
     console.log(req.body);
-    db.run("insert into seccion(id, numero, horario, periodo)  values ($id, $numero, $horario, $periodo)", {
+    db.run('insert into seccion(id, numero, horario, periodo)  values ($id, $numero, $horario, $periodo)', {
         $id: req.body.id,
         $numero: req.body.numero,
         $horario: req.body.horario,

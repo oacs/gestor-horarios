@@ -31,17 +31,17 @@ router.delete('/:id', function (req, res) {
 
 router.put('/:id', function (req, res) {
     if (req.body.nombre) {
-        db.run("UPDATE materia SET nombre = $nombre WHERE id = $id", {
+        db.run('UPDATE materia SET nombre = $nombre WHERE id = $id', {
             $id: req.params.id,
             $nombre: req.body.nombre
-        }), info => {
+        }, info => {
             console.log(info);
             res.send(info);
-        };
+        });
     }
 
     if (req.body.semestre) {
-        db.run("UPDATE materia SET semestre = $semestre WHERE id = $id", {
+        db.run('UPDATE materia SET semestre = $semestre WHERE id = $id', {
             $id: req.params.id,
             $semestre: req.body.semestre
         }, info => {
@@ -54,7 +54,7 @@ router.put('/:id', function (req, res) {
 router.post('/', function (req, res) {
 
     console.log(req.body);
-    db.run("insert into materia(id, semestre, nombre)  values ($id, $semestre, $nombre)", {
+    db.run('insert into materia(id, semestre, nombre)  values ($id, $semestre, $nombre)', {
         $id: req.body.id,
         $semestre: req.body.semestre,
         $nombre: req.body.nombre

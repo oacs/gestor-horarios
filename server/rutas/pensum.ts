@@ -31,21 +31,21 @@ router.delete('/:id', function (req, res) {
 
 router.put('/:id', function (req, res) {
     if (req.body.fecha) {
-        db.run("UPDATE pensum SET fecha = $fecha WHERE id = $id", {
+        db.run('UPDATE pensum SET fecha = $fecha WHERE id = $id', {
             $id: req.params.id,
             $fecha: req.body.fecha
-        }), info => {
+        }, info => {
             console.log(info);
             res.send(info);
-        };
+        });
     }
 });
 
 router.post('/', function (req, res) {
 
     console.log(req.body);
-    db.run("insert into pensum(id, fecha)  values ($id, $fecha)", {
-        $id: req.body.id,    
+    db.run('insert into pensum(id, fecha)  values ($id, $fecha)', {
+        $id: req.body.id,
         $fecha: req.body.fecha
     }, info => {
         console.log(info);

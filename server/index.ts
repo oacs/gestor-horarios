@@ -36,11 +36,11 @@ export function init() {
         // Pass to next layer of middleware
         next();
     });
- 
-    app.use('/materias', materias );
-    app.use('/secciones', secciones );
-    app.use('/pensum', pensum );
-    app.use('/profesores', profesores );
+
+    app.use('/materias', materias);
+    app.use('/secciones', secciones);
+    app.use('/pensum', pensum);
+    app.use('/profesores', profesores);
 
     app.listen(3000, function () {
         console.log('listening in port 3000');
