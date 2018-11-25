@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import data from './testData';
+import { DatabaseService, Materia } from '../../database.service';
 @Component({
   selector: 'app-gestor',
   templateUrl: './gestor.component.html',
@@ -7,17 +7,21 @@ import data from './testData';
 })
 export class GestorComponent implements OnInit {
   openned: boolean;
-  public materias : any[] = data;
+  public materias: Materia[];
 
-  constructor() { 
+  constructor(private dbService: DatabaseService) {
     this.openned = false;
+    this.dbService.getMaterias().subscribe( materias => {
+      this.materias = materias;
+    })
   }
 
-  matterModal(){
-    if(this.openned == true)
+  matterModal() {
+    if (this.openned === true) {
       this.openned = false;
-    else
+    } else {
       this.openned = true;
+    }
   }
 
   ngOnInit() {

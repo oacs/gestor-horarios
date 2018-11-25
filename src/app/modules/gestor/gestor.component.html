@@ -10,7 +10,7 @@
 
   <div class="materias-cotainer">
     <div  class="materia" *ngFor="let materia of materias" >
-      <p> {{materia.title}} </p>
+      <p> {{materia.nombre | titlecase }} </p>
     </div>
   </div>
 
