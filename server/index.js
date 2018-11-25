@@ -4,6 +4,7 @@ var express = require('express');
 exports.app = express();
 exports.sqlite3 = require('sqlite3').verbose();
 exports.db = new exports.sqlite3.Database('./database.db');
+var materias = require("./rutas/materia");
 function init() {
     // Add headers
     exports.app.use(function (req, res, next) {
@@ -19,13 +20,7 @@ function init() {
         // Pass to next layer of middleware
         next();
     });
-    exports.app.get('/', function (req, res) {
-        exports.db.get('select * from materia', function (err, row) {
-            console.log(err);
-            console.log(row);
-            res.send(row);
-        });
-    });
+    exports.app.use('/materias', materias);
     exports.app.listen(3000, function () {
     });
 }

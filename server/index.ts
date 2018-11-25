@@ -3,6 +3,7 @@ const express = require('express');
 export const app = express();
 export const sqlite3 = require('sqlite3').verbose();
 export const db = new sqlite3.Database('./database.db');
+import * as materias from './rutas/materia';
 
 export function init() {
     // Add headers
@@ -24,13 +25,8 @@ export function init() {
         // Pass to next layer of middleware
         next();
     });
-    app.get('/', function (req, res) {
-        db.get('select * from materia', (err, row) => {
-            console.log(err);
-            console.log(row);
-            res.send(row);
-        });
-    });
+ 
+    app.use('/materias', materias );
 
     app.listen(3000, function () {
     });
