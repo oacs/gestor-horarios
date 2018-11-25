@@ -100,4 +100,21 @@ export class DatabaseService {
     return this.http.post(AppConfig.api + 'materias/', materia );
   }
 
+  // ------------------------Profesores-----------------------------
+  public getProfesores(): Observable<Profesor[]> {
+    return this.http.get<Profesor[]>(AppConfig.api + 'profesores');
+  }
+
+  public getProfesor(id: number): Observable<Profesor> {
+    return this.http.get<Profesor>(AppConfig.api + 'profesores/' + id);
+  }
+
+  public updateProfesor(profesor: Profesor): Observable<any> {
+    return this.http.put(AppConfig.api + 'profesores/' + profesor.id, profesor );
+  }
+
+  public insertProfesor(profesor: Profesor): Observable<any> {
+    return this.http.post(AppConfig.api + 'profesores/', profesor );
+  }
+
 }
