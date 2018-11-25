@@ -1,3 +1,27 @@
-<p>
-  gestor works!
-</p>
+
+
+<div class="contenedorMaterias">
+
+  <div class="materias-top-cotainer">            
+    <input class="campoTexto" type="text" name="buscar" placeholder="Buscar..." >
+    <i class="fa fa-filter" aria-hidden="true"></i>
+    <button class="button" style="float:right" (click)="matterModal()">Nuevo</button>        
+  </div>
+
+  <div class="materias-cotainer">
+    <div  class="materia" *ngFor="let materia of materias" >
+      <p> {{materia.title}} </p>
+    </div>
+  </div>
+
+  <div *ngIf="openned" class="new-matter-modal">
+    <p>
+      HEEEELLOOOOO!!!!!!
+    </p>
+  </div>
+
+</div>
+
+
+
+
