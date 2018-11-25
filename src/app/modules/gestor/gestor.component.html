@@ -14,10 +14,26 @@
     </div>
   </div>
 
-  <div *ngIf="openned" class="new-matter-modal">
-    <p>
-      HEEEELLOOOOO!!!!!!
-    </p>
+  <div *ngIf="openned" class="form-modal new-matter-modal">
+    <h2>Crear nueva materia</h2>
+    <form [formGroup]="profileForm">
+      <label class="form-group">
+        Nombre:
+        <input type="text" class="input-form"formControlName="nombre" required>
+      </label>
+    
+      <label class="form-group">
+        Horas:
+        <input type="text" class="input-form" formControlName="horas" required>
+      </label>
+
+      <label class="form-group">
+          Horas Maximas:
+          <input type="text" class="input-form" formControlName="horasMax" required>
+      </label>
+
+    <button type="button" class="button-form" (click)="submitForm()">Aceptar</button>        
+    </form>
   </div>
 
 </div>
