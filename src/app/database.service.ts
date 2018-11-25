@@ -29,6 +29,8 @@ export interface Materia {
   id: string;
   nombre: string;
   semestre: string;
+  horas: string;
+  maxH: string;
 }
 
 // tslint:disable-next-line:class-name
@@ -90,7 +92,7 @@ export class DatabaseService {
     return this.http.get<Materia>(AppConfig.api + 'materias/' + id);
   }
 
-  public updateMateria(materia: Materia): any {
+  public updateMateria(materia: Materia): Observable<any> {
     return this.http.put(AppConfig.api + 'materias/' + materia.id, materia );
   }
 
