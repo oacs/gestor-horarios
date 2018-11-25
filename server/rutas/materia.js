@@ -26,16 +26,16 @@ router.delete('/:id', function (req, res) {
 });
 router.put('/:id', function (req, res) {
     if (req.body.nombre) {
-        index_1.db.run("UPDATE materia SET nombre = $nombre WHERE id = $id", {
+        index_1.db.run('UPDATE materia SET nombre = $nombre WHERE id = $id', {
             $id: req.params.id,
             $nombre: req.body.nombre
-        }), function (info) {
+        }, function (info) {
             console.log(info);
             res.send(info);
-        };
+        });
     }
     if (req.body.semestre) {
-        index_1.db.run("UPDATE materia SET semestre = $semestre WHERE id = $id", {
+        index_1.db.run('UPDATE materia SET semestre = $semestre WHERE id = $id', {
             $id: req.params.id,
             $semestre: req.body.semestre
         }, function (info) {
@@ -46,7 +46,7 @@ router.put('/:id', function (req, res) {
 });
 router.post('/', function (req, res) {
     console.log(req.body);
-    index_1.db.run("insert into materia(id, semestre, nombre)  values ($id, $semestre, $nombre)", {
+    index_1.db.run('insert into materia(id, semestre, nombre)  values ($id, $semestre, $nombre)', {
         $id: req.body.id,
         $semestre: req.body.semestre,
         $nombre: req.body.nombre
