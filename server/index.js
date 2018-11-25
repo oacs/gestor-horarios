@@ -5,6 +5,9 @@ exports.app = express();
 exports.sqlite3 = require('sqlite3').verbose();
 exports.db = new exports.sqlite3.Database('./database.db');
 var materias = require("./rutas/materia");
+var pensum = require("./rutas/pensum");
+var profesores = require("./rutas/profesor");
+var secciones = require("./rutas/seccion");
 var bodyParser = require('body-parser');
 var multer = require('multer'); // v1.0.5
 var upload = multer(); // for parsing multipart/form-data
@@ -26,7 +29,11 @@ function init() {
         next();
     });
     exports.app.use('/materias', materias);
+    exports.app.use('/secciones', secciones);
+    exports.app.use('/pensum', pensum);
+    exports.app.use('/profesores', profesores);
     exports.app.listen(3000, function () {
+        console.log('listening in port 3000');
     });
 }
 exports.init = init;

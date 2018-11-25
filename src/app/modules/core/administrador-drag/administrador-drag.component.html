@@ -4,9 +4,9 @@
     <div class="upload" (click)="abrirModal('importar');">
       <i class="fa fa-upload" aria-hidden="true"></i>
     </div>
-    <div class="card-container">  
+    <div class="card-container" cdkDropList cdkDropListOrientation="horizontal"  id="list-two" [cdkDropListConnectedTo]="['list-one']">  
       <div class="newCard"></div>
-      <div *ngFor="let materia of grupoMaterias" class="card" (click)="abrirModal('modificar');" (dragstart)="drag($event)" draggable="true" id="oscar">
+      <div cdkDrag *ngFor="let materia of grupoMaterias" class="card" (click)="abrirModal('modificar');" (dragstart)="drag($event)" draggable="true" id="oscar">
         {{materia.nombre}}
       </div>
     </div>

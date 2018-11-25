@@ -1,14 +1,14 @@
 <div class="columnContainer">
-  <div class="column" (drop)="drop($event)" (dragover)="allowDrop($event)"><h1>S1</h1></div>
+  <div class="column" cdkDropList (cdkDropListDropped)="drop($event)" id="list-one" [cdkDropListConnectedTo]="['list-two']"><h1>S1</h1></div>
   <div class="column"><h1>S2</h1></div>
   <div class="column"><h1>S3</h1></div>
-  <div class="column"><h1>S4</h1></div>
+  <!-- <div class="column"><h1>S4</h1></div>
   <div class="column"><h1>S5</h1></div>
   <div class="column"><h1>S6</h1></div>
   <div class="column"><h1>S7</h1></div>
   <div class="column"><h1>S8</h1></div>
   <div class="column"><h1>S9</h1></div>
-  <div class="column"><h1>S10</h1></div>
+  <div class="column"><h1>S10</h1></div> -->
 </div>
 
 <app-administrador-drag [grupoMaterias]="materias" (modal)="toggleModal($event)"></app-administrador-drag>

@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule, Route } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AdministradorDragComponent } from './administrador-drag/administrador-drag.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Route[] = [
   {path: '', component: HomeComponent}
@@ -12,7 +13,8 @@ const routes: Route[] = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    DragDropModule
   ],
   exports: [
     AdministradorDragComponent,
