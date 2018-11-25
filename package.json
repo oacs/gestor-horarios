@@ -40,9 +40,11 @@
     "@types/express": "^4.16.0",
     "@types/lodash": "^4.14.118",
     "angular-font-awesome": "^3.1.2",
+    "body-parser": "^1.18.3",
     "electron-db": "^0.8.1",
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
+    "multer": "^1.4.1",
     "sqlite3": "^4.0.4"
   },
   "devDependencies": {

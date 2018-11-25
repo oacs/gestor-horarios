@@ -4,8 +4,16 @@ export const app = express();
 export const sqlite3 = require('sqlite3').verbose();
 export const db = new sqlite3.Database('./database.db');
 import * as materias from './rutas/materia';
+var bodyParser = require('body-parser');
+var multer = require('multer'); // v1.0.5
+var upload = multer(); // for parsing multipart/form-data
+
+
+
 
 export function init() {
+    app.use(bodyParser.json()); // for parsing application/json
+    app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
     // Add headers
     app.use(function (req, res, next) {
 

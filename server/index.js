@@ -5,7 +5,12 @@ exports.app = express();
 exports.sqlite3 = require('sqlite3').verbose();
 exports.db = new exports.sqlite3.Database('./database.db');
 var materias = require("./rutas/materia");
+var bodyParser = require('body-parser');
+var multer = require('multer'); // v1.0.5
+var upload = multer(); // for parsing multipart/form-data
 function init() {
+    exports.app.use(bodyParser.json()); // for parsing application/json
+    exports.app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
     // Add headers
     exports.app.use(function (req, res, next) {
         // Website you wish to allow to connect
