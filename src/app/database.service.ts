@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import * as database from '../../node_modules/electron-db';
 import { AppConfig } from '../environments/environment';
 import { Pensum } from './algoritmo/pensum';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 const db = database;
 
 export interface Seccion {
@@ -51,10 +53,10 @@ export class DatabaseService {
 
   public db;
   public tables: string[];
-  constructor() {
+  constructor(private http: HttpClient) {
     this.db = db;
     this.tables = AppConfig.tables;
-    this.crearTablas();
+    // this.crearTablas();
   }
 
   public crearTablas(): void {
@@ -77,6 +79,10 @@ export class DatabaseService {
       flag = succ;
     });
     return flag;
+  }
+
+  public getMaterias(): Observable<Materia> {
+    return this.http.get<Materia>('http://localhost:3000');
   }
 
 }

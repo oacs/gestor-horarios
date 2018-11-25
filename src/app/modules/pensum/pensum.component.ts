@@ -80,6 +80,9 @@ export class PensumComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dbService.getMaterias().subscribe( data => {
+      console.log(data);
+    });
   }
 
 }
