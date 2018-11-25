@@ -1,7 +1,15 @@
 <div class="columnContainer">
-  <div class="column" cdkDropList (cdkDropListDropped)="drop($event)" id="list-one" [cdkDropListConnectedTo]="['list-two']"><h1>S1</h1></div>
-  <div class="column"><h1>S2</h1></div>
-  <div class="column"><h1>S3</h1></div>
+  <div *ngFor="let semestre of semestres" class="column"
+  cdkDropListOrientation="vertical" 
+  cdkDropList (cdkDropListDropped)="drop($event)" [id]="'list-' + semestre.numero" 
+  [cdkDropListData]="semestre.materias"
+  [cdkDropListConnectedTo]="['list-two','list-1', 'list-2', 'list-3', 'list-4', 'list-5', 'list-6', 'list-7', 'list-8', 'list-9', 'list-10']">
+  <h1>S{{semestre.numero}}</h1>
+  <div cdkDrag [cdkDragData]="materia"  *ngFor="let materia of semestre.materias" class="card" >
+    {{materia.nombre}}
+  </div>
+</div>
+
   <!-- <div class="column"><h1>S4</h1></div>
   <div class="column"><h1>S5</h1></div>
   <div class="column"><h1>S6</h1></div>

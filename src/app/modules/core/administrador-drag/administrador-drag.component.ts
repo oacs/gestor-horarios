@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Materia } from '../../../database.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -9,20 +10,28 @@ import { Materia } from '../../../database.service';
 })
 export class AdministradorDragComponent implements OnInit {
 
-  @Input('grupoMaterias') grupoMaterias : Materia[];
-  @Output() modal = new EventEmitter<String>(); 
-  
-  constructor() { 
+  @Input() grupoMaterias: Materia[];
+  @Output() modal = new EventEmitter<String>();
+
+  constructor() {
   }
 
-  abrirModal(id_modal : String) {
+  abrirModal(id_modal: String) {
     this.modal.emit(id_modal);
   }
 
-  drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+  drop(event: CdkDragDrop<string[]>) {
+    console.log( event);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
-  
+
   ngOnInit() {
   }
 

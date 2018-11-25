@@ -3,7 +3,12 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 
 import { DatabaseService, Materia } from '../../database.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
+interface Semestre {
+  numero: number;
+  materias: Materia[];
+}
 
 @Component({
   selector: 'app-pensum',
@@ -19,6 +24,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export class PensumComponent implements OnInit {
   materias: Materia[];
+  semestres: Semestre[];
   materiasEnDrag: number;
   displayModalNuevo: String;
   displayModalImportar: String;
@@ -30,7 +36,17 @@ export class PensumComponent implements OnInit {
   }
 
   constructor(private dbService: DatabaseService) {
-
+    this.semestres = [
+      { numero: 1, materias: [{nombre: 'Hola', id: '2', semestre: '1'}] },
+      { numero: 2, materias: [] },
+      { numero: 3, materias: [] },
+      { numero: 4, materias: [] },
+      { numero: 5, materias: [] },
+      { numero: 6, materias: [] },
+      { numero: 7, materias: [] },
+      { numero: 8, materias: [] },
+      { numero: 9, materias: [] },
+      { numero: 10, materias: [] }];
     this.materias = [
       { id: '1', nombre: 'Matematicas', semestre: '1' },
       { id: '2', nombre: 'Plastilina', semestre: '2' },
@@ -38,7 +54,6 @@ export class PensumComponent implements OnInit {
       { id: '4', nombre: 'Colores', semestre: '4' },
       { id: '5', nombre: 'Mapas', semestre: '5' },
     ];
-
 
     this.displayModalImportar = 'none';
     this.displayModalNuevo = 'none';
@@ -95,9 +110,16 @@ export class PensumComponent implements OnInit {
   //   ev.target.append(document.getElementById(data));
   // }
 
-  drop(ev: CdkDragDrop<Materia>) {
-    moveItemInArray(this.materias, ev.previousIndex, ev.currentIndex);
-    console.log(ev);
+  drop(event: CdkDragDrop<string[]>) {
+    console.log( event);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
   }
 
   allowDrop(ev) {

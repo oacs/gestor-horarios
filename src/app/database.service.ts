@@ -44,6 +44,7 @@ export interface Materia_x_Pensum {
 export interface Pensum {
   id: string;
   fecha: string;
+  materias?: Materia[];
 }
 
 @Injectable({
