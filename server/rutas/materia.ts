@@ -6,7 +6,7 @@ const router = Router();
 router.get('/', function (req, res) {
     db.all('select * from materia', (err, row) => {
         console.log(err);
-        console.log(row);
+        // console.log(row);
         res.send(row);
     });
 });
@@ -15,7 +15,7 @@ router.get('/:id', function (req, res) {
 
     db.get('select * from materia where id = ' + req.params.id, (err, row) => {
         console.log(err);
-        console.log(row);
+        // console.log(row);
         res.send(row);
     });
 });
