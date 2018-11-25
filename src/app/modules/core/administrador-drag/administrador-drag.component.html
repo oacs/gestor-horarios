@@ -6,7 +6,7 @@
     </div>
     <div class="card-container">  
       <div class="newCard"></div>
-      <div *ngFor="let materia of grupoMaterias" class="card" (click)="abrirModal('modificar');">
+      <div *ngFor="let materia of grupoMaterias" class="card" (click)="abrirModal('modificar');" (dragstart)="drag($event)" draggable="true" id="oscar">
         {{materia.nombre}}
       </div>
     </div>

@@ -18,6 +18,10 @@ export class AdministradorDragComponent implements OnInit {
     this.modal.emit(id_modal);
   }
 
+  drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+  
   ngOnInit() {
   }
 

@@ -80,6 +80,18 @@ export class PensumComponent implements OnInit {
       return this.displayModalModificar;
   }
 
+  /* Drag and drop */
+  drop(ev) {
+    ev.preventDefault();
+    console.log(ev);
+    var data = ev.dataTransfer.getData("text");
+    ev.target.append(document.getElementById(data));
+  }
+
+  allowDrop(ev) {
+    ev.preventDefault();
+  }
+
   ngOnInit() {
     this.dbService.getMaterias().subscribe( data => {
       console.log(data);
