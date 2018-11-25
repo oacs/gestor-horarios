@@ -25,29 +25,27 @@ let routes: Routes = [
         component: TestAlgoritmoComponent
     }
 ];
-// if (!isDevMode()) {
-//  routes 
-// } else {
-//      routes = [
-//         {
-//             path: '',
-//             loadChildren: () => CoreModule
+if (isDevMode()) {
+     routes = [
+        {
+            path: '',
+            loadChildren: () => CoreModule
     
-//         },
-//         {
-//             path: 'pensum',
-//             loadChildren: () => PensumModule
-//         },
-//         {
-//             path: 'gestor',
-//             loadChildren: () => GestorModule
-//         },
-//         {
-//             path: 'test',
-//             component: TestAlgoritmoComponent
-//         }
-//     ];
-// }
+        },
+        {
+            path: 'pensum',
+            loadChildren: () => PensumModule
+        },
+        {
+            path: 'gestor',
+            loadChildren: () => GestorModule
+        },
+        {
+            path: 'test',
+            component: TestAlgoritmoComponent
+        }
+    ];
+}
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {useHash: true})],
