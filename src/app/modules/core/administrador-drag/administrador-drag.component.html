@@ -1,3 +1,16 @@
-<p>
-  administrador-drag works!
-</p>
+<div class="container">
+  <div class="blue"></div>
+  <div class="green">
+    <i class="fas fa-file-import"></i>
+    <div class="card-container">  
+      <div class="newCard"></div>
+      <div *ngFor="let materia of grupoMaterias" class="card">
+        {{materia.nombre}}
+      </div>
+    </div>
+    <div class="arrows">
+      <i class="fas fa-caret-up"></i>
+      <i class="fas fa-caret-down"></i>
+    </div>
+  </div>
+</div>

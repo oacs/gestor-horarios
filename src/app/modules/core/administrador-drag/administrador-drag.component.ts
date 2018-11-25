@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Materia } from '../../../models/materia';
 
 @Component({
   selector: 'app-administrador-drag',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministradorDragComponent implements OnInit {
 
-  constructor() { }
+  @Input('grupoMaterias') grupoMaterias : Materia[];
+  
+  constructor() { 
+  }
 
   ngOnInit() {
   }

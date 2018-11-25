@@ -1,0 +1,46 @@
+div.container {
+    height: 100px;
+    width: 100%;
+    background-color: #3f3;
+}
+
+div.container div.green {
+    background-color: #83ccae;
+    height: 60px;
+}
+
+div.container div.blue {
+    background-color: #93cecc;
+    height: 40px;
+}
+
+div.container div.green div.card-container {
+    position: absolute;
+    left: 10%;
+}
+
+div.container div.green div.card {
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 85px;
+    margin-left: 23px;
+    margin-top: -30px;
+    background-color: white;
+    box-shadow: 0 3px 4px 0 rgba(255, 255, 255, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
+    overflow: hidden;
+    cursor: grab;
+    transition: all 0.15s ease-in-out;
+    user-select: none;
+}
+
+div.container div.green div.card:hover {
+    transform: scale(1.1);
+    top: -11px;
+}
+
+div.arrows {
+    position: absolute;
+    right: 5%;
+    transform: rotateY(90deg);
+}
