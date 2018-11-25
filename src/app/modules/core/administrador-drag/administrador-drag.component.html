@@ -1,16 +1,18 @@
 <div class="container">
   <div class="blue"></div>
   <div class="green">
-    <i class="fas fa-file-import"></i>
+    <div class="upload" (click)="abrirModal('importar');">
+      <i class="fa fa-upload" aria-hidden="true"></i>
+    </div>
     <div class="card-container">  
       <div class="newCard"></div>
-      <div *ngFor="let materia of grupoMaterias" class="card">
+      <div *ngFor="let materia of grupoMaterias" class="card" (click)="abrirModal('modificar');">
         {{materia.nombre}}
       </div>
     </div>
     <div class="arrows">
-      <i class="fas fa-caret-up"></i>
-      <i class="fas fa-caret-down"></i>
+      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      <i class="fa fa-chevron-right" aria-hidden="true"></i>
     </div>
   </div>
 </div>

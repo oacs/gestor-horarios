@@ -11,4 +11,20 @@
   <div class="column"><h1>S10</h1></div>
 </div>
 
-<app-administrador-drag [grupoMaterias]="materias"></app-administrador-drag>
+<app-administrador-drag [grupoMaterias]="materias" (modal)="toggleModal($event)"></app-administrador-drag>
+
+<div class="modal" [style.display]="displayType('nuevaMateria')">
+  <div class="card">
+    <button (click)="toggleModal('nuevaMateria')">Cerrar nueva materia</button>
+  </div>
+</div>
+<div class="modal" [style.display]="displayType('importar')">
+  <div class="card">
+    <button (click)="toggleModal('importar')">Cerrar importar</button>
+  </div>
+</div>
+<div class="modal" [style.display]="displayType('modificar')">
+  <div class="card">
+    <button (click)="toggleModal('modificar')">Cerrar modificar</button>
+  </div>
+</div>

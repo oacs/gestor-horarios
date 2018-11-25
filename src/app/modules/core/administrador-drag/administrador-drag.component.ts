@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Materia } from '../../../models/materia';
 
 @Component({
@@ -9,8 +9,13 @@ import { Materia } from '../../../models/materia';
 export class AdministradorDragComponent implements OnInit {
 
   @Input('grupoMaterias') grupoMaterias : Materia[];
+  @Output() modal = new EventEmitter<String>(); 
   
   constructor() { 
+  }
+
+  abrirModal(id_modal : String) {
+    this.modal.emit(id_modal);
   }
 
   ngOnInit() {
