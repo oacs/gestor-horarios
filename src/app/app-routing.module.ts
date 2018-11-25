@@ -1,30 +1,51 @@
 
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TestAlgoritmoComponent } from './algoritmo/test-algoritmo/test-algoritmo.component';
 import { CoreModule } from './modules/core/core.module';
 import { PensumModule } from './modules/pensum/pensum.module';
 import { GestorModule } from './modules/gestor/gestor.module';
 
-
-const routes: Routes = [
+let routes: Routes = [
     {
         path: '',
-        loadChildren: () => CoreModule
+        loadChildren:  './modules/core/core.module#CoreModule'
+
     },
     {
         path: 'pensum',
-        loadChildren: () => PensumModule
+        loadChildren:  './modules/pensum/pensum.module#PensumModule'
     },
     {
         path: 'gestor',
-        loadChildren: () => GestorModule
+        loadChildren: './modules/gestor/gestor.module#GestorModule'
     },
     {
         path: 'test',
         component: TestAlgoritmoComponent
     }
 ];
+if (isDevMode()) {
+     routes = [
+        {
+            path: '',
+            loadChildren: () => CoreModule
+    
+        },
+        {
+            path: 'pensum',
+            loadChildren: () => PensumModule
+        },
+        {
+            path: 'gestor',
+            loadChildren: () => GestorModule
+        },
+        {
+            path: 'test',
+            component: TestAlgoritmoComponent
+        }
+    ];
+}
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {useHash: true})],

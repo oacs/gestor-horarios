@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Materia} from '../../../database.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Materia } from '../../../database.service';
+
 
 @Component({
   selector: 'app-administrador-drag',
@@ -9,10 +10,19 @@ import { Materia} from '../../../database.service';
 export class AdministradorDragComponent implements OnInit {
 
   @Input('grupoMaterias') grupoMaterias : Materia[];
+  @Output() modal = new EventEmitter<String>(); 
   
   constructor() { 
   }
 
+  abrirModal(id_modal : String) {
+    this.modal.emit(id_modal);
+  }
+
+  drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+  
   ngOnInit() {
   }
 

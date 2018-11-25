@@ -4,6 +4,9 @@ export const app = express();
 export const sqlite3 = require('sqlite3').verbose();
 export const db = new sqlite3.Database('./database.db');
 import * as materias from './rutas/materia';
+import * as pensum from './rutas/pensum';
+import * as profesores from './rutas/profesor';
+import * as secciones from './rutas/seccion';
 var bodyParser = require('body-parser');
 var multer = require('multer'); // v1.0.5
 var upload = multer(); // for parsing multipart/form-data
@@ -35,7 +38,11 @@ export function init() {
     });
  
     app.use('/materias', materias );
+    app.use('/secciones', secciones );
+    app.use('/pensum', pensum );
+    app.use('/profesores', profesores );
 
     app.listen(3000, function () {
+        console.log('listening in port 3000');
     });
 }
