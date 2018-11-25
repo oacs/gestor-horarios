@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Materia } from '../../../models/materia';
+import { Materia } from '../../../database.service';
 
 @Component({
   selector: 'app-administrador-drag',

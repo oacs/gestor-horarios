@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 
-import { Materia } from '../../models/materia';
+import { Materia } from '../../database.service';
 
 import { DatabaseService } from '../../database.service';
 
@@ -32,11 +32,12 @@ export class PensumComponent implements OnInit {
 
   constructor(private dbService: DatabaseService) { 
     this.materias = [ 
-      new Materia('Matematica'), 
-      new Materia('Introducción'), 
-      new Materia('Plastilina'), 
-      new Materia('Trigonometría'),
-      new Materia('Programación') ];
+      { id: '1', nombre:'Matematicas', semestre: '1' },
+      { id: '2', nombre:'Plastilina', semestre: '2' },
+      { id: '3', nombre:'Manualidades', semestre: '3' },
+      { id: '4', nombre:'Colores', semestre: '4' },
+      { id: '5', nombre:'Mapas', semestre: '5' },
+    ];
 
     this.displayModalImportar = 'none';
     this.displayModalNuevo = 'none';
