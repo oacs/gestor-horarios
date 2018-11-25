@@ -19,6 +19,9 @@ export class PensumComponent implements OnInit {
   constructor(private dbService: DatabaseService) { }
 
   ngOnInit() {
+    this.dbService.getMaterias().subscribe( data => {
+      console.log(data);
+    });
   }
 
 }
