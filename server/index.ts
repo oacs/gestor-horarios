@@ -37,5 +37,6 @@ export function init() {
     app.use('/materias', materias );
 
     app.listen(3000, function () {
+        console.log('listening in port 3000');
     });
 }
