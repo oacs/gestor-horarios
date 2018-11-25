@@ -23,12 +23,26 @@ interface Semestre {
 })
 
 export class PensumComponent implements OnInit {
-  materias: Materia[];
-  semestres: Semestre[];
-  materiasEnDrag: number;
-  displayModalNuevo: String;
-  displayModalImportar: String;
-  displayModalModificar: String;
+  public materias: Materia[];
+  public info: Materia[];
+  public limite: number;
+  /**
+   * @description guarda la posicion de comienzo del arreglo de info
+   * @example materias: Materia[] = [ 0, 1, 2, 3, 4, 5]
+   * y  limite: number = 2 por lo tanto se agrupan
+   * de dos para pasar la informacion al hijo.
+   * si posicion = 0 entonces info = [0, 1]
+   * si posicion = 1 entonces info = [2, 3]
+   * si posicion = n entonces info = [posicion * limite, limite]
+  */
+  public posicion: number;
+  public semestres: Semestre[];
+  public materiasEnDrag: number;
+
+  // Cestari con su modal chimbo
+  public displayModalNuevo: string;
+  public displayModalImportar: string;
+  public displayModalModificar: string;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -37,7 +51,7 @@ export class PensumComponent implements OnInit {
 
   constructor(private dbService: DatabaseService) {
     this.semestres = [
-      { numero: 1, materias: [{nombre: 'Hola', id: '2', semestre: '1'}] },
+      { numero: 1, materias: [] },
       { numero: 2, materias: [] },
       { numero: 3, materias: [] },
       { numero: 4, materias: [] },
@@ -47,13 +61,7 @@ export class PensumComponent implements OnInit {
       { numero: 8, materias: [] },
       { numero: 9, materias: [] },
       { numero: 10, materias: [] }];
-    this.materias = [
-      { id: '1', nombre: 'Matematicas', semestre: '1' },
-      { id: '2', nombre: 'Plastilina', semestre: '2' },
-      { id: '3', nombre: 'Manualidades', semestre: '3' },
-      { id: '4', nombre: 'Colores', semestre: '4' },
-      { id: '5', nombre: 'Mapas', semestre: '5' },
-    ];
+    this.materias = [];
 
     this.displayModalImportar = 'none';
     this.displayModalNuevo = 'none';
@@ -61,8 +69,8 @@ export class PensumComponent implements OnInit {
   }
 
   /* Cambia el tipo de display (cuando se presiona alguno de los botones) */
-  toggleModal(id_modal: String) {
-    if (id_modal === 'importar') {
+  public toggleModal(idModal: string) {
+    if (idModal === 'importar') {
       if (this.displayModalImportar === 'none') {
         this.displayModalImportar = 'block';
       } else {
@@ -70,7 +78,7 @@ export class PensumComponent implements OnInit {
       }
     }
 
-    if (id_modal === 'nuevaMateria') {
+    if (idModal === 'nuevaMateria') {
       if (this.displayModalNuevo === 'none') {
         this.displayModalNuevo = 'block';
       } else {
@@ -78,7 +86,7 @@ export class PensumComponent implements OnInit {
       }
     }
 
-    if (id_modal === 'modificar') {
+    if (idModal === 'modificar') {
       if (this.displayModalModificar === 'none') {
         this.displayModalModificar = 'block';
       } else {
@@ -88,61 +96,56 @@ export class PensumComponent implements OnInit {
   }
 
   /* Retorna el tipo de display para aplicar ngStyle sobre el modal */
-  displayType(id_modal: String) {
-    if (id_modal === 'importar') {
+  public displayType(idModal: String) {
+    if (idModal === 'importar') {
       return this.displayModalImportar;
     }
 
-    if (id_modal === 'nuevaMateria') {
+    if (idModal === 'nuevaMateria') {
       return this.displayModalNuevo;
     }
 
-    if (id_modal === 'modificar') {
+    if (idModal === 'modificar') {
       return this.displayModalModificar;
     }
   }
 
-  /* Drag and drop */
-  // drop(ev) {
-  //   ev.preventDefault();
-  //   console.log(ev);
-  //   const data = ev.dataTransfer.getData('text');
-  //   ev.target.append(document.getElementById(data));
-  // }
 
-  drop(event: CdkDragDrop<string[]>) {
-    console.log( event);
+  public drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
     }
   }
 
-  allowDrop(ev) {
-    ev.preventDefault();
+  public cambiarInfo(event: string) {
+    switch (event) {
+      case 'left':
+        if (this.posicion !== 0) {
+          this.posicion--;
+        }
+        break;
+      case 'right':
+        if (this.posicion !== this.materias.length % this.limite) {
+          this.posicion++;
+        }
+        break;
+    }
+    this.info = this.materias.slice(this.posicion * this.limite, (this.posicion * this.limite) + this.limite);
   }
 
   ngOnInit() {
     this.dbService.getMaterias().subscribe(data => {
-      console.log(data);
       this.materias = data;
+      this.limite = 4;
+      this.posicion = 0;
+      this.info = this.materias.slice(this.posicion * this.limite, (this.posicion * this.limite) + this.limite);
     });
 
-    // this.dbService.getMateria(1).subscribe( data => {
-    //   console.log(data);
-    // });
-
-    // this.dbService.insertMateria({id: '4', nombre: 'introduccion',  semestre: '1'}).subscribe(data => {
-    //   console.log(data);
-    // });
-
-    // this.dbService.updateMateria({id: '1', nombre: 'castellano',  semestre: '1'}).subscribe(data => {
-    //   console.log(data);
-    // });
   }
 
 }

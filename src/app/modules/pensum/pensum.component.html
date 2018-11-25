@@ -9,17 +9,9 @@
     {{materia.nombre}}
   </div>
 </div>
-
-  <!-- <div class="column"><h1>S4</h1></div>
-  <div class="column"><h1>S5</h1></div>
-  <div class="column"><h1>S6</h1></div>
-  <div class="column"><h1>S7</h1></div>
-  <div class="column"><h1>S8</h1></div>
-  <div class="column"><h1>S9</h1></div>
-  <div class="column"><h1>S10</h1></div> -->
 </div>
 
-<app-administrador-drag [grupoMaterias]="materias" (modal)="toggleModal($event)"></app-administrador-drag>
+<app-administrador-drag [grupoMaterias]="info" (modal)="toggleModal($event)" (flechas)="cambiarInfo($event)"></app-administrador-drag>
 
 <div class="modal" [style.display]="displayType('nuevaMateria')">
   <div class="card">

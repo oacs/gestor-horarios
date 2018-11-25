@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="arrows">
-      <i class="fa fa-chevron-left" aria-hidden="true"></i>
-      <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      <i class="fa fa-chevron-left" aria-hidden="true" (click)="flechas.emit('left')"></i>
+      <i class="fa fa-chevron-right" aria-hidden="true" (click)="flechas.emit('right')"></i>
     </div>
   </div>
 </div>

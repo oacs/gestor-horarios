@@ -11,12 +11,13 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 export class AdministradorDragComponent implements OnInit {
 
   @Input() grupoMaterias: Materia[];
-  @Output() modal = new EventEmitter<String>();
+  @Output() modal = new EventEmitter<string>();
+  @Output() flechas = new EventEmitter<string>();
 
   constructor() {
   }
 
-  abrirModal(id_modal: String) {
+  abrirModal(id_modal: string) {
     this.modal.emit(id_modal);
   }
 
