@@ -29,17 +29,17 @@ export class PensumComponent implements OnInit {
       this.materias = data;
     });
 
-    this.dbService.getMateria(1).subscribe( data => {
-      console.log(data);
-    });
+    // this.dbService.getMateria(1).subscribe( data => {
+    //   console.log(data);
+    // });
 
-    this.dbService.insertMateria({id: '4', nombre: 'introduccion',  semestre: '1'}).subscribe(data => {
-      console.log(data);
-    });
+    // this.dbService.insertMateria({id: '4', nombre: 'introduccion',  semestre: '1'}).subscribe(data => {
+    //   console.log(data);
+    // });
 
-    this.dbService.updateMateria({id: '1', nombre: 'castellano',  semestre: '1'}).subscribe(data => {
-      console.log(data);
-    });
+    // this.dbService.updateMateria({id: '1', nombre: 'castellano',  semestre: '1'}).subscribe(data => {
+    //   console.log(data);
+    // });
   }
 
 }
