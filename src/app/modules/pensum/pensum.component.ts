@@ -33,7 +33,7 @@ export class PensumComponent implements OnInit {
    * de dos para pasar la informacion al hijo.
    * si posicion = 0 entonces info = [0, 1]
    * si posicion = 1 entonces info = [2, 3]
-   * si posicion = n entonces info = [posicion * limite, limite]
+   * si posicion = n entonces info = [posicion * limite, (posicion * limite) + limite]
   */
   public posicion: number;
   public semestres: Semestre[];
@@ -47,6 +47,36 @@ export class PensumComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     console.log(event.target.innerWidth);
+    if (event.target.innerWidth > 1300) {
+      this.limite = 6;
+      this.actualizarInfo();
+      return;
+    }
+    if (event.target.innerWidth < 1300 && event.target.innerWidth > 1040) {
+      this.limite = 5;
+      this.actualizarInfo();
+      return;
+    }
+    if (event.target.innerWidth < 1040 && event.target.innerWidth > 700) {
+      this.limite = 4;
+      this.actualizarInfo();
+      return;
+    }
+    if (event.target.innerWidth < 700 && event.target.innerWidth > 580) {
+      this.limite = 3;
+      this.actualizarInfo();
+      return;
+    }
+    if (event.target.innerWidth < 580 && event.target.innerWidth > 400) {
+      this.limite = 2;
+      this.actualizarInfo();
+      return;
+    }
+    if (event.target.innerWidth < 400) {
+      this.limite = 1;
+      this.actualizarInfo();
+      return;
+    }
   }
 
   constructor(private dbService: DatabaseService) {
@@ -130,11 +160,15 @@ export class PensumComponent implements OnInit {
         }
         break;
       case 'right':
-        if (this.posicion !== this.materias.length % this.limite) {
+        if (this.posicion < (this.materias.length / this.limite) - 1) {
           this.posicion++;
         }
         break;
     }
+    this.actualizarInfo();
+  }
+
+  private actualizarInfo() {
     this.info = this.materias.slice(this.posicion * this.limite, (this.posicion * this.limite) + this.limite);
   }
 
@@ -143,7 +177,7 @@ export class PensumComponent implements OnInit {
       this.materias = data;
       this.limite = 4;
       this.posicion = 0;
-      this.info = this.materias.slice(this.posicion * this.limite, (this.posicion * this.limite) + this.limite);
+      this.actualizarInfo();
     });
 
   }
