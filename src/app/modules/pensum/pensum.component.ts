@@ -149,7 +149,7 @@ export class PensumComponent implements OnInit {
     }
   }
 
-  submitForm() {
+  submitFormNewMatter() {
     if (this.materiaForm.valid) {
       this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
         if (data === null) {
