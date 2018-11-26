@@ -4,7 +4,11 @@
         <div class="title">Nuevo pensum</div>  
       <div *ngIf="this.activeNuevoPensum" class="inputNuevo">
         <form [formGroup]="createPensumForm">
-          <input type="text" placeholder="Nombre del pensum" formControlName="fecha" required>
+
+          <label class="form-group">
+            Nombre          
+            <input type="text" placeholder="Nombre del pensum" formControlName="fecha" required>
+          </label>
           <button (click)="crearPensum()">Crear</button>      
           <button (click)="toggleActiveNuevo($event);">Cancelar</button>      
         </form>
@@ -14,9 +18,13 @@
         <div class="title">Modificar pensum existente</div>
       <div *ngIf="this.activeModificarPensum" class="inputModificar">
         <form [formGroup]="modifyPensumForm">
-          <select  formControlName="option"> 
-            <option [value]="pensum.id" *ngFor="let pensum of pensums"required>{{pensum.fecha}}</option>
-          </select>
+          
+          <label class="form-group">
+            Nombre de pensum
+            <select  formControlName="option"> 
+                <option [value]="pensum.id" *ngFor="let pensum of pensums"required>{{pensum.fecha}}</option>
+              </select>
+          </label>
           <button (click)="modificarPensum()">Modificar</button>
           <button (click)="toggleActiveModificar($event)">Cancelar</button>
         </form>

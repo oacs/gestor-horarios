@@ -152,10 +152,35 @@ div.opciones div.grid-opciones {
 
 div.opciones div.grid-opciones div.opcion {
     cursor: pointer;
-    background-color: #c6c6c6;
+    background-color: #fff;
+    box-shadow: 0 3px 4px 0 rgba(255, 255, 255, 0.2), 0 3px 3px -2px rgba(255, 255, 255, .3), 0 1px 8px 0 rgba(255, 255, 255, .19);
     height: 200px;
+    padding: 10px;
 }
 
-div.opciones div.grid-opciones div.opcion {
-    
+
+.form-group{
+    display:block;
+    margin: 0 0 10px 0;
+}
+
+div.opciones div.grid-opciones div.opcion label { margin: 10% 0%; }
+div.opciones div.grid-opciones div.opcion input[type="text"],
+div.opciones div.grid-opciones div.opcion select { 
+    width: 100%; 
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+    margin: 10px 0px ;
+    border: solid 1px rgba(0, 0, 0, 0.5);
+}
+
+
+div.opciones div.grid-opciones div.opcion button {
+    background: #83ccae;
+    border: none;
+    height: 30px;
+    width: 100px;
+    color: #FFF;
+    font-size: 15px;
+    margin-right: 2px;
 }
