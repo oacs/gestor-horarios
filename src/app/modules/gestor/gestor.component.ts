@@ -19,6 +19,7 @@ export class GestorComponent implements OnInit {
   public updateMatterForm: FormGroup;
   public materiaForm: FormGroup;
 
+  public materiaTemporal: Materia;
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
     this.newMatter = false;
     this.updateMatter = false;
@@ -38,15 +39,10 @@ export class GestorComponent implements OnInit {
 
     this.updateMatterForm = this.formModal.group({
       nombre: ['', Validators.required],
-      horas: ['', Validators.required],
-      horasMax: ['', Validators.required]
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
     });
 
-    this.updateMatterForm = this.formModal.group({
-      nombre: ['', Validators.required],
-      horas: ['', Validators.required],
-      horasMax: ['', Validators.required]
-    });
   }
 
   /*
@@ -63,11 +59,13 @@ export class GestorComponent implements OnInit {
   /*
     Muestra y oculta el form para actualizar una materia existente
   */
-  showUpdateModal() {
+  showUpdateModal(materia: Materia) {
     if (this.updateMatter === true) {
       this.updateMatter = false;
     } else {
       this.updateMatter = true;
+      this.updateMatterForm.get('nombre').setValue(materia.nombre);
+      this.materiaTemporal = materia;
     }
   }
   /*
@@ -85,7 +83,15 @@ export class GestorComponent implements OnInit {
   }
 
   submitFormUpdateMatter() {
-    console.log(this.updateMatterForm.value);
+    if (this.updateMatterForm.valid) {
+      this.dbService.updateMateria(this.updateMatterForm.value).subscribe(data => {
+        console.log(data);
+        if (data === null) {
+          this.materias[this.materias.indexOf(this.materiaTemporal)].nombre = this.updateMatterForm.value.nombre;
+          this.updateMatter = false;
+        }
+      });
+    }
   }
 
   /*
