@@ -27,15 +27,18 @@ export class AdministradorDragComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log( event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
     }
+  }
+
+  exit(event: any) {
+    console.log(event);
   }
 
   ngOnInit() {

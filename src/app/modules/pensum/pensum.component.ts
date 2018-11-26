@@ -41,9 +41,9 @@ export class PensumComponent implements OnInit {
   public materiasEnDrag: number;
 
   // Teipe de opciones
-  public opciones : boolean;
-  public activeNuevoPensum : boolean;
-  public activeModificarPensum : boolean;
+  public opciones: boolean;
+  public activeNuevoPensum: boolean;
+  public activeModificarPensum: boolean;
 
   // Cestari con su modal chimbo
   public displayModalNuevo: string;
@@ -170,15 +170,16 @@ export class PensumComponent implements OnInit {
   submitFormNewMatter() {
     if (this.materiaForm.valid) {
       this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
-        if (data === null) {
-          this.materias.unshift(this.materiaForm.value);
-          this.actualizarInfo();
+        if (data.id !== null) {
+          const mat: Materia = this.materiaForm.value;
+          mat.id = data.id;
+          this.materias.unshift(mat);
           this.displayModalNuevo = 'none';
+          this.actualizarInfo();
         }
       });
     }
   }
-
 
   public drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -189,6 +190,7 @@ export class PensumComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    this.actualizarInfo();
   }
 
   public cambiarInfo(event: string) {
@@ -208,8 +210,17 @@ export class PensumComponent implements OnInit {
   }
 
   private actualizarInfo() {
-    this.info = this.materias.slice(this.posicion * this.limite, (this.posicion * this.limite) + this.limite);
+    const aux: Materia[] = [];
+    this.semestres.forEach( semestre => {
+      semestre.materias.forEach( materia => {
+        aux.push(materia);
+      });
+    });
+    const infoAux:  Materia[] = this.materias.filter(mat => !aux.includes(mat));
+    this.info = infoAux.slice(this.posicion * this.limite,
+      (this.posicion * this.limite) + this.limite);
   }
+
 
 
   // private guardar() {
@@ -238,7 +249,6 @@ export class PensumComponent implements OnInit {
         this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
         this.displayModalModificar = 'none';
       }
-
     });
   }
 
@@ -250,21 +260,23 @@ export class PensumComponent implements OnInit {
   toggleActiveNuevo(event) {
     event.stopPropagation();
 
-    if(this.activeNuevoPensum == false)
+    if (this.activeNuevoPensum === false) {
       this.activeNuevoPensum = true;
-    else  
+    } else {
       this.activeNuevoPensum = false;
+    }
 
     console.log(this.activeNuevoPensum);
   }
 
   toggleActiveModificar(event) {
     event.stopPropagation();
-    if(this.activeModificarPensum == false)
+    if (this.activeModificarPensum === false) {
       this.activeModificarPensum = true;
-    else  
+    } else {
       this.activeModificarPensum = false;
-    
+    }
+
     console.log(this.activeModificarPensum);
   }
 
@@ -289,6 +301,7 @@ export class PensumComponent implements OnInit {
       { numero: 8, materias: [] },
       { numero: 9, materias: [] },
       { numero: 10, materias: [] }];
+    console.log(this.semestres);
     this.materias = [];
     this.dbService.getMaterias().subscribe(data => {
       this.materias = data;
