@@ -131,6 +131,31 @@ div.modal i.fa.fa-times:hover { color: rgba(0,0,0,0.6);}
 }
 
 
+/* Opciones : teipe */
+div.opciones {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    height: calc(100vh - 100px);
+    width: 100vw;
+    background-color: #f0f7f7;
+    z-index: 9999999999999999999999999;
+}
 
+div.opciones div.grid-opciones {
+    display: grid;
+    margin: 5% 10%;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    justify-content: space-between;
+}
 
+div.opciones div.grid-opciones div.opcion {
+    cursor: pointer;
+    background-color: #c6c6c6;
+    height: 200px;
+}
 
+div.opciones div.grid-opciones div.opcion {
+    
+}
