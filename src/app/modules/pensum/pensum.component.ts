@@ -162,15 +162,15 @@ export class PensumComponent implements OnInit {
   submitFormNewMatter() {
     if (this.materiaForm.valid) {
       this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
-        if (data === null) {
-          this.materias.unshift(this.materiaForm.value);
-          this.actualizarInfo();
+        if (data.id !== null) {
+          const mat: Materia = this.materiaForm.value;
+          mat.id = data.id;
+          this.materias.push(mat);
           this.displayModalNuevo = 'none';
         }
       });
     }
   }
-
 
   public drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -230,7 +230,6 @@ export class PensumComponent implements OnInit {
         this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
         this.displayModalModificar = 'none';
       }
-
     });
   }
 
