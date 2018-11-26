@@ -47,7 +47,9 @@ export class GestorComponent implements OnInit {
     Guarda la informacion del from crear nueva materia en la base de datos
   */
   submitForm(){
-    console.log(this.profileForm.value);
+    if ( this.profileForm.valid) {
+      this.dbService.insertMateria(this.profileForm.value);
+    }
   }
 
   ngOnInit() {
