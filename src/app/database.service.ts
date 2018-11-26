@@ -115,5 +115,4 @@ export class DatabaseService {
   public insertProfesor(profesor: Profesor): Observable<any> {
     return this.http.post(AppConfig.api + 'profesores/', profesor );
   }
-
 }
