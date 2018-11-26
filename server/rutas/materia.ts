@@ -44,8 +44,7 @@ router.put('/:id', function (req, res) {
 router.post('/', function (req, res) {
 
     // console.log(req.body);
-    db.run('insert into materia(id, nombre)  values ($id, $nombre)', {
-        $id: req.body.id,
+    db.run('insert into materia( nombre)  values ( $nombre)', {
         $nombre: req.body.nombre
     }, info => {
         console.log(info);

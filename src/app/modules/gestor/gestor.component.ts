@@ -21,14 +21,14 @@ export class GestorComponent implements OnInit {
       this.materias = materias;
       this.info = materias;
     });
-    this.search.valueChanges.subscribe( data => {
+    this.search.valueChanges.subscribe(data => {
       this.info = this.filteredListOptions();
     });
 
     this.profileForm = this.formModal.group({
       nombre: ['', Validators.required],
-      horas: ['', Validators.required],
-      horasMax: ['', Validators.required]
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
     });
   }
 
@@ -46,9 +46,14 @@ export class GestorComponent implements OnInit {
   /*
     Guarda la informacion del from crear nueva materia en la base de datos
   */
-  submitForm(){
-    if ( this.profileForm.valid) {
-      this.dbService.insertMateria(this.profileForm.value);
+  submitForm() {
+    if (this.profileForm.valid) {
+      this.dbService.insertMateria(this.profileForm.value).subscribe(data => {
+        if (data === null) {
+          this.materias.push(this.profileForm.value);
+          this.openned = false;
+        }
+      });
     }
   }
 
