@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GestorComponent } from './gestor.component';
 import { SideContentContainerComponent } from './side-content-container/side-content-container.component';
 import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -20,7 +21,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [GestorComponent, SideContentContainerComponent]
 })
