@@ -77,6 +77,10 @@ export class GestorComponent implements OnInit {
         if (data === null) {
           this.materias.push(this.materiaForm.value);
           this.newMatter = false;
+          this.dbService.getMaterias().subscribe(materias => {
+            this.materias = materias;
+            this.info = materias;
+          });
         }
       });
     }
