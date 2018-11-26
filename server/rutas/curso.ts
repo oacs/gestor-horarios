@@ -56,7 +56,7 @@ router.get('/getBy', function (req, res) {
 
 router.delete('/:id', function (req, res) {
 
-    db.get('delete from curso where id = ' + req.params.id, (err, row) => {
+    db.get('delete from curso where id_periodo = ' + req.params.id_periodo +' and id_materia = ' + req.params.id_materia +' and seccion = ' + req.params.seccion + ' and id_pensum = ' + req.params.id_pensum, (err, row) => {
         console.log(err);
         // console.log(row);
         res.send(row);
@@ -90,19 +90,26 @@ router.put('/:id', function (req, res) {
     query = query.substr(0,query.length-1)
 
     query+= ' where id_periodo = $id_periodo and id_materia = $id_materia and id_pensum = $id_pensum and seccion = $seccion'
+
     if(query != 'update curso set where id_periodo = $id_periodo and id_materia = $id_materia and id_pensum = $id_pensum and seccion = $seccion')
     db.run(query,vars, info => {
         console.log(info);
         res.send(info);
     });
     res.status(400).send('error...')
+
 });
 
 router.post('/', function (req, res) {
 
     // console.log(req.body);
     db.run('insert into curso( id_profesor, id_periodo, id_materia, semestre, seccion, id_pensum)  values ( $id_profesor, $id_periodo, $id_materia, $semestre, $seccion, $id_pensum)', {
-        $nombre: req.body.nombre
+        $id_profesor: req.body.id_pro$id_profesor,
+        $id_periodo: req.body.id_periodo,
+        $id_materiasemestre: req.body.id$id_materiasemestre,
+        $semestre: req.body.semestre,
+        $seccion: req.body.seccion,
+        $id_pensum: req.body.id_pe$id_pensum
     }, info => {
         console.log(info);
         res.send(info);
