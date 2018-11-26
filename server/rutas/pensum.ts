@@ -29,6 +29,31 @@ router.delete('/:id', function (req, res) {
     });
 });
 
+router.get('/:id/materias', function (req, res) {
+    let query = 'select * from materia as m'
+        +'inner join materia_x_pensum as mxp on mxp.id_materia = m.id'
+        +'inner join pensum as p on p.id = mxp.id_pensum'
+        +'where p.id = $id'
+        db.run(query, {
+            $id: req.params.id,
+        }, info => {
+            console.log(info);
+            res.send(info);
+        });
+});
+
+router.get('/:id/periodos', function (req, res) {
+    let query = 'select * from periodo as per'
+        +'inner join pensum as pem on per.id_pensum = pem.id'
+        +'where pem.id = $id'
+        db.run(query, {
+            $id: req.params.id,
+        }, info => {
+            console.log(info);
+            res.send(info);
+        });
+});
+
 router.put('/:id', function (req, res) {
     if (req.body.fecha) {
         db.run('UPDATE pensum SET fecha = $fecha WHERE id = $id', {
