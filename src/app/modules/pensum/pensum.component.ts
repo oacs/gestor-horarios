@@ -52,6 +52,9 @@ export class PensumComponent implements OnInit {
 
   public materiaForm: FormGroup;
   public updateMatterForm: FormGroup;
+  public createPensumForm: FormGroup;
+  public modifyPensumForm: FormGroup;
+
 
   public materiaTemporal: Materia;
 
@@ -122,6 +125,14 @@ export class PensumComponent implements OnInit {
       nombre: ['', Validators.required],
       // horas: ['', Validators.required],
       // horasMax: ['', Validators.required]
+    });
+
+    this.createPensumForm = this.formModal.group({
+      nombre_pensum: ['', Validators.required],
+    });
+
+    this.modifyPensumForm = this.formModal.group({
+      option: ['', Validators.required],
     });
 
   }
