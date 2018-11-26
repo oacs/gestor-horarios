@@ -1,3 +1,32 @@
+<div class="opciones" *ngIf="this.opciones">
+  <div class="grid-opciones">
+    <div class="opcion" (click)="toggleActiveNuevo($event)">
+        <div class="title">Nuevo pensum</div>  
+      <div *ngIf="this.activeNuevoPensum" class="inputNuevo">
+        <input type="text" placeholder="Nombre del pensum">
+        <button (click)="crearPensum()">Crear</button>      
+        <button (click)="toggleActiveNuevo($event);">Cancelar</button>      
+      </div>
+    </div>
+    <div class="opcion" (click)="toggleActiveModificar($event)">
+        <div class="title">Modificar pensum existente</div>
+      <div *ngIf="this.activeModificarPensum" class="inputModificar">
+        <select> 
+          <option value="test"></option>
+        </select>
+        <button (click)="modificarPensum()">Modificar</button>
+        <button (click)="toggleActiveModificar($event)">Cancelar</button>
+      </div>
+    </div>
+    <div class="opcion">
+      <div class="title">Importar pensum desde archivo</div>
+    </div>
+    <div class="opcion">
+      <div class="title">Exportar pensum existente</div>
+    </div>
+  </div>
+</div>
+
 <div class="columnContainer">
   <div *ngFor="let semestre of semestres" class="column" cdkDropListOrientation="vertical" cdkDropList
     (cdkDropListDropped)="drop($event)" [id]="'list-' + semestre.numero" [cdkDropListData]="semestre.materias"
@@ -9,7 +38,7 @@
   </div>
 </div>
 
-<app-administrador-drag [grupoMaterias]="info" (modal)="toggleModal($event)" (flechas)="cambiarInfo($event)"></app-administrador-drag>
+<app-administrador-drag [grupoMaterias]="info" (modal)="toggleModal($event)" (flechas)="cambiarInfo($event)" (guardar)="guardarPensum();"></app-administrador-drag>
 
 <div class="modal" [style.display]="displayType('nuevaMateria')">
   <div class="card">
@@ -22,25 +51,6 @@
       </label>
       <p style="text-align: center">
         <button type="button" class="accept-button-form" (click)="submitFormNewMatter()">Guardar</button>
-      </p>
-    </form>
-  </div>
-</div>
-<div class="modal" [style.display]="displayType('importar')">
-    <i class="fa fa-times" (click)="this.displayModalImportar = 'none'"></i>
-</div>
-<div class="modal" [style.display]="displayType('modificar')">
-  <div class="card">
-    <i class="fa fa-times" (click)="this.displayModalModificar = 'none'"></i>
-    <h2>Actualizar materia</h2>
-    <form [formGroup]="materiaForm">
-      <label class="form-group">
-        Nombre
-        <input type="text" class="input-text-form" formControlName="nombre" required>
-      </label>
-      <p style="text-align: center;">
-        <button type="button" class="accept-button-form" (click)="submitFormUpdateMatter()">Modificar</button>
-        <button type="button" class="delete-button-form" (click)="deleteMatter()">Eliminar</button>
       </p>
     </form>
   </div>

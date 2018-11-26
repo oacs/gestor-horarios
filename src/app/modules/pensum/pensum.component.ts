@@ -40,6 +40,11 @@ export class PensumComponent implements OnInit {
   public semestres: Semestre[];
   public materiasEnDrag: number;
 
+  // Teipe de opciones
+  public opciones: boolean;
+  public activeNuevoPensum: boolean;
+  public activeModificarPensum: boolean;
+
   // Cestari con su modal chimbo
   public displayModalNuevo: string;
   public displayModalImportar: string;
@@ -86,10 +91,24 @@ export class PensumComponent implements OnInit {
   }
 
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
+    this.opciones = true;
+    this.activeModificarPensum = false;
+    this.activeNuevoPensum = false;
 
+
+    this.semestres = [
+      { numero: 1, materias: [] },
+      { numero: 2, materias: [] },
+      { numero: 3, materias: [] },
+      { numero: 4, materias: [] },
+      { numero: 5, materias: [] },
+      { numero: 6, materias: [] },
+      { numero: 7, materias: [] },
+      { numero: 8, materias: [] },
+      { numero: 9, materias: [] },
+      { numero: 10, materias: [] }];
     this.materias = [];
 
-    this.displayModalImportar = 'none';
     this.displayModalNuevo = 'none';
     this.displayModalModificar = 'none';
 
@@ -109,14 +128,6 @@ export class PensumComponent implements OnInit {
 
   /* Cambia el tipo de display (cuando se presiona alguno de los botones) */
   public toggleModal(idModal: string) {
-    if (idModal === 'importar') {
-      if (this.displayModalImportar === 'none') {
-        this.displayModalImportar = 'block';
-      } else {
-        this.displayModalImportar = 'none';
-      }
-    }
-
     if (idModal === 'nuevaMateria') {
       if (this.displayModalNuevo === 'none') {
         this.displayModalNuevo = 'block';
@@ -136,10 +147,6 @@ export class PensumComponent implements OnInit {
 
   /* Retorna el tipo de display para aplicar ngStyle sobre el modal */
   public displayType(idModal: String) {
-    if (idModal === 'importar') {
-      return this.displayModalImportar;
-    }
-
     if (idModal === 'nuevaMateria') {
       return this.displayModalNuevo;
     }
@@ -196,7 +203,7 @@ export class PensumComponent implements OnInit {
     this.semestres.forEach( semestre => {
       semestre.materias.forEach( materia => {
         aux.push(materia);
-      })
+      });
     });
     const infoAux:  Materia[] = this.materias.filter(mat => !aux.includes(mat));
     this.info = infoAux.slice(this.posicion * this.limite,
@@ -232,6 +239,43 @@ export class PensumComponent implements OnInit {
         this.displayModalModificar = 'none';
       }
     });
+  }
+
+  crearPensum() {
+
+    this.opciones = false;
+  }
+
+  toggleActiveNuevo(event) {
+    event.stopPropagation();
+
+    if (this.activeNuevoPensum === false) {
+      this.activeNuevoPensum = true;
+    } else {
+      this.activeNuevoPensum = false;
+    }
+
+    console.log(this.activeNuevoPensum);
+  }
+
+  toggleActiveModificar(event) {
+    event.stopPropagation();
+    if (this.activeModificarPensum === false) {
+      this.activeModificarPensum = true;
+    } else {
+      this.activeModificarPensum = false;
+    }
+
+    console.log(this.activeModificarPensum);
+  }
+
+  modificarPensum() {
+
+    this.opciones  = false;
+  }
+
+  guardarPensum() {
+    console.log('Guardar pensum');
   }
 
   ngOnInit() {

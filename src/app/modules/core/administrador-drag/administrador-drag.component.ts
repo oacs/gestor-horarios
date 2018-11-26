@@ -13,12 +13,17 @@ export class AdministradorDragComponent implements OnInit {
   @Input() grupoMaterias: Materia[];
   @Output() modal = new EventEmitter<string>();
   @Output() flechas = new EventEmitter<string>();
+  @Output() guardar = new EventEmitter<string>();
 
   constructor() {
   }
 
   abrirModal(id_modal: string) {
     this.modal.emit(id_modal);
+  }
+
+  guardarPensum() {
+    this.guardar.emit('guardar');
   }
 
   drop(event: CdkDragDrop<string[]>) {
