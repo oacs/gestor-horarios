@@ -94,11 +94,14 @@ export class GestorComponent implements OnInit {
     }
   }
 
-  /*
-    Guarda la informacion del from crear nueva materia en la base de datos
-  */
-  submitForm() {
-    console.log(this.profileForm.value);
+  deleteMatter () {
+    this.dbService.deleteMateria(this.materiaTemporal).subscribe( data => {
+      if (data === null) {
+        this.materias.splice(this.materias.indexOf(this.materiaTemporal));
+        this.updateMatter = false;
+      }
+
+    })
   }
 
   ngOnInit() {
