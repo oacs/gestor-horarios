@@ -15,6 +15,13 @@
 
 <div class="modal" [style.display]="displayType('nuevaMateria')">
   <div class="card">
+      <form [formGroup]="materiaForm">
+          <label class="form-group">
+            Nombre:
+            <input type="text" class="input-form"formControlName="nombre" required>
+          </label>    
+        <button type="button" class="button-form" (click)="submitForm()">Aceptar</button>        
+        </form>
     <button (click)="toggleModal('nuevaMateria')">Cerrar nueva materia</button>
   </div>
 </div>

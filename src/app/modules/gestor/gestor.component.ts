@@ -18,6 +18,9 @@ export class GestorComponent implements OnInit {
   public profileForm: FormGroup;
   public updateMatterForm: FormGroup;
 
+  public materiaForm: FormGroup;
+  public updateMatterForm: FormGroup;
+
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
     this.newMatter = false;
     this.updateMatter = false;
@@ -29,7 +32,13 @@ export class GestorComponent implements OnInit {
       this.info = this.filteredListOptions();
     });
 
-    this.profileForm = this.formModal.group({
+    this.materiaForm = this.formModal.group({
+      nombre: ['', Validators.required],
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
+    });
+
+    this.updateMatterForm = this.formModal.group({
       nombre: ['', Validators.required],
       horas: ['', Validators.required],
       horasMax: ['', Validators.required]
@@ -82,10 +91,15 @@ export class GestorComponent implements OnInit {
   }
 
   /*
-    Elimina una materia
+    Guarda la informacion del from crear nueva materia en la base de datos
   */
-  deleteFormUpdateMatter(){
-    console.log(this.updateMatterForm.value);
+  submitForm(){
+    console.log(this.profileForm.value);
+  }
+
+  ngOnInit() {
+
+
   }
 
   ngOnInit() {

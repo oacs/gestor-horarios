@@ -44,8 +44,7 @@ router.put('/:id', function (req, res) {
 router.post('/', function (req, res) {
 
     console.log(req.body);
-    db.run('insert into pensum(id, fecha)  values ($id, $fecha)', {
-        $id: req.body.id,
+    db.run('insert into pensum(fecha)  values ($fecha)', {
         $fecha: req.body.fecha
     }, info => {
         console.log(info);
