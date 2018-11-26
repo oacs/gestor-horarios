@@ -3,19 +3,23 @@
     <div class="opcion" (click)="toggleActiveNuevo($event)">
         <div class="title">Nuevo pensum</div>  
       <div *ngIf="this.activeNuevoPensum" class="inputNuevo">
-        <input type="text" placeholder="Nombre del pensum">
-        <button (click)="crearPensum()">Crear</button>      
-        <button (click)="toggleActiveNuevo($event);">Cancelar</button>      
+        <form [formGroup]="createPensumForm">
+          <input type="text" placeholder="Nombre del pensum" formControlName="nombre_pensum" required>
+          <button (click)="crearPensum()">Crear</button>      
+          <button (click)="toggleActiveNuevo($event);">Cancelar</button>      
+        </form>
       </div>
     </div>
     <div class="opcion" (click)="toggleActiveModificar($event)">
         <div class="title">Modificar pensum existente</div>
       <div *ngIf="this.activeModificarPensum" class="inputModificar">
-        <select> 
-          <option value="test"></option>
-        </select>
-        <button (click)="modificarPensum()">Modificar</button>
-        <button (click)="toggleActiveModificar($event)">Cancelar</button>
+        <form [formGroup]="modifyPensumForm">
+          <select> 
+            <option value="test" formControlName="option" required></option>
+          </select>
+          <button (click)="modificarPensum()">Modificar</button>
+          <button (click)="toggleActiveModificar($event)">Cancelar</button>
+        </form>
       </div>
     </div>
     <div class="opcion">
