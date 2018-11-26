@@ -70,26 +70,17 @@ router.delete('/:id', function (req, res) {
  * @body nombre text
  */
 router.put('/:id', function (req, res) {
-  const vars = {
-    id: req.params.id,
-    nombre: ''
-  };
-  let query = 'update materia set ';
+  let query = '';
   if (req.body.nombre) {
-    vars.nombre = req.body.nombre;
-    query += ' nombre = $nombre';
+    query += 'update materia set nombre = $nombre where id = $id';
+    db.run(query, {$id: req.params.id, $nombre: req.body.nombre}, info => {
+      console.log(info);
+      res.send(info);
+    });
+  } else {
+    res.status(400).send('error parametros no valido: enum[nombre,id]');
   }
 
-  query += ' where id = $id';
-  if (query !== 'update materia set  where id = $id') {
-    if (req.body.nombre) {
-      db.run(query, vars, info => {
-        console.log(info);
-        res.send(info);
-      });
-    }
-  }
-  res.status(400).send('error parametros no valido: enum[nombre,id]');
 });
 
 /** Guardo un registro dado un id
@@ -102,7 +93,11 @@ router.post('/', function (req, res) {
     $nombre: req.body.nombre
   }, info => {
     console.log(info);
-    res.send(info);
+    db.get('select id from materia order by id desc limit 1', (err, row) => {
+      console.log(err);
+      console.log(row);
+      res.send(row);
+    });
   });
 });
 

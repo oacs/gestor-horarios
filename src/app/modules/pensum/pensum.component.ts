@@ -212,7 +212,7 @@ export class PensumComponent implements OnInit {
 
   submitFormUpdateMatter() {
     if (this.updateMatterForm.valid) {
-      this.dbService.updateMateria(this.updateMatterForm.value).subscribe(data => {
+      this.dbService.updateMateria(this.updateMatterForm.value, this.materiaTemporal.id).subscribe(data => {
         console.log(data);
         if (data === null) {
           this.materias[this.materias.indexOf(this.materiaTemporal)].nombre = this.updateMatterForm.value.nombre;
@@ -235,6 +235,18 @@ export class PensumComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.semestres = [
+      { numero: 1, materias: [] },
+      { numero: 2, materias: [] },
+      { numero: 3, materias: [] },
+      { numero: 4, materias: [] },
+      { numero: 5, materias: [] },
+      { numero: 6, materias: [] },
+      { numero: 7, materias: [] },
+      { numero: 8, materias: [] },
+      { numero: 9, materias: [] },
+      { numero: 10, materias: [] }];
+    this.materias = [];
     this.dbService.getMaterias().subscribe(data => {
       this.materias = data;
       this.limite = 4;

@@ -74,8 +74,10 @@ export class GestorComponent implements OnInit {
   submitFormNewMatter() {
     if (this.materiaForm.valid) {
       this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
-        if (data === null) {
-          this.materias.push(this.materiaForm.value);
+        if (data.id !== null) {
+          const mat: Materia = this.materiaForm.value;
+          mat.id = data.id;
+          this.materias.push(mat);
           this.newMatter = false;
           this.dbService.getMaterias().subscribe(materias => {
             this.materias = materias;
@@ -87,8 +89,9 @@ export class GestorComponent implements OnInit {
   }
 
   submitFormUpdateMatter() {
+    console.log(this.materiaTemporal);
     if (this.updateMatterForm.valid) {
-      this.dbService.updateMateria(this.updateMatterForm.value).subscribe(data => {
+      this.dbService.updateMateria(this.updateMatterForm.value, this.materiaTemporal.id).subscribe(data => {
         console.log(data);
         if (data === null) {
           this.materias[this.materias.indexOf(this.materiaTemporal)].nombre = this.updateMatterForm.value.nombre;
@@ -108,6 +111,18 @@ export class GestorComponent implements OnInit {
   ngOnInit() {
 
 
+  }
+
+  deleteMatter() {
+    console.log(this.materiaTemporal);
+    this.dbService.deleteMateria(this.materiaTemporal).subscribe(data => {
+      console.log(data);
+      if (data === null) {
+        this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
+        this.updateMatter = false;
+      }
+
+    });
   }
 
   filteredListOptions() {

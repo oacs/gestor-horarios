@@ -70,8 +70,8 @@ export class DatabaseService {
     return this.http.get<Materia>(AppConfig.api + 'materias/' + id);
   }
 
-  public updateMateria(materia: Materia): Observable<any> {
-    return this.http.put(AppConfig.api + 'materias/' + materia.id, materia );
+  public updateMateria(materia: Materia, id: number): Observable<any> {
+    return this.http.put(AppConfig.api + 'materias/' + id, materia );
   }
 
   public insertMateria(materia: Materia): Observable<any> {
