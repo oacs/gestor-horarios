@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService, Materia } from '../../database.service';
-import { FormControl } from '@angular/forms';
+
+import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-gestor',
   templateUrl: './gestor.component.html',
@@ -10,24 +11,43 @@ export class GestorComponent implements OnInit {
   openned: boolean;
   public search = new FormControl('');
   public materias: Materia[];
+
   public info: Materia[];
-  constructor(private dbService: DatabaseService) {
+  public profileForm: FormGroup;
+
+  constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
     this.openned = false;
     this.dbService.getMaterias().subscribe(materias => {
       this.materias = materias;
       this.info = materias;
     });
-    this.search.valueChanges.subscribe(data => {
+    this.search.valueChanges.subscribe( data => {
       this.info = this.filteredListOptions();
+    });
+
+    this.profileForm = this.formModal.group({
+      nombre: ['', Validators.required],
+      horas: ['', Validators.required],
+      horasMax: ['', Validators.required]
     });
   }
 
+  /*
+    Muestra y oculta el form para crear una materia nueva
+  */
   matterModal() {
     if (this.openned === true) {
       this.openned = false;
     } else {
       this.openned = true;
     }
+  }
+
+  /*
+    Guarda la informacion del from crear nueva materia en la base de datos
+  */
+  submitForm(){
+    console.log(this.profileForm.value);
   }
 
   ngOnInit() {

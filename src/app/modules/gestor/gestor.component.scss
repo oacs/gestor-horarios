@@ -85,9 +85,34 @@ body{
     left: 35%;
     background: white;
     position: fixed;
+    padding: 10px;
     width: 350px;
     height: 400px;
-    border: 1px solid grey;
+    border: 1px solid #e6e2e2;
     margin: 0 auto;
+}
+
+
+.form-group{
+    display:block;
+    margin: 0 0 10px 0;
+}
+
+.form-group .input-form{
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+}
+
+.button-form{
+    background: #83ccae;
+    border: none;
+    height: 30px;
+    width: 100px;
+    color: #FFF;
+    font-size: 15px;
+}
+
+.button-form:hover{
+    background: #49a07d;
 }
 
