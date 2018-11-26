@@ -95,13 +95,15 @@ export class GestorComponent implements OnInit {
   }
 
   deleteMatter () {
+    console.log(this.materiaTemporal);
     this.dbService.deleteMateria(this.materiaTemporal).subscribe( data => {
+      console.log(data);
       if (data === null) {
-        this.materias.splice(this.materias.indexOf(this.materiaTemporal));
+        this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
         this.updateMatter = false;
       }
 
-    })
+    });
   }
 
   ngOnInit() {
