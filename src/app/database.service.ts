@@ -29,9 +29,10 @@ export interface Prelacion {
 export interface Materia {
   id: number;
   nombre: string;
-  semestre: string;
-  horas: string;
-  maxH: string;
+  semestre?: string;
+  horas?: string;
+  maxH?: string;
+  prelaciones?: Materia[];
 }
 
 // tslint:disable-next-line:class-name
