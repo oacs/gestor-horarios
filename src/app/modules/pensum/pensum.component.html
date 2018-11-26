@@ -1,21 +1,21 @@
 <div class="opciones" *ngIf="this.opciones">
   <div class="grid-opciones">
-    <div class="opcion" (click)="toggleActiveNuevo($event)">
+    <div class="opcion" (click)="this.activeNuevoPensum = true;">
         <div class="title">Nuevo pensum</div>  
       <div *ngIf="this.activeNuevoPensum" class="inputNuevo">
         <form [formGroup]="createPensumForm">
-          <input type="text" placeholder="Nombre del pensum" formControlName="nombre_pensum" required>
+          <input type="text" placeholder="Nombre del pensum" formControlName="fecha" required>
           <button (click)="crearPensum()">Crear</button>      
           <button (click)="toggleActiveNuevo($event);">Cancelar</button>      
         </form>
       </div>
     </div>
-    <div class="opcion" (click)="toggleActiveModificar($event)">
+    <div class="opcion" (click)="this.activeModificarPensum = true">
         <div class="title">Modificar pensum existente</div>
       <div *ngIf="this.activeModificarPensum" class="inputModificar">
         <form [formGroup]="modifyPensumForm">
-          <select> 
-            <option value="test" formControlName="option" required></option>
+          <select  formControlName="option"> 
+            <option [value]="pensum.id" *ngFor="let pensum of pensums"required>{{pensum.fecha}}</option>
           </select>
           <button (click)="modificarPensum()">Modificar</button>
           <button (click)="toggleActiveModificar($event)">Cancelar</button>

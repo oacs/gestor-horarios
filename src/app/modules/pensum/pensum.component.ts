@@ -100,7 +100,7 @@ export class PensumComponent implements OnInit {
     this.activeModificarPensum = false;
     this.activeNuevoPensum = false;
 
-    this.dbService.getPensums().subscribe( pensums => {
+    this.dbService.getPensums().subscribe(pensums => {
       this.pensums = pensums;
       console.log(pensums);
     });
@@ -134,7 +134,7 @@ export class PensumComponent implements OnInit {
     });
 
     this.createPensumForm = this.formModal.group({
-      nombre_pensum: ['', Validators.required],
+      fecha: ['', Validators.required],
     });
 
     this.modifyPensumForm = this.formModal.group({
@@ -217,12 +217,12 @@ export class PensumComponent implements OnInit {
 
   private actualizarInfo() {
     const aux: Materia[] = [];
-    this.semestres.forEach( semestre => {
-      semestre.materias.forEach( materia => {
+    this.semestres.forEach(semestre => {
+      semestre.materias.forEach(materia => {
         aux.push(materia);
       });
     });
-    const infoAux:  Materia[] = this.materias.filter(mat => !aux.includes(mat));
+    const infoAux: Materia[] = this.materias.filter(mat => !aux.includes(mat));
     this.info = infoAux.slice(this.posicion * this.limite,
       (this.posicion * this.limite) + this.limite);
   }
@@ -259,8 +259,18 @@ export class PensumComponent implements OnInit {
   }
 
   crearPensum() {
+    if (this.createPensumForm.valid) {
+      this.dbService.insertPensum(this.createPensumForm.value).subscribe(data => {
+        if (data.id !== null) {
+          const pensumTemp: Pensum = this.createPensumForm.value;
+          pensumTemp.id = data.id;
+          this.pensums.push(pensumTemp);
+          this.abrirPensum(data.id);
 
-    this.opciones = false;
+          this.opciones = false;
+        }
+      });
+    }
   }
 
   toggleActiveNuevo(event) {
@@ -287,12 +297,24 @@ export class PensumComponent implements OnInit {
   }
 
   modificarPensum() {
-
-    this.opciones  = false;
+    console.log(this.modifyPensumForm.value);
+    if (this.modifyPensumForm.valid) {
+      this.abrirPensum(this.modifyPensumForm.value.option);
+      this.opciones = false;
+    }
   }
 
   guardarPensum() {
     console.log('Guardar pensum');
+  }
+
+  abrirPensum(id: number) {
+    this.dbService.getMateriasPensum(id).subscribe(materias => {
+      console.log(materias);
+      materias.forEach(materia => {
+        this.semestres[materia.semestre].materias.push(materia);
+      });
+    });
   }
 
   ngOnInit() {

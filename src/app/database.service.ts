@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as database from '../../node_modules/electron-db';
 import { AppConfig } from '../environments/environment';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 const db = database;
 
 export interface Curso {
@@ -114,5 +114,14 @@ export class DatabaseService {
     // ------------------------Pensums-----------------------------
     public getPensums(): Observable<Pensum[]> {
       return this.http.get<Pensum[]>(AppConfig.api + 'pensum');
+    }
+
+    public getMateriasPensum(id: number): Observable<Materia[]> {
+
+      const params = new HttpParams().set('id_pensum', id + '');
+      return this.http.get<Materia[]>(AppConfig.api + 'pensum/materias', {params: params} );
+    }
+    public insertPensum(pensum: Pensum): Observable<any> {
+      return this.http.post(AppConfig.api + 'pensum/', pensum );
     }
 }

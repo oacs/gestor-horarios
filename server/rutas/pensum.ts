@@ -13,6 +13,25 @@ router.get('/', function (req, res) {
         res.send(row);
     });
 });
+/**Obtengo todas las materias de un pensum
+ * @param id int
+ */
+router.get('/materias', function (req, res) {
+    const query = 'select m.*, mxp.semestre as semestre, mxp.horas as horas, mxp.maxH as maxH from materia as m '
+        + ' inner join materia_x_pensum as mxp on mxp.id_materia = m.id'
+        + ' inner join pensum as p on p.id = mxp.id_pensum '
+        + ' where p.id = $id ';
+    db.all(query, {
+        $id: req.query.id_pensum,
+    }, (err, info) => {
+        console.log('perro');
+        console.log(req.query.id_pensum);
+        console.log(query);
+        console.log(info);
+        console.log(err);
+        res.send(info);
+    });
+});
 /**Obtengo un registro dado su id
  * @param id int
  */
@@ -35,34 +54,21 @@ router.delete('/:id', function (req, res) {
         res.send(row);
     });
 });
-/**Obtengo todas las materias de un pensum
- * @param id int
- */
-router.get('/materias', function (req, res) {
-    let query = 'select m.*, mxp.horas as horas, mxp.maxH as maxH from materia as m'
-        +'inner join materia_x_pensum as mxp on mxp.id_materia = m.id'
-        +'inner join pensum as p on p.id = mxp.id_pensum'
-        +'where p.id = $id'
-        db.run(query, {
-            $id: req.params.id_pensum,
-        }, info => {
-            console.log(info);
-            res.send(info);
-        });
-});
+
 /**Obtengo todas los periodos de un pensum
  * @param id int
  */
 router.get('/:id/periodos', function (req, res) {
-    let query = 'select * from periodo as per'
-        +'inner join pensum as pem on per.id_pensum = pem.id'
-        +'where pem.id = $id'
-        db.run(query, {
-            $id: req.params.id,
-        }, info => {
-            console.log(info);
-            res.send(info);
-        });
+    console.log(req.params.id);
+    let query = 'select * from periodo as per '
+        + ' inner join pensum as pem on per.id_pensum = pem.id '
+        + ' where pem.id = $id'
+    db.run(query, {
+        $id: req.params.id,
+    }, info => {
+        console.log(info);
+        res.send(info);
+    });
 });
 /**Actualizo un registro dado su id
  * @param id int
@@ -91,8 +97,8 @@ router.post('/materia', function (req, res) {
     db.run('insert into materia_x_pensum (horas,maxH,id_pensum,id_materia) values ($horas,$maxH,$id_pensum,$id_materia)', {
         $id_pensum: req.body.id_pensum,
         $id_materia: req.body.id_materia,
-        $horas : req.body.horas,
-        $maxH : req.body.maxH
+        $horas: req.body.horas,
+        $maxH: req.body.maxH
     }, info => {
         console.log(info);
         res.send(info);
