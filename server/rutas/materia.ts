@@ -20,6 +20,22 @@ router.get('/:id', function (req, res) {
     });
 });
 
+router.get('/getBy', function (req, res) {
+    let query = 'select * from materia where '
+    if(req.params.id) query+= ' id ='+req.params.id +','
+    
+    if(req.params.nombre) query+= ' nombre ='+req.params.nombre +','
+    
+    query = query.substr(0,query.length-1)
+    if(query != 'select * from materia where')
+    db.get(query, (err, row) => {
+        console.log(err);
+        // console.log(row);
+        res.send(row);
+    });
+    res.status(400).send('error parametros no valido: enum[nombre,id]')
+});
+
 router.delete('/:id', function (req, res) {
 
     db.get('delete from materia where id = ' + req.params.id, (err, row) => {
@@ -30,15 +46,20 @@ router.delete('/:id', function (req, res) {
 });
 
 router.put('/:id', function (req, res) {
+    let query = 'update materia set '
+    if (req.body.nombre) query+= ' nombre = '+req.body.nombre
+
+    query+= ' where id = $id'
+    if(query != 'update materia set  where id = $id')
     if (req.body.nombre) {
-        db.run('UPDATE materia SET nombre = $nombre WHERE id = $id', {
+        db.run(query, {
             $id: req.params.id,
-            $nombre: req.body.nombre
         }, info => {
             console.log(info);
             res.send(info);
         });
     }
+    res.status(400).send('error parametros no valido: enum[nombre,id]')
 });
 
 router.post('/', function (req, res) {
