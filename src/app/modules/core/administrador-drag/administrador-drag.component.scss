@@ -36,6 +36,18 @@ div.container div.green div.card {
     user-select: none;
 }
 
+div.container div.green div.card div.infoMateria{ 
+    text-align: center;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.7px;
+} 
+
 div.container div.green div.card:hover {
     top: -6px;
 }

@@ -11,7 +11,9 @@
     id="list-two" [cdkDropListConnectedTo]="['list-1', 'list-2', 'list-3', 'list-4', 'list-5', 'list-6', 'list-7', 'list-8', 'list-9', 'list-10']">  
       <div class="newCard"></div>
       <div cdkDrag [cdkDragData]="materia"  *ngFor="let materia of grupoMaterias" class="card" (click)="abrirModal('modificar');">
-        {{materia.nombre}}
+        <div class="infoMateria">
+          {{materia.nombre}}
+        </div>
       </div>
     </div>
     <div class="arrows">
