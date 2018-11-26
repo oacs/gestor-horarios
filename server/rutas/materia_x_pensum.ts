@@ -11,31 +11,23 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
-
-    if(req.body.id_pensum){
-        db.get('select * from materia_x_pensum where id_pensum = ' + req.params.id_pensum, (err, row) => {
-            console.log(err);
-            console.log(row);
-            res.send(row);
-        });
+router.get('/:id_materia/:id_pensum', function (req, res) {
+    let query = 'select * from materia_x_pensum where ';
+    let vars = {id_materia: 0, id_pensum: 0};
+    if(req.params.id_materia){
+        query+= ' id_materia = $id_materia'
+        vars.id_materia = req.params.id_materia
+    }
+    if(req.params.id_pensum){
+        query+= ' id_pensum = $id_pensum',
+        vars.id_pensum = req.params.id_pensum
     }
 
-    if(req.body.id_materia){
-        db.get('select * from materia_x_pensum where id_materia = ' + req.params.id_materia, (err, row) => {
-            console.log(err);
-            console.log(row);
-            res.send(row);
-        });
-    }
-
-    if(req.body.id){
-        db.get('select * from materia_x_pensum where id = ' + req.params.id, (err, row) => {
-            console.log(err);
-            console.log(row);
-            res.send(row);
-        });
-    }
+    db.get(query,vars, (err, row) => {
+        console.log(err);
+        console.log(row);
+        res.send(row);
+    });
 });
 
 router.delete('/:id', function (req, res) {

@@ -65,6 +65,19 @@ router.put('/:id', function (req, res) {
         });
     }
 });
+router.post('/:id/materia', function (req, res) {
+    if (req.body.fecha) {
+        db.run('insert into materia_x_pensum (horas,horasM,id_pensum,id_materia) values ($horas,$horasM,$id_pensum,$id_materia)', {
+            $id_pensum: req.params.id,
+            $id_materia: req.body.id_materia,
+            $horas : req.body.horas,
+            $horasM : req.body.horasM
+        }, info => {
+            console.log(info);
+            res.send(info);
+        });
+    }
+});
 
 router.post('/', function (req, res) {
 

@@ -22,13 +22,17 @@ router.get('/:id', function (req, res) {
 
 router.get('/getBy', function (req, res) {
     let query = 'select * from materia where '
-    if(req.params.id) query+= ' id ='+req.params.id +','
-    
-    if(req.params.nombre) query+= ' nombre ='+req.params.nombre +','
-    
-    query = query.substr(0,query.length-1)
+    let vars = {id: 0 , nombre: ''}
+    if(req.params.id){
+        query+= ' id = $id'
+        vars.id = req.params.id
+    }
+    if(req.params.nombre){
+        query+= ' nombre = $nombre',
+        vars.nombre = req.params.nombre
+    }
     if(query != 'select * from materia where')
-    db.get(query, (err, row) => {
+    db.get(query,vars, (err, row) => {
         console.log(err);
         // console.log(row);
         res.send(row);
