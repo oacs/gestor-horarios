@@ -20,7 +20,7 @@ router.get('/:id', function (req, res) {
 router.delete('/:id', function (req, res) {
     index_1.db.get('delete from materia where id = ' + req.params.id, function (err, row) {
         console.log(err);
-        console.log(row);
+        // console.log(row);
         res.send(row);
     });
 });
@@ -34,21 +34,10 @@ router.put('/:id', function (req, res) {
             res.send(info);
         });
     }
-    if (req.body.semestre) {
-        index_1.db.run('UPDATE materia SET semestre = $semestre WHERE id = $id', {
-            $id: req.params.id,
-            $semestre: req.body.semestre
-        }, function (info) {
-            console.log(info);
-            res.send(info);
-        });
-    }
 });
 router.post('/', function (req, res) {
-    console.log(req.body);
-    index_1.db.run('insert into materia(id, semestre, nombre)  values ($id, $semestre, $nombre)', {
-        $id: req.body.id,
-        $semestre: req.body.semestre,
+    // console.log(req.body);
+    index_1.db.run('insert into materia( nombre)  values ( $nombre)', {
         $nombre: req.body.nombre
     }, function (info) {
         console.log(info);

@@ -80,14 +80,14 @@ body{
 }
 
 
-.new-matter-modal{
-    top:15%;
+.form-modal{
+    top:20%;
     left: 35%;
     background: white;
     position: fixed;
     padding: 10px;
     width: 350px;
-    height: 400px;
+    height: auto;
     border: 1px solid #e6e2e2;
     margin: 0 auto;
 }
@@ -98,12 +98,18 @@ body{
     margin: 0 0 10px 0;
 }
 
-.form-group .input-form{
+.form-group .input-text-form{
     border: 1px solid #a6a6a6;
     border-radius: 3px;
 }
 
-.button-form{
+.form-group .input-number-form{
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+    width: 45px;
+}
+
+.accept-button-form{
     background: #83ccae;
     border: none;
     height: 30px;
@@ -112,7 +118,20 @@ body{
     font-size: 15px;
 }
 
-.button-form:hover{
+.accept-button-form:hover{
     background: #49a07d;
+}
+
+.delete-button-form{
+    background: #e88e8e;
+    border: none;
+    height: 30px;
+    width: 100px;
+    color: #FFF;
+    font-size: 15px;
+}
+
+.delete-button-form:hover{
+    background: #e64242;
 }
 
