@@ -17,9 +17,7 @@ export class GestorComponent implements OnInit {
   public info: Materia[];
   public profileForm: FormGroup;
   public updateMatterForm: FormGroup;
-
   public materiaForm: FormGroup;
-  public updateMatterForm: FormGroup;
 
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
     this.newMatter = false;
@@ -100,9 +98,6 @@ export class GestorComponent implements OnInit {
   ngOnInit() {
 
 
-  }
-
-  ngOnInit() {
   }
 
   filteredListOptions() {
