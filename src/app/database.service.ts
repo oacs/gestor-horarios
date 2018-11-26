@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as database from '../../node_modules/electron-db';
 import { AppConfig } from '../environments/environment';
-import { Pensum } from './algoritmo/pensum';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 const db = database;
@@ -111,4 +110,9 @@ export class DatabaseService {
   public insertMateriaxPensum(profesor: Profesor): Observable<any> {
     return this.http.post(AppConfig.api + 'profesores/', profesor );
   }
+
+    // ------------------------Pensums-----------------------------
+    public getPensums(): Observable<Pensum[]> {
+      return this.http.get<Pensum[]>(AppConfig.api + 'pensum');
+    }
 }

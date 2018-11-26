@@ -24,6 +24,8 @@ interface Semestre {
 })
 
 export class PensumComponent implements OnInit {
+
+  public pensums: Pensum[];
   public materias: Materia[];
   public info: Materia[];
   public limite: number;
@@ -98,6 +100,10 @@ export class PensumComponent implements OnInit {
     this.activeModificarPensum = false;
     this.activeNuevoPensum = false;
 
+    this.dbService.getPensums().subscribe( pensums => {
+      this.pensums = pensums;
+      console.log(pensums);
+    });
 
     this.semestres = [
       { numero: 1, materias: [] },

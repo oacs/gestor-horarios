@@ -38,13 +38,13 @@ router.delete('/:id', function (req, res) {
 /**Obtengo todas las materias de un pensum
  * @param id int
  */
-router.get('/:id/materias', function (req, res) {
-    let query = 'select *, mxp.horas as horas, mxp.maxH as maxH from materia as m'
+router.get('/materias', function (req, res) {
+    let query = 'select m.*, mxp.horas as horas, mxp.maxH as maxH from materia as m'
         +'inner join materia_x_pensum as mxp on mxp.id_materia = m.id'
         +'inner join pensum as p on p.id = mxp.id_pensum'
         +'where p.id = $id'
         db.run(query, {
-            $id: req.params.id,
+            $id: req.params.id_pensum,
         }, info => {
             console.log(info);
             res.send(info);
@@ -87,12 +87,12 @@ router.put('/:id', function (req, res) {
  * @body horas int
  * @body maxH int
  */
-router.post('/:id/materia', function (req, res) {
-    db.run('insert into materia_x_pensum (horas,horasM,id_pensum,id_materia) values ($horas,$horasM,$id_pensum,$id_materia)', {
-        $id_pensum: req.params.id,
+router.post('/materia', function (req, res) {
+    db.run('insert into materia_x_pensum (horas,maxH,id_pensum,id_materia) values ($horas,$maxH,$id_pensum,$id_materia)', {
+        $id_pensum: req.body.id_pensum,
         $id_materia: req.body.id_materia,
         $horas : req.body.horas,
-        $horasM : req.body.horasM
+        $maxH : req.body.maxH
     }, info => {
         console.log(info);
         res.send(info);
