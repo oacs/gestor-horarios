@@ -5,7 +5,6 @@ import { SideContentContainerComponent } from './side-content-container/side-con
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
 const routes: Routes = [
   {
       path: 'materias',

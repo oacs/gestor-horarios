@@ -1,15 +1,13 @@
-
-
 <div class="contenedorMaterias">
 
-  <div class="materias-top-cotainer">            
-    <input class="campoTexto" type="text" name="buscar" placeholder="Buscar..." >
+  <div class="materias-top-cotainer">
+    <input class="campoTexto" type="text" name="buscar" placeholder="Buscar..." [formControl]="search">
     <i class="fa fa-filter" aria-hidden="true"></i>
-    <button class="button" style="float:right" (click)="matterModal()">Nuevo</button>        
+    <button class="button" style="float:right" (click)="matterModal()">Nuevo</button>
   </div>
 
   <div class="materias-cotainer">
-    <div  class="materia" *ngFor="let materia of materias" >
+    <div class="materia" *ngFor="let materia of info">
       <p> {{materia.nombre | titlecase }} </p>
     </div>
   </div>
@@ -37,7 +35,3 @@
   </div>
 
 </div>
-
-
-
-

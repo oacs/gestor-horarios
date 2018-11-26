@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService, Materia } from '../../database.service';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
 
-
+import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-gestor',
   templateUrl: './gestor.component.html',
@@ -12,13 +9,20 @@ import { FormGroup } from '@angular/forms';
 })
 export class GestorComponent implements OnInit {
   openned: boolean;
+  public search = new FormControl('');
   public materias: Materia[];
+
+  public info: Materia[];
   public profileForm: FormGroup;
 
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
     this.openned = false;
-    this.dbService.getMaterias().subscribe( materias => {
+    this.dbService.getMaterias().subscribe(materias => {
       this.materias = materias;
+      this.info = materias;
+    });
+    this.search.valueChanges.subscribe( data => {
+      this.info = this.filteredListOptions();
     });
 
     this.profileForm = this.formModal.group({
@@ -49,6 +53,17 @@ export class GestorComponent implements OnInit {
   ngOnInit() {
 
 
+  }
+
+  filteredListOptions() {
+    const posts = this.materias;
+    const filteredPostsList = [];
+    for (const post of posts) {
+      if (post.nombre.match(this.search.value)) {
+        filteredPostsList.push(post);
+      }
+    }
+    return filteredPostsList;
   }
 
 }

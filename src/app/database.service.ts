@@ -6,45 +6,45 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 const db = database;
 
-export interface Seccion {
-  id: string;
-  numero: string;
-  horaio: string;
-  periodo: string;
+export interface Curso {
+  id: number;
+  semestre: string;
+  seccion: string;
+  id_profesor: number;
+  id_periodo: number;
+  id_materia: number;
 }
-
 export interface Profesor {
-  id: string;
+  id: number;
   disp: string;
   nombre: string;
   correo: string;
 }
 
 export interface Prelacion {
+  id: number;
   id_prelada: string;
   id_prelante: string;
-  id: string;
 }
 export interface Materia {
-  id: string;
+  id: number;
   nombre: string;
-  semestre: string;
-  horas: string;
-  maxH: string;
+  semestre?: string;
+  horas?: string;
+  maxH?: string;
+  prelaciones?: Materia[];
 }
 
 // tslint:disable-next-line:class-name
-export interface Materia_x_Pensum {
-  id: string;
-  id_pensum: string;
-  id_materia: string;
-
-  delete();
-  save();
+export interface Periodo {
+  id: number;
+  nombre: string;
+  horario: string;
+  id_pensum: number;
 }
 
 export interface Pensum {
-  id: string;
+  id: number;
   fecha: string;
   materias?: Materia[];
 }
@@ -116,5 +116,4 @@ export class DatabaseService {
   public insertProfesor(profesor: Profesor): Observable<any> {
     return this.http.post(AppConfig.api + 'profesores/', profesor );
   }
-
 }
