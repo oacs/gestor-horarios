@@ -32,6 +32,15 @@
 </div>
 <div class="modal" [style.display]="displayType('modificar')">
   <div class="card">
+      <form [formGroup]="materiaForm">
+          <label class="form-group">
+            Nombre:
+            <input type="text" class="input-form"formControlName="nombre" required>
+          </label>    
+          <button type="button" class="accept-button-form" (click)="submitFormUpdateMatter()">Aceptar</button>   
+    
+          <button type="button" class="delete-button-form" (click)="deleteMatter()">Borrar</button>         
+        </form>
     <button (click)="toggleModal('modificar')">Cerrar modificar</button>
   </div>
 </div>

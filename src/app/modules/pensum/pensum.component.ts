@@ -44,8 +44,11 @@ export class PensumComponent implements OnInit {
   public displayModalNuevo: string;
   public displayModalImportar: string;
   public displayModalModificar: string;
-  
+
   public materiaForm: FormGroup;
+  public updateMatterForm: FormGroup;
+
+  public materiaTemporal: Materia;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -105,6 +108,13 @@ export class PensumComponent implements OnInit {
       // horas: ['', Validators.required],
       // horasMax: ['', Validators.required]
     });
+
+    this.updateMatterForm = this.formModal.group({
+      nombre: ['', Validators.required],
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
+    });
+
   }
 
   /* Cambia el tipo de display (cuando se presiona alguno de los botones) */
@@ -199,6 +209,30 @@ export class PensumComponent implements OnInit {
   //     this.dbService.
   //   })
   // }
+
+  submitFormUpdateMatter() {
+    if (this.updateMatterForm.valid) {
+      this.dbService.updateMateria(this.updateMatterForm.value).subscribe(data => {
+        console.log(data);
+        if (data === null) {
+          this.materias[this.materias.indexOf(this.materiaTemporal)].nombre = this.updateMatterForm.value.nombre;
+
+        }
+      });
+    }
+  }
+
+  deleteMatter() {
+    console.log(this.materiaTemporal);
+    this.dbService.deleteMateria(this.materiaTemporal).subscribe(data => {
+      console.log(data);
+      if (data === null) {
+        this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
+        this.displayModalModificar = 'none';
+      }
+
+    });
+  }
 
   ngOnInit() {
     this.dbService.getMaterias().subscribe(data => {
