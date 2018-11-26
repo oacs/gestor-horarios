@@ -59,11 +59,11 @@ export class GestorComponent implements OnInit {
       this.newMatter = true;
     }
   }
-  
+
   /*
     Muestra y oculta el form para actualizar una materia existente
   */
- showUpdateModal() {
+  showUpdateModal() {
     if (this.updateMatter === true) {
       this.updateMatter = false;
     } else {
@@ -73,25 +73,25 @@ export class GestorComponent implements OnInit {
   /*
     Guarda la informacion del form crear nueva materia en la base de datos
   */
-  submitFormNewMatter(){
-    if (this.profileForm.valid) {
-      this.dbService.insertMateria(this.profileForm.value).subscribe(data => {
+  submitFormNewMatter() {
+    if (this.materiaForm.valid) {
+      this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
         if (data === null) {
-          this.materias.push(this.profileForm.value);
+          this.materias.push(this.materiaForm.value);
           this.newMatter = false;
         }
       });
     }
   }
 
-  submitFormUpdateMatter(){
+  submitFormUpdateMatter() {
     console.log(this.updateMatterForm.value);
   }
 
   /*
     Guarda la informacion del from crear nueva materia en la base de datos
   */
-  submitForm(){
+  submitForm() {
     console.log(this.profileForm.value);
   }
 
