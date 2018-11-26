@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 
-import { DatabaseService, Materia } from '../../database.service';
+import { DatabaseService, Materia, Pensum } from '../../database.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 interface Semestre {
@@ -46,7 +46,7 @@ export class PensumComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    console.log(event.target.innerWidth);
+    // console.log(event.target.innerWidth);
     if (event.target.innerWidth > 1300) {
       this.limite = 6;
       this.actualizarInfo();
@@ -171,6 +171,13 @@ export class PensumComponent implements OnInit {
   private actualizarInfo() {
     this.info = this.materias.slice(this.posicion * this.limite, (this.posicion * this.limite) + this.limite);
   }
+
+
+  // private guardar() {
+  //   this.materias.forEach( materia => {
+  //     this.dbService.
+  //   })
+  // }
 
   ngOnInit() {
     this.dbService.getMaterias().subscribe(data => {
