@@ -64,8 +64,7 @@ router.put('/:id', function (req, res) {
 router.post('/', function (req, res) {
 
     console.log(req.body);
-    db.run('insert into profesor(id, disp, nombre, correo)  values ($id, $disp, $nombre, $correo)', {
-        $id: req.body.id,
+    db.run('insert into profesor(disp, nombre, correo)  values $disp, $nombre, $correo)', {
         $disp: req.body.disp,
         $nombre: req.body.nombre,
         $correo: req.body.correo
