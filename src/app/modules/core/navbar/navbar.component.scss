@@ -30,13 +30,17 @@
     border-left: 2.3px solid rgba(255,255,255,0.4);
     border-right: 2.3px solid rgba(255,255,255,0.4);
     padding: 0px 10px 0px 0px;
+}
+
+.header div.green-container span.nav-icons i {
     animation: divIconsArrive 0.7s;
 }
+
 
 /*Animacion de entrada del div de los iconos*/
 @keyframes divIconsArrive {
     from { 
-        transform: translateX(-100%); 
+        transform: translateX(-30%); 
         // overflow-x: hidden;
         // width: 0%;
         opacity: 0;

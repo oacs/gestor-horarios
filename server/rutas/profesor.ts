@@ -3,6 +3,9 @@ import { Router } from 'express';
 
 const router = Router();
 
+/**Obtengo todos los registros
+ * 
+ */
 router.get('/', function (req, res) {
     db.all('select * from profesor', (err, row) => {
         console.log(err);
@@ -11,6 +14,9 @@ router.get('/', function (req, res) {
     });
 });
 
+/**Busco dado su id
+ * @param id int
+ */
 router.get('/:id', function (req, res) {
 
     db.get('select * from profesor where id = ' + req.params.id, (err, row) => {
@@ -19,7 +25,9 @@ router.get('/:id', function (req, res) {
         res.send(row);
     });
 });
-
+/**Elimino dado su id
+ * @param id int
+ */
 router.delete('/:id', function (req, res) {
 
     db.get('delete from profesor where id = ' + req.params.id, (err, row) => {
@@ -29,6 +37,9 @@ router.delete('/:id', function (req, res) {
     });
 });
 
+//TODO: implementar función getBy
+
+//TODO: Modificar esta función para que quede igual a las demás
 router.put('/:id', function (req, res) {
     if (req.body.nombre) {
         db.run('UPDATE profesor SET nombre = $nombre WHERE id = $id', {

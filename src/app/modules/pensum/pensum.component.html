@@ -1,7 +1,7 @@
 <div class="columnContainer">
   <div *ngFor="let semestre of semestres" class="column"
-  cdkDropListOrientation="vertical" 
-  cdkDropList (cdkDropListDropped)="drop($event)" [id]="'list-' + semestre.numero" 
+  cdkDropListOrientation="vertical"
+  cdkDropList (cdkDropListDropped)="drop($event)" [id]="'list-' + semestre.numero"
   [cdkDropListData]="semestre.materias"
   [cdkDropListConnectedTo]="['list-two','list-1', 'list-2', 'list-3', 'list-4', 'list-5', 'list-6', 'list-7', 'list-8', 'list-9', 'list-10']">
   <h1>S{{semestre.numero}}</h1>
@@ -13,25 +13,35 @@
 
 <app-administrador-drag [grupoMaterias]="info" (modal)="toggleModal($event)" (flechas)="cambiarInfo($event)"></app-administrador-drag>
 
-<div class="modal" [style.display]="displayType('nuevaMateria')">
+<div class="modal form-modal" [style.display]="displayType('nuevaMateria')">
   <div class="card">
+      <h2>Crear nueva materia</h2>
       <form [formGroup]="materiaForm">
           <label class="form-group">
             Nombre:
-            <input type="text" class="input-form"formControlName="nombre" required>
-          </label>    
-        <button type="button" class="button-form" (click)="submitForm()">Aceptar</button>        
+            <input type="text" class="input-text-form"formControlName="nombre" required>
+          </label>
+        <button type="button" class="accept-button-form" (click)="submitFormNewMatter()">Aceptar</button>
+        <button class="gray-button-form" (click)="toggleModal('nuevaMateria')"><i class="fa fa-chevron-left"></i>Cerrar</button>
         </form>
-    <button (click)="toggleModal('nuevaMateria')">Cerrar nueva materia</button>
   </div>
 </div>
 <div class="modal" [style.display]="displayType('importar')">
   <div class="card">
-    <button (click)="toggleModal('importar')">Cerrar importar</button>
+    <button class="gray-button-form" (click)="toggleModal('importar')"><i class="fa fa-chevron-left"></i>Cerrar</button>
   </div>
 </div>
-<div class="modal" [style.display]="displayType('modificar')">
+<div class="modal form-modal" [style.display]="displayType('modificar')">
   <div class="card">
-    <button (click)="toggleModal('modificar')">Cerrar modificar</button>
+      <h2>Actualizar materia</h2>
+      <form [formGroup]="materiaForm">
+          <label class="form-group">
+            Nombre:
+            <input type="text" class="input-text-form"formControlName="nombre" required>
+          </label>
+          <button type="button" class="accept-button-form" (click)="submitFormUpdateMatter()">Aceptar</button>
+          <button type="button" class="delete-button-form" (click)="deleteMatter()">Borrar</button>
+          <button class="gray-button-form" (click)="toggleModal('modificar')"> <i class="fa fa-chevron-left"></i>Cerrar</button>
+        </form>
   </div>
 </div>
