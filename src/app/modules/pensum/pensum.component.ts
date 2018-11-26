@@ -86,17 +86,7 @@ export class PensumComponent implements OnInit {
   }
 
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
-    this.semestres = [
-      { numero: 1, materias: [] },
-      { numero: 2, materias: [] },
-      { numero: 3, materias: [] },
-      { numero: 4, materias: [] },
-      { numero: 5, materias: [] },
-      { numero: 6, materias: [] },
-      { numero: 7, materias: [] },
-      { numero: 8, materias: [] },
-      { numero: 9, materias: [] },
-      { numero: 10, materias: [] }];
+
     this.materias = [];
 
     this.displayModalImportar = 'none';
@@ -165,8 +155,9 @@ export class PensumComponent implements OnInit {
         if (data.id !== null) {
           const mat: Materia = this.materiaForm.value;
           mat.id = data.id;
-          this.materias.push(mat);
+          this.materias.unshift(mat);
           this.displayModalNuevo = 'none';
+          this.actualizarInfo();
         }
       });
     }
@@ -181,6 +172,7 @@ export class PensumComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
+    this.actualizarInfo();
   }
 
   public cambiarInfo(event: string) {
@@ -200,8 +192,17 @@ export class PensumComponent implements OnInit {
   }
 
   private actualizarInfo() {
-    this.info = this.materias.slice(this.posicion * this.limite, (this.posicion * this.limite) + this.limite);
+    const aux: Materia[] = [];
+    this.semestres.forEach( semestre => {
+      semestre.materias.forEach( materia => {
+        aux.push(materia);
+      })
+    });
+    const infoAux:  Materia[] = this.materias.filter(mat => !aux.includes(mat));
+    this.info = infoAux.slice(this.posicion * this.limite,
+      (this.posicion * this.limite) + this.limite);
   }
+
 
 
   // private guardar() {
@@ -245,6 +246,7 @@ export class PensumComponent implements OnInit {
       { numero: 8, materias: [] },
       { numero: 9, materias: [] },
       { numero: 10, materias: [] }];
+    console.log(this.semestres);
     this.materias = [];
     this.dbService.getMaterias().subscribe(data => {
       this.materias = data;
