@@ -2,7 +2,9 @@ import { db } from '../index';
 import { Router } from 'express';
 
 const router = Router();
-
+/** Retorna todos los cursos
+ * 
+ */
 router.get('/', function (req, res) {
     db.all('select * from curso', (err, row) => {
         console.log(err);
@@ -10,7 +12,15 @@ router.get('/', function (req, res) {
         res.send(row);
     });
 });
-
+/** Hace una busqueda por los siguientes parametros
+ * @param id_profesor int
+ * @param id_periodo int
+ * @param id_materia int
+ * @param id_pensum int
+ * @param seccion text
+ * @param semestre int
+ * @return rows Curso[]
+ */
 router.get('/getBy', function (req, res) {
     let query = 'select * from curso where '
     let vars ={id_profesor : 0,id_periodo : 0,id_materia: 0,seccion: '',id_pensum : 0, semestre : 0}
@@ -53,8 +63,14 @@ router.get('/getBy', function (req, res) {
     });
     res.status(400).send('error parametros no valido: enum[id_profesor,id_periodo,id_materia,semestre,seccion,id_pensum]')
 });
-
-router.delete('/:id', function (req, res) {
+/** Elimina un curso
+ * @param id_periodo int
+ * @param id_materia int
+ * @param id_pensum int
+ * @param seccion text
+ * @return rows Curso[]
+ */
+router.delete('/', function (req, res) {
 
     db.get('delete from curso where id_periodo = ' + req.params.id_periodo +' and id_materia = ' + req.params.id_materia +' and seccion = ' + req.params.seccion + ' and id_pensum = ' + req.params.id_pensum, (err, row) => {
         console.log(err);
@@ -62,7 +78,16 @@ router.delete('/:id', function (req, res) {
         res.send(row);
     });
 });
-
+/** Actualiza un registro
+ * @body id_profesor int
+ * @body horario
+ * @body semestre
+ * @param id_periodo int
+ * @param id_materia int
+ * @param id_pensum int
+ * @param seccion text
+ * @return result boolean
+ */
 router.put('/:id', function (req, res) {
     let vars = {
         semestre : 0,
@@ -99,7 +124,16 @@ router.put('/:id', function (req, res) {
     res.status(400).send('error...')
 
 });
-
+/** Inserta un registro
+ * @body id_profesor int
+ * @body horario
+ * @body semestre
+ * @body id_periodo int
+ * @body id_materia int
+ * @body id_pensum int
+ * @body seccion text
+ * @return result boolean
+ */
 router.post('/', function (req, res) {
 
     // console.log(req.body);
