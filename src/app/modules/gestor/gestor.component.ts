@@ -13,7 +13,7 @@ export class GestorComponent implements OnInit {
   public materias: Materia[];
 
   public info: Materia[];
-  public profileForm: FormGroup;
+  public materiaForm: FormGroup;
 
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
     this.openned = false;
@@ -25,7 +25,7 @@ export class GestorComponent implements OnInit {
       this.info = this.filteredListOptions();
     });
 
-    this.profileForm = this.formModal.group({
+    this.materiaForm = this.formModal.group({
       nombre: ['', Validators.required],
       // horas: ['', Validators.required],
       // horasMax: ['', Validators.required]
@@ -47,10 +47,10 @@ export class GestorComponent implements OnInit {
     Guarda la informacion del from crear nueva materia en la base de datos
   */
   submitForm() {
-    if (this.profileForm.valid) {
-      this.dbService.insertMateria(this.profileForm.value).subscribe(data => {
+    if (this.materiaForm.valid) {
+      this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
         if (data === null) {
-          this.materias.push(this.profileForm.value);
+          this.materias.push(this.materiaForm.value);
           this.openned = false;
         }
       });
