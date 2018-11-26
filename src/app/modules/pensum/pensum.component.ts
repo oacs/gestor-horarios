@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { DatabaseService, Materia, Pensum } from '../../database.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 interface Semestre {
   numero: number;
@@ -43,6 +44,8 @@ export class PensumComponent implements OnInit {
   public displayModalNuevo: string;
   public displayModalImportar: string;
   public displayModalModificar: string;
+  
+  public materiaForm: FormGroup;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -79,7 +82,7 @@ export class PensumComponent implements OnInit {
     }
   }
 
-  constructor(private dbService: DatabaseService) {
+  constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
     this.semestres = [
       { numero: 1, materias: [] },
       { numero: 2, materias: [] },
@@ -96,6 +99,12 @@ export class PensumComponent implements OnInit {
     this.displayModalImportar = 'none';
     this.displayModalNuevo = 'none';
     this.displayModalModificar = 'none';
+
+    this.materiaForm = this.formModal.group({
+      nombre: ['', Validators.required],
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
+    });
   }
 
   /* Cambia el tipo de display (cuando se presiona alguno de los botones) */
@@ -137,6 +146,18 @@ export class PensumComponent implements OnInit {
 
     if (idModal === 'modificar') {
       return this.displayModalModificar;
+    }
+  }
+
+  submitForm() {
+    if (this.materiaForm.valid) {
+      this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
+        if (data === null) {
+          this.materias.unshift(this.materiaForm.value);
+          this.actualizarInfo();
+          this.displayModalNuevo = 'none';
+        }
+      });
     }
   }
 
