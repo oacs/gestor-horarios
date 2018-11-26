@@ -36,6 +36,35 @@ div.container div.green div.card {
     user-select: none;
 }
 
+div.container div.green div.card div.infoMateria, div.container div.green div.newCard div.icono{ 
+    text-align: center;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.7px;
+} 
+
+div.container div.green div.newCard {
+    font-size: 30px;
+    background-color: white;
+    box-shadow: 0 3px 4px 0 rgba(255, 255, 255, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
+    margin-left: 23px;
+    margin-top: -30px;
+    width: 140px;
+    height: 85px;
+    cursor: pointer;
+    user-select: none;
+}
+
+div.container div.green div.newCard:hover { 
+    background-color: #e9e9e9;
+}
+
+
 div.container div.green div.card:hover {
     top: -6px;
 }

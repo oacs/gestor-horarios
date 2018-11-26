@@ -27,7 +27,14 @@ div.columnContainer div.column h1 {
 div.columnContainer div.column div.card {
     background-color: white;
     box-shadow: 0 3px 4px 0 rgba(255, 255, 255, 0.2), 0 3px 3px -2px rgba(255, 255, 255, .3), 0 1px 8px 0 rgba(255, 255, 255, .19);
-    font-size: 12px;
+    font-size: 0.5em;
+    padding: 20px 5px 20px 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    overflow: hidden;
+    cursor: grab;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
 }
 
 div.modal{

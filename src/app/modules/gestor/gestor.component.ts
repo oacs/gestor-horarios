@@ -25,14 +25,14 @@ export class GestorComponent implements OnInit {
       this.materias = materias;
       this.info = materias;
     });
-    this.search.valueChanges.subscribe( data => {
+    this.search.valueChanges.subscribe(data => {
       this.info = this.filteredListOptions();
     });
 
     this.profileForm = this.formModal.group({
       nombre: ['', Validators.required],
-      horas: ['', Validators.required],
-      horasMax: ['', Validators.required]
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
     });
 
     this.updateMatterForm = this.formModal.group({
@@ -63,11 +63,18 @@ export class GestorComponent implements OnInit {
       this.updateMatter = true;
     }
   }
-  /*
-    Guarda la informacion del form crear nueva materia en la base de datos
   */
+    Guarda la informacion del form crear nueva materia en la base de datos
+  /*
   submitFormNewMatter(){
-    console.log(this.profileForm.value);
+    if (this.profileForm.valid) {
+      this.dbService.insertMateria(this.profileForm.value).subscribe(data => {
+        if (data === null) {
+          this.materias.push(this.profileForm.value);
+          this.openned = false;
+        }
+      });
+    }
   }
 
   submitFormUpdateMatter(){

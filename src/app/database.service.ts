@@ -6,45 +6,45 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 const db = database;
 
-export interface Seccion {
-  id: string;
-  numero: string;
-  horaio: string;
-  periodo: string;
+export interface Curso {
+  id: number;
+  semestre: string;
+  seccion: string;
+  id_profesor: number;
+  id_periodo: number;
+  id_materia: number;
 }
-
 export interface Profesor {
-  id: string;
+  id: number;
   disp: string;
   nombre: string;
   correo: string;
 }
 
 export interface Prelacion {
+  id: number;
   id_prelada: string;
   id_prelante: string;
-  id: string;
 }
 export interface Materia {
-  id: string;
+  id: number;
   nombre: string;
-  semestre: string;
-  horas: string;
-  maxH: string;
+  semestre?: string;
+  horas?: string;
+  maxH?: string;
+  prelaciones?: Materia[];
 }
 
 // tslint:disable-next-line:class-name
-export interface Materia_x_Pensum {
-  id: string;
-  id_pensum: string;
-  id_materia: string;
-
-  delete();
-  save();
+export interface Periodo {
+  id: number;
+  nombre: string;
+  horario: string;
+  id_pensum: number;
 }
 
 export interface Pensum {
-  id: string;
+  id: number;
   fecha: string;
   materias?: Materia[];
 }
@@ -62,28 +62,6 @@ export class DatabaseService {
     // this.crearTablas();
   }
 
-  public crearTablas(): void {
-    const that = this;
-    this.tables.forEach(table => {
-      that.db.createTable(table, (succ, msg) => {
-        // succ - boolean, tells if the call is successful
-        console.log('Success: ' + succ);
-        console.log('`Message: ' + msg);
-      });
-    });
-  }
-
-  public crearPensum(pensum: Pensum): boolean {
-    let flag = false;
-    this.db.insertTableContent('customers', pensum, (succ, msg) => {
-      // succ - boolean, tells if the call is successful
-      console.log('Success: ' + succ);
-      console.log('Message: ' + msg);
-      flag = succ;
-    });
-    return flag;
-  }
-
   public getMaterias(): Observable<Materia[]> {
     return this.http.get<Materia[]>(AppConfig.api + 'materias');
   }
@@ -98,6 +76,10 @@ export class DatabaseService {
 
   public insertMateria(materia: Materia): Observable<any> {
     return this.http.post(AppConfig.api + 'materias/', materia );
+  }
+
+  public deleteMateria(materia: Materia): Observable<any> {
+    return this.http.delete(AppConfig.api + 'materias/' + materia.id );
   }
 
   // ------------------------Profesores-----------------------------
@@ -117,4 +99,16 @@ export class DatabaseService {
     return this.http.post(AppConfig.api + 'profesores/', profesor );
   }
 
+  // Materia x pensum
+  public getMateriasxPensum(): Observable<Profesor[]> {
+    return this.http.get<Profesor[]>(AppConfig.api + 'profesores');
+  }
+
+  public getMateriaxPensum(id: number): Observable<Profesor> {
+    return this.http.get<Profesor>(AppConfig.api + 'profesores/' + id);
+  }
+
+  public insertMateriaxPensum(profesor: Profesor): Observable<any> {
+    return this.http.post(AppConfig.api + 'profesores/', profesor );
+  }
 }
