@@ -3,34 +3,63 @@
   <div class="materias-top-cotainer">
     <input class="campoTexto" type="text" name="buscar" placeholder="Buscar..." [formControl]="search">
     <i class="fa fa-filter" aria-hidden="true"></i>
-    <button class="button" style="float:right" (click)="matterModal()">Nuevo</button>
+    <button class="button" style="float:right" (click)="showNewModal()">Nuevo</button>
   </div>
 
   <div class="materias-cotainer">
-    <div class="materia" *ngFor="let materia of info">
+    <div class="materia" *ngFor="let materia of info" (click)="showUpdateModal()">
       <p> {{materia.nombre | titlecase }} </p>
     </div>
   </div>
 
-  <div *ngIf="openned" class="form-modal new-matter-modal">
+  <!-- 
+    Modal para crear nueva materia
+   -->
+  <div *ngIf="newMatter" class="form-modal new-matter-modal">
     <h2>Crear nueva materia</h2>
     <form [formGroup]="materiaForm">
       <label class="form-group">
         Nombre:
-        <input type="text" class="input-form"formControlName="nombre" required>
+        <input type="text" class="input-text-form"formControlName="nombre" required>
       </label>
     
       <!-- <label class="form-group">
         Horas:
-        <input type="text" class="input-form" formControlName="horas" required>
+        <input type="number" class="input-number-form" formControlName="horas" required>
       </label>
 
       <label class="form-group">
           Horas Maximas:
-          <input type="text" class="input-form" formControlName="horasMax" required>
-      </label> -->
+          <input type="number" class="input-number-form" formControlName="horasMax" required>
+      </label>
 
-    <button type="button" class="button-form" (click)="submitForm()">Aceptar</button>        
+    <button type="button" class="accept-button-form" (click)="submitFormNewMatter()">Aceptar</button>        
+    </form>
+  </div>
+
+  <!-- 
+    Modal para modificar una materia
+   -->
+  <div *ngIf="updateMatter" class="form-modal update-matter-modal">
+    <h2>Actualizar materia</h2>
+    <form [formGroup]="updateMatterForm">
+      <label class="form-group">
+        Nombre:
+        <input type="text" class="input-text-form"formControlName="nombre" required>
+      </label>
+    
+      <label class="form-group">
+        Horas:
+        <input type="number" class="input-number-form" formControlName="horas" required>
+      </label>
+
+      <label class="form-group">
+          Horas Maximas:
+          <input type="number" class="input-number-form" formControlName="horasMax" required>
+      </label>
+
+      <button type="button" class="accept-button-form" (click)="submitFormUpdateMatter()">Actualizar</button>
+      <button type="button" class="delete-button-form" (click)="deleteFormUpdateMatter()">Eliminar</button>        
     </form>
   </div>
 

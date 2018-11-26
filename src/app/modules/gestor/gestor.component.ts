@@ -8,15 +8,20 @@ import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms'
   styleUrls: ['./gestor.component.scss']
 })
 export class GestorComponent implements OnInit {
-  openned: boolean;
+  newMatter: boolean;
+  updateMatter: boolean;
+
   public search = new FormControl('');
   public materias: Materia[];
 
   public info: Materia[];
+
   public materiaForm: FormGroup;
+  public updateMatterForm: FormGroup;
 
   constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
-    this.openned = false;
+    this.newMatter = false;
+    this.updateMatter = false;
     this.dbService.getMaterias().subscribe(materias => {
       this.materias = materias;
       this.info = materias;
@@ -30,36 +35,59 @@ export class GestorComponent implements OnInit {
       // horas: ['', Validators.required],
       // horasMax: ['', Validators.required]
     });
+
+    this.updateMatterForm = this.formModal.group({
+      nombre: ['', Validators.required],
+      horas: ['', Validators.required],
+      horasMax: ['', Validators.required]
+    });
   }
 
   /*
     Muestra y oculta el form para crear una materia nueva
   */
-  matterModal() {
-    if (this.openned === true) {
-      this.openned = false;
+  showNewModal() {
+    if (this.newMatter === true) {
+      this.newMatter = false;
     } else {
-      this.openned = true;
+      this.newMatter = true;
+    }
+  }
+  
+  /*
+    Muestra y oculta el form para actualizar una materia existente
+  */
+ showUpdateModal() {
+    if (this.updateMatter === true) {
+      this.updateMatter = false;
+    } else {
+      this.updateMatter = true;
     }
   }
 
-  /*
-    Guarda la informacion del from crear nueva materia en la base de datos
-  */
   submitForm() {
     if (this.materiaForm.valid) {
       this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
         if (data === null) {
           this.materias.push(this.materiaForm.value);
-          this.openned = false;
+          this.newMatter = false;
         }
       });
     }
   }
 
+  submitFormUpdateMatter(){
+    console.log(this.updateMatterForm.value);
+  }
+
+  /*
+    Elimina una materia
+  */
+  deleteFormUpdateMatter(){
+    console.log(this.updateMatterForm.value);
+  }
+
   ngOnInit() {
-
-
   }
 
   filteredListOptions() {
