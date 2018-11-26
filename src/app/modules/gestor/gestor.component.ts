@@ -79,10 +79,6 @@ export class GestorComponent implements OnInit {
           mat.id = data.id;
           this.materias.push(mat);
           this.newMatter = false;
-          this.dbService.getMaterias().subscribe(materias => {
-            this.materias = materias;
-            this.info = materias;
-          });
         }
       });
     }
