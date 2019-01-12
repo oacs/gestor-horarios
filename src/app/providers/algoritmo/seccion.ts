@@ -1,30 +1,27 @@
 import { Profesor } from "./profesor";
+import { Horario } from "./interface";
 
 export class Seccion {
     /**
      * @description id de la seccion generado
-     * @type {string}
      * @memberof Seccion
      */
     public id: string;
     /**
      * @description horario final de la seccion en bloques de horas
-     * @type {any[]}
      * @memberof Seccion
      */
-    public horarioFinal: any[];
+    public horarioFinal: Horario[];
     /**
      * @description profesor que da clases en esta seccion
-     * @type {Profesor}
      * @memberof Seccion
      */
     public profesor: Profesor;
     /**
      * @description posiciones posibles para bloques de clases
-     * @type {any[]}
      * @memberof Seccion
      */
-    public horarioPosible: any[];
+    public horarioPosible: Horario[];
 
     /**
      * @description Crea una instancia de

@@ -1,4 +1,4 @@
-export enum Disponibilidad {
+export enum Bloque {
     '7:00am a 8:00am',
     '8:00am a 9:00am',
     '9:00am a 10:00am',

@@ -1,3 +1,5 @@
+import { Horario } from "./interface";
+
 export class Profesor {
     /**
      * @description nombre del profesor
@@ -13,10 +15,10 @@ export class Profesor {
     public id: string;
     /**
      * @description disponibilidad del profesor en arreglo de enum
-     * @type {any[]}
+     * @type {Horario[]}
      * @memberof Profesor
      */
-    public disponibilidad: any[];
+    public disponibilidad: Horario[];
     /**
      * @description correo de contacto del profesor
      * @type {string}
