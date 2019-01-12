@@ -1,17 +1,13 @@
 
 import { NgModule, isDevMode } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TestAlgoritmoComponent } from './algoritmo/test-algoritmo/test-algoritmo.component';
 import { CoreModule } from './modules/core/core.module';
 import { PensumModule } from './modules/pensum/pensum.module';
 import { GestorModule } from './modules/gestor/gestor.module';
+import { HomeModule } from './modules/home/home.module';
 
 let routes: Routes = [
-    {
-        path: '',
-        loadChildren:  './modules/core/core.module#CoreModule'
 
-    },
     {
         path: 'pensum',
         loadChildren:  './modules/pensum/pensum.module#PensumModule'
@@ -21,21 +17,12 @@ let routes: Routes = [
         loadChildren: './modules/gestor/gestor.module#GestorModule'
     },
     {
-        path: 'home',
+        path: '',
         loadChildren: './modules/home/home.module#HomeModule'
-    },
-    {
-        path: 'test',
-        component: TestAlgoritmoComponent
     }
 ];
 if (isDevMode()) {
      routes = [
-        {
-            path: '',
-            loadChildren: () => CoreModule
-    
-        },
         {
             path: 'pensum',
             loadChildren: () => PensumModule
@@ -45,8 +32,8 @@ if (isDevMode()) {
             loadChildren: () => GestorModule
         },
         {
-            path: 'test',
-            component: TestAlgoritmoComponent
+            path: '',
+            loadChildren: () => HomeModule
         }
     ];
 }

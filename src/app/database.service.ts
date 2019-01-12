@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import * as database from '../../node_modules/electron-db';
+// import * as database from '../../node_modules/electron-db';
 import { AppConfig } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-const db = database;
+// const db = database;
 
 export interface Curso {
   id: number;
@@ -56,7 +56,7 @@ export class DatabaseService {
   public db;
   public tables: string[];
   constructor(private http: HttpClient) {
-    this.db = db;
+    // this.db = db;
     this.tables = AppConfig.tables;
     // this.crearTablas();
   }

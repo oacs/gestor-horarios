@@ -19,7 +19,8 @@ import { ElectronService } from './providers/electron.service';
 import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
-import { TestAlgoritmoComponent } from './algoritmo/test-algoritmo/test-algoritmo.component';
+
+// Features
 import { CoreModule } from './modules/core/core.module';
 import { PensumModule } from './modules/pensum/pensum.module';
 import { GestorModule } from './modules/gestor/gestor.module';
@@ -33,8 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    WebviewDirective,
-    TestAlgoritmoComponent
+    WebviewDirective
   ],
   imports: [
     BrowserModule,
