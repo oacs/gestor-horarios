@@ -21,6 +21,10 @@ let routes: Routes = [
         loadChildren: './modules/gestor/gestor.module#GestorModule'
     },
     {
+        path: 'home',
+        loadChildren: './modules/home/home.module#HomeModule'
+    },
+    {
         path: 'test',
         component: TestAlgoritmoComponent
     }

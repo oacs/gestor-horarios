@@ -23,6 +23,7 @@ import { TestAlgoritmoComponent } from './algoritmo/test-algoritmo/test-algoritm
 import { CoreModule } from './modules/core/core.module';
 import { PensumModule } from './modules/pensum/pensum.module';
 import { GestorModule } from './modules/gestor/gestor.module';
+import { HomeModule } from './modules/home/home.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -41,10 +42,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     AppRoutingModule,
     DragDropModule,
+
     // Features
     CoreModule,
     PensumModule,
     GestorModule,
+    HomeModule,
+
     //
     TranslateModule.forRoot({
       loader: {

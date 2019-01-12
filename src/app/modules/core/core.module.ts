@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
-import { RouterModule, Route } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
-import { AdministradorDragComponent } from './administrador-drag/administrador-drag.component';
+import { RouterModule } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-const routes: Route[] = [
-  {path: '', component: HomeComponent}
-];
+import { NavbarComponent } from './navbar/navbar.component';
+import { AdministradorDragComponent } from './administrador-drag/administrador-drag.component';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    RouterModule,
     DragDropModule
   ],
   exports: [
     AdministradorDragComponent,
     NavbarComponent
   ],
-  declarations: [ HomeComponent, NavbarComponent, AdministradorDragComponent]
+  declarations: [ NavbarComponent, AdministradorDragComponent]
 })
 export class CoreModule { }
