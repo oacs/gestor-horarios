@@ -40,7 +40,7 @@ export class Materia {
      * @param {number} secciones cantiadad de secciones a crear para esta materia
      * @memberof Materia
      */
-    constructor(nombre: string, id: string, semestre: number, horas: number, horasMax: number, secciones: number) {
+    constructor(nombre: string, id: string, semestre: number, horas: number, horasMax: number) {
         this.nombre = nombre;
         this.id = id;
         this.semestre = semestre;
@@ -48,8 +48,7 @@ export class Materia {
         this.horasMax = horasMax;
         this.prelaciones = [];
         this.secciones = [];
-        for(let i = 0; i < secciones; i++) {
-            this.secciones.push(new Seccion('40' + i));
-        }
     }
+
+    
 }

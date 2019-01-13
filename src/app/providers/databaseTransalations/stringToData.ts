@@ -13,8 +13,8 @@ export function stringToBloqueHoras(texto: string): BloqueHoras[] {
             disp.push(
                 new BloqueHoras(
                     Number(dia[0]),
-                    stringHexToNumber(bloques[i]),
-                    stringHexToNumber(bloques[i + 1])
+                    stringHexToNumber(bloques[i * 2]),
+                    stringHexToNumber(bloques[(i * 2) + 1])
                 )
             );
         }
@@ -31,13 +31,13 @@ export function stringToDisponibilidad(texto: string): BloqueHoras[] {
     const disp: BloqueHoras[] = [];
     texto.split(',').forEach((dia) => {
         const bloques = dia.substring(1);
-        for (let i = 0; i < bloques.length / 2; i++) {
+        for (let i = 0; i < bloques.length / 3; i++) {
             disp.push(
                 new BloqueHoras(
                     Number(dia[0]),
-                    stringHexToNumber(bloques[i]),
-                    stringHexToNumber(bloques[i + 1]),
-                    Number(bloques[i + 1])
+                    stringHexToNumber(bloques[(i * 3)]),
+                    stringHexToNumber(bloques[(i * 3) + 1]),
+                    Number(bloques[(i * 3) + 2])
                 )
             );
         }

@@ -7,9 +7,16 @@ import { BloqueHoras } from '../algoritmo/BloqueHoras';
  * @memberof Profesor
  */
 export function BloqueHorasToString(disp: BloqueHoras[]): string {
-    const texto = '';
+    let texto = '';
+    disp = ordenarPorDia(disp);
+    let day = disp[0].dia;
+    texto += day + '';
     disp.forEach(row => {
-        texto.concat(row.dia + '' + row.hora);
+        if ( day !== row.dia) {
+            day = row.dia;
+            texto += ',' + day;
+        }
+        texto += ( numberToHexString(row.inicio) + numberToHexString(row.fin));
     });
     return texto;
 }
@@ -21,11 +28,27 @@ export function BloqueHorasToString(disp: BloqueHoras[]): string {
  * @memberof Profesor
  */
 export function DisponibilidadToString(disp: BloqueHoras[]): string {
-    const texto = '';
+    let texto = '';
+    disp = ordenarPorDia(disp);
+    let day = disp[0].dia;
+    texto += day + '';
     disp.forEach(row => {
-        texto.concat(row.dia + numberToHexString(row.inicio) + numberToHexString(row.fin) + row.prioridad);
+        if ( day !== row.dia) {
+            day = row.dia;
+            texto += ',' + day;
+        }
+        texto += ( numberToHexString(row.inicio) + numberToHexString(row.fin) + row.prioridad);
     });
     return texto;
+}
+
+export function ordenarPorDia(bloques: BloqueHoras[]): BloqueHoras[] {
+    return bloques.sort( (a: BloqueHoras, b: BloqueHoras) => {
+        if ( a.dia > b.dia) {
+            return 1;
+        }
+        return 0;
+    });
 }
 
 export function numberToHexString(numero: number): string {

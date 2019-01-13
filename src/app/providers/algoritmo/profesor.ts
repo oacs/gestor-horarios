@@ -1,4 +1,5 @@
-import { Horario } from "./interface";
+import { BloqueHoras } from "./BloqueHoras";
+import { stringToBloqueHoras } from "../databaseTransalations/stringToData";
 
 export class Profesor {
     /**
@@ -15,10 +16,10 @@ export class Profesor {
     public id: string;
     /**
      * @description disponibilidad del profesor en arreglo de enum
-     * @type {Horario[]}
+     * @type {BloqueHoras[]}
      * @memberof Profesor
      */
-    public disponibilidad: Horario[];
+    public disponibilidad: BloqueHoras[];
     /**
      * @description correo de contacto del profesor
      * @type {string}
@@ -33,10 +34,11 @@ export class Profesor {
      * @param correo correo del profesor
      * @param disponibilidad disponibilidad del profesor
      */
-    constructor(id: string, nombre: string, correo: string, disponibilidad: any[]) {
+    constructor(id: string, nombre: string, correo: string, disponibilidad: string) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this.disponibilidad = disponibilidad;
+        this.disponibilidad = stringToBloqueHoras(disponibilidad);
     }
+
 }
