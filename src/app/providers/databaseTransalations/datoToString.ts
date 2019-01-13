@@ -12,11 +12,11 @@ export function BloqueHorasToString(disp: BloqueHoras[]): string {
     let day = disp[0].dia;
     texto += day + '';
     disp.forEach(row => {
-        if ( day !== row.dia) {
+        if (day !== row.dia) {
             day = row.dia;
             texto += ',' + day;
         }
-        texto += ( numberToHexString(row.inicio) + numberToHexString(row.fin));
+        texto += (numberToHexString(row.inicio) + numberToHexString(row.fin));
     });
     return texto;
 }
@@ -33,21 +33,29 @@ export function DisponibilidadToString(disp: BloqueHoras[]): string {
     let day = disp[0].dia;
     texto += day + '';
     disp.forEach(row => {
-        if ( day !== row.dia) {
+        if (day !== row.dia) {
             day = row.dia;
             texto += ',' + day;
         }
-        texto += ( numberToHexString(row.inicio) + numberToHexString(row.fin) + row.prioridad);
+        texto += (numberToHexString(row.inicio) + numberToHexString(row.fin) + row.prioridad);
     });
     return texto;
 }
 
 export function ordenarPorDia(bloques: BloqueHoras[]): BloqueHoras[] {
-    return bloques.sort( (a: BloqueHoras, b: BloqueHoras) => {
-        if ( a.dia > b.dia) {
+    return bloques.sort((a: BloqueHoras, b: BloqueHoras) => {
+        if (+a.dia > +b.dia) {
             return 1;
+        } else {
+            if (+a.dia === +b.dia) {
+                if (+a.inicio > +b.inicio) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
         }
-        return 0;
+        return -1;
     });
 }
 

@@ -38,10 +38,14 @@ const hs: HorarioPeriodo = new HorarioPeriodo();
 hs.materiasPorSemestre = materiasPorSemestre;
 
 
+console.log('Profesores:\n');
+console.log('Normal:');
+console.log(profesores[0].disponibilidad);
+console.log('\nInvertiro:');
+// console.log(profesores[0]);
+// console.log(DisponibilidadToString(profesores[0].disponibilidad));
+console.log(hs.invertirBloques(profesores[0].disponibilidad));
 
-console.log(profesores[0]);
-console.log(DisponibilidadToString(profesores[0].disponibilidad));
-
-
+console.log('Secciones\n');
 console.log(hs.obtenerBloquesPosibles('1', 2, '401'));
-console.log(secciones[0]);
+// console.log(secciones[0]);
