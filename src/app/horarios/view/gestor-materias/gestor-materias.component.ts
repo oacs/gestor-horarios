@@ -20,25 +20,41 @@ export class GestorMateriasComponent implements OnInit {
   public materiaActiva: MateriaClass;
   public listaMateria: Materia[];
   public seccionesActivas: SeccionClass[];
+  public semestreActivo: number;
   public posicion: number;
 
   constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) {
     this.listaMateria = [];
+    this.semestreActivo = 0;
   }
 
   ngOnInit() {
     this.servicioConfiguracionHorario.horarioActual.subscribe(horario => {
       this.horarioActivo = horario;
+      console.log(this.horarioActivo);
     });
 
     this.servicioConfiguracionHorario.listaProfesoresActual.subscribe(lista => {
-      this.horarioActivo = lista;
+      this.listaProfesores = lista;
+      console.log(this.listaProfesores);
     });
   }
 
   cargarInformacion(materia: MateriaClass, posicion: number) {
     this.materiaActiva = materia;
     this.posicion = posicion;
+  }
+
+  changeSemestre(numero: number) {
+    if (this.semestreActivo + numero < 0) {
+      this.semestreActivo = 0;
+    } else {
+      if (this.semestreActivo + numero > 9) {
+        this.semestreActivo = 9;
+      } else {
+        this.semestreActivo += numero;
+      }
+    }
   }
 
 }

@@ -1,41 +1,42 @@
 <div class="view" style="margin: 15px 10% 10% 10%">
   <h1>Paso 2</h1>
   <p>A continuación podrá seleccionar los profesores responsables de dictar de una determinada materia. No
-      olvide asignar docente a todas las secciones presentadas para cada materia.</p>
-<div class="container">
+    olvide asignar docente a todas las secciones presentadas para cada materia.</p>
+  <div class="container">
 
-  <div class="column">
+    <div class="column">
 
-      <div class="selectorSemestre" >
-          <a href=""><i class="fa fa-caret-left" aria-hidden="true"></i></a>
-          <span class="semestre-activo">2</span>   
-          <a href=""><i class="fa fa-caret-right" aria-hidden="true"></i></a>   
+      <div class="selectorSemestre">
+        <a><i (click)="changeSemestre(-1)" class="fa fa-caret-left" aria-hidden="true"></i></a>
+        <span class="semestre-activo">{{ (semestreActivo+1) }}</span>
+        <a><i (click)="changeSemestre(1)" class="fa fa-caret-right" aria-hidden="true"></i></a>
       </div>
       <p style="text-align: center; font-size: 12px; margin-top: -12px">Semestre</p>
       <div class="contenedor-materias">
 
-          <div class="materia" *ngFor="let materia of listaMateria; let i of index" (click)="cargarInformacion(materia,i)">
-              <p>{{materia.nombre | titlecase }}</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Cantidad de secciones: 1</p>
-          </div>
-         
+        <div class="materia" *ngFor="let materia of listaMateria; let i of index" (click)="cargarInformacion(materia,i)">
+          <p>{{materia.nombre | titlecase }}</p>
+          <p>Cantidad de secciones: 2</p>
+          <p>Cantidad de secciones: 1</p>
+        </div>
+
       </div>
 
-  </div>
-  <div class="info">
+    </div>
+    <div class="info">
       <div class="info-container" *ngIf="materiaActiva">
-          <h1 class="titulo-materia" >{{materiaActiva.nombre | titlecase }}</h1>
-          <p class="titulo-seccion" *ngFor="let seccion of horarioActivo.materiasPorSemestre[materiaActiva.semestre - 1][posicion]"> Sección {{seccion.id}}
+        <h1 class="titulo-materia">{{materiaActiva.nombre | titlecase }}</h1>
+        <p class="titulo-seccion" *ngFor="let seccion of horarioActivo.materiasPorSemestre[materiaActiva.semestre - 1][posicion]">
+          Sección {{seccion.id}}
 
-                <select name="" id="">
-                  <option *ngFor="let profesor of listaProfesores" value="{{profesor.nombre}}" >{{profesor.nombre}}</option>
-                </select>
+          <select name="" id="">
+            <option *ngFor="let profesor of listaProfesores" value="{{profesor.nombre}}">{{profesor.nombre}}</option>
+          </select>
 
-            </p>
+        </p>
       </div>
+    </div>
   </div>
-</div>
 
 </div>
 
@@ -43,5 +44,3 @@
 
 <a class="float-right" routerLink="/horarios/paso3"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
 <a class="float-left" routerLink="/horarios/paso1"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-
-
