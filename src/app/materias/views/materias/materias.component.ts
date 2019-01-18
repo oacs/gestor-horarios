@@ -126,7 +126,7 @@ export class MateriasComponent implements OnInit {
     const posts = this.materias;
     const filteredPostsList = [];
     for (const post of posts) {
-      if (post.nombre.match(this.search.value)) {
+      if (post.nombre.toLocaleLowerCase().indexOf(this.search.value.toLocaleLowerCase()) >= 0) {
         filteredPostsList.push(post);
       }
     }

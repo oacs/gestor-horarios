@@ -48,7 +48,8 @@ export class ProfesoresComponent implements OnInit {
       if (cambio === '') {
         this.profesores = this.auxProfesores;
       } else {
-        this.profesores = this.auxProfesores.filter(profesor => profesor.nombre.indexOf(cambio) >= 0 ? true : false);
+        this.profesores = this.auxProfesores.filter(
+          profesor => profesor.nombre.toLocaleLowerCase().indexOf(cambio.toLocaleLowerCase()) >= 0 ? true : false);
       }
     });
   }
@@ -122,6 +123,9 @@ export class ProfesoresComponent implements OnInit {
   public eliminarProfesor() {
     this.profesorService.deleteProfesor(this.profesorSeleccionado.id).subscribe(res => {
       console.log(res);
+      this.auxProfesores.splice(this.auxProfesores.indexOf(this.profesorSeleccionado) - 1);
+      this.profesores.splice(this.profesores.indexOf(this.profesorSeleccionado) - 1);
+      this.profesorSeleccionado = new ProfesorClass(0, '', '', '');
     });
   }
 
