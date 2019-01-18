@@ -88,9 +88,11 @@ export class MateriasComponent implements OnInit {
     if (this.updateMatterForm.valid) {
       this.materiasService.updateMateria(this.updateMatterForm.value, this.materiaTemporal.id).subscribe(data => {
         console.log(data);
-        if (data === null) {
+        if (data.status === 1) {
           this.materias[this.materias.indexOf(this.materiaTemporal)].nombre = this.updateMatterForm.value.nombre;
           this.updateMatter = false;
+        } else {
+          console.log(data.err);
         }
       });
     }

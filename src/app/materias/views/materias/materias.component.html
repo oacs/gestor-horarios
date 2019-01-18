@@ -16,10 +16,10 @@
     Modal para crear nueva materia
    -->
   <div *ngIf="newMatter" class="contenedor-modal">
-    <div  class="form-modal">
+    <div class="form-modal">
       <i class="fa fa-times" (click)="this.newMatter = false;"></i>
       <h2>Crear nueva materia</h2>
-      <form [formGroup]="materiaForm">
+      <form [formGroup]="materiaForm" (ngSubmit)="submitFormNewMatter()">
         <label class="form-group">
           Nombre <br>
           <input type="text" class="input-text-form" formControlName="nombre" required>
@@ -35,9 +35,9 @@
           <input type="number" class="input-number-form" formControlName="horasMax" required>
       </label>
     -->
-      <p style="text-align: center;">
-        <button type="button" class="accept-button-form" (click)="submitFormNewMatter()">Guardar</button>
-      </p>
+        <p style="text-align: center;">
+          <button type="button" class="accept-button-form" (click)="submitFormNewMatter()">Guardar</button>
+        </p>
       </form>
     </div>
   </div>
@@ -45,10 +45,10 @@
     Modal para modificar una materia
    -->
   <div *ngIf="updateMatter" class="contenedor-modal">
-    <div  class="form-modal">
+    <div class="form-modal">
       <i class="fa fa-times" (click)="this.updateMatter = false;"></i>
       <h2>Actualizar materia</h2>
-      <form [formGroup]="updateMatterForm">
+      <form [formGroup]="updateMatterForm" (click)="submitFormUpdateMatter()">
         <label class="form-group">
           Nombre
           <input type="text" class="input-text-form" formControlName="nombre" required>
@@ -63,10 +63,10 @@
           Horas Maximas:
           <input type="number" class="input-number-form" formControlName="horasMax" required>
       </label> -->
-      <p style="text-align: center;">
-        <button type="button" class="accept-button-form" (click)="submitFormUpdateMatter()">Modificar</button>
-        <button type="button" class="delete-button-form" (click)="deleteMatter()">Eliminar</button>
-      </p>
+        <p style="text-align: center;">
+          <button type="button" class="accept-button-form" (click)="submitFormUpdateMatter()">Modificar</button>
+          <button type="button" class="delete-button-form" (click)="deleteMatter()">Eliminar</button>
+        </p>
       </form>
     </div>
   </div>
