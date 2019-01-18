@@ -1,10 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
-
-import { DatabaseService, Materia, Pensum } from '../../../providers/database/database.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PensumService } from '../../../providers/pensum/pensum.service';
+import { MateriaService, Materia } from '../../../providers/materia/materia.service';
+import { MateriasxpensumService } from '../../../providers/materiasxpensum/materiasxpensum.service';
 
 interface Semestre {
   numero: number;
@@ -95,12 +96,16 @@ export class PensumComponent implements OnInit {
     }
   }
 
-  constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
+  constructor(
+    private pensumSevice: PensumService,
+    private materiasService: MateriaService,
+    private materiasxpensumService: MateriasxpensumService,
+    private formModal: FormBuilder) {
     this.opciones = true;
     this.activeModificarPensum = false;
     this.activeNuevoPensum = false;
 
-    this.dbService.getPensums().subscribe(pensums => {
+    this.pensumSevice.getPensums().subscribe(pensums => {
       this.pensums = pensums;
       console.log(pensums);
     });
@@ -175,7 +180,7 @@ export class PensumComponent implements OnInit {
 
   submitFormNewMatter() {
     if (this.materiaForm.valid) {
-      this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
+      this.materiasService.insertMateria(this.materiaForm.value).subscribe(data => {
         if (data.id !== null) {
           const mat: Materia = this.materiaForm.value;
           mat.id = data.id;
@@ -237,7 +242,7 @@ export class PensumComponent implements OnInit {
 
   submitFormUpdateMatter() {
     if (this.updateMatterForm.valid) {
-      this.dbService.updateMateria(this.updateMatterForm.value, this.materiaTemporal.id).subscribe(data => {
+      this.materiasService.updateMateria(this.updateMatterForm.value, this.materiaTemporal.id).subscribe(data => {
         console.log(data);
         if (data === null) {
           this.materias[this.materias.indexOf(this.materiaTemporal)].nombre = this.updateMatterForm.value.nombre;
@@ -249,7 +254,7 @@ export class PensumComponent implements OnInit {
 
   deleteMatter() {
     console.log(this.materiaTemporal);
-    this.dbService.deleteMateria(this.materiaTemporal).subscribe(data => {
+    this.materiasService.deleteMateria(this.materiaTemporal).subscribe(data => {
       console.log(data);
       if (data === null) {
         this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
@@ -260,7 +265,7 @@ export class PensumComponent implements OnInit {
 
   crearPensum() {
     if (this.createPensumForm.valid) {
-      this.dbService.insertPensum(this.createPensumForm.value).subscribe(data => {
+      this.pensumSevice.insertPensum(this.createPensumForm.value).subscribe(data => {
         if (data.id !== null) {
           const pensumTemp: Pensum = this.createPensumForm.value;
           pensumTemp.id = data.id;
@@ -309,7 +314,7 @@ export class PensumComponent implements OnInit {
   }
 
   abrirPensum(id: number) {
-    this.dbService.getMateriasPensum(id).subscribe(materias => {
+    this.materiasxpensumService.getMateriasPensum(id).subscribe(materias => {
       console.log(materias);
       materias.forEach(materia => {
         this.semestres[materia.semestre].materias.push(materia);
@@ -331,7 +336,7 @@ export class PensumComponent implements OnInit {
       { numero: 10, materias: [] }];
     console.log(this.semestres);
     this.materias = [];
-    this.dbService.getMaterias().subscribe(data => {
+    this.materiasService.getMaterias().subscribe(data => {
       this.materias = data;
       this.limite = 4;
       this.posicion = 0;

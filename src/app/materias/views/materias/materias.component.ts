@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseService, Materia } from '../../../providers/database/database.service';
-
 import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MateriaService, Materia } from '../../../providers/materia/materia.service';
 @Component({
   selector: 'app-materias',
   templateUrl: './materias.component.html',
@@ -20,10 +19,10 @@ export class MateriasComponent implements OnInit {
   public materiaForm: FormGroup;
 
   public materiaTemporal: Materia;
-  constructor(private dbService: DatabaseService, private formModal: FormBuilder) {
+  constructor(private materiasService: MateriaService, private formModal: FormBuilder) {
     this.newMatter = false;
     this.updateMatter = false;
-    this.dbService.getMaterias().subscribe(materias => {
+    this.materiasService.getMaterias().subscribe(materias => {
       this.materias = materias;
       this.info = materias;
     });
@@ -73,7 +72,7 @@ export class MateriasComponent implements OnInit {
   */
   submitFormNewMatter() {
     if (this.materiaForm.valid) {
-      this.dbService.insertMateria(this.materiaForm.value).subscribe(data => {
+      this.materiasService.insertMateria(this.materiaForm.value).subscribe(data => {
         if (data.id !== null) {
           const mat: Materia = this.materiaForm.value;
           mat.id = data.id;
@@ -87,7 +86,7 @@ export class MateriasComponent implements OnInit {
   submitFormUpdateMatter() {
     console.log(this.materiaTemporal);
     if (this.updateMatterForm.valid) {
-      this.dbService.updateMateria(this.updateMatterForm.value, this.materiaTemporal.id).subscribe(data => {
+      this.materiasService.updateMateria(this.updateMatterForm.value, this.materiaTemporal.id).subscribe(data => {
         console.log(data);
         if (data === null) {
           this.materias[this.materias.indexOf(this.materiaTemporal)].nombre = this.updateMatterForm.value.nombre;
@@ -111,7 +110,7 @@ export class MateriasComponent implements OnInit {
 
   deleteMatter() {
     console.log(this.materiaTemporal);
-    this.dbService.deleteMateria(this.materiaTemporal).subscribe(data => {
+    this.materiasService.deleteMateria(this.materiaTemporal).subscribe(data => {
       console.log(data);
       if (data === null) {
         this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
