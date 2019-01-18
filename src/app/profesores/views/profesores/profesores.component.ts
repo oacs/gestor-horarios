@@ -79,7 +79,18 @@ export class ProfesoresComponent implements OnInit {
       }
     });
   }
-
+  public cambiarPrioridad(cambio: number, i: number, j: number) {
+    if (this.profesorSeleccionado.nombre !== '') {
+      this.horario[i][j] += cambio;
+      if (this.horario[i][j] < 0) {
+        this.horario[i][j] = 2;
+      } else {
+        if (this.horario[i][j] > 2) {
+          this.horario[i][j] = 0;
+        }
+      }
+    }
+  }
   public clearHorario(): void {
     for (let i = 0; i < 7; i++) {
       this.horario[i].forEach(bloque => {
