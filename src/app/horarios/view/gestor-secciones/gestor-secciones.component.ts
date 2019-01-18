@@ -34,9 +34,11 @@ export class GestorSeccionesComponent implements OnInit {
     this.pensumService.getPensums().subscribe(pensums => {
       this.listaPensum = pensums;
     });
+    this.listaMateria = [];
 
     this.selectPensum.valueChanges.subscribe(id => {
       this.materiaxPensumService.getMateriasxPensumId(id).subscribe(materias => {
+        this.listaMateria = [];
         materias.forEach(materia => {
           this.listaMateria.push(new MateriaClass(
             materia.nombre,
