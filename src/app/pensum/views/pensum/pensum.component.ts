@@ -314,7 +314,7 @@ export class PensumComponent implements OnInit {
     this.pensumActivo.id = 2;
     this.semestres.forEach((semestre, i) => {
       semestre.materias.forEach((materia, j) => {
-        this.materiasxpensumService.insertMateria({
+        this.materiasxpensumService.insertMateriaxpensum({
           id_materia: materia.id,
           id_pensum: this.pensumActivo.id,
           maxH: 4,
@@ -333,7 +333,7 @@ export class PensumComponent implements OnInit {
     });
     const infoAux: Materia[] = this.materias.filter(mat => !aux.includes(mat));
     infoAux.forEach(materia => {
-      this.materiasxpensumService.insertMateria({
+      this.materiasxpensumService.insertMateriaxpensum({
         id_materia: materia.id,
         id_pensum: this.pensumActivo.id,
         maxH: 4,
