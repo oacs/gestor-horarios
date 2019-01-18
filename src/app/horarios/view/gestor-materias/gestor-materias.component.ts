@@ -22,23 +22,23 @@ export class GestorMateriasComponent implements OnInit {
   public seccionesActivas: SeccionClass[];
   public posicion: number;
 
-  constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) { }
+  constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) {
+    this.listaMateria = [];
+  }
 
   ngOnInit() {
-    this.servicioConfiguracionHorario.horarioActual.subscribe( horario => {
+    this.servicioConfiguracionHorario.horarioActual.subscribe(horario => {
       this.horarioActivo = horario;
     });
 
-    this.servicioConfiguracionHorario.listaProfesoresActual.subscribe( lista => {
+    this.servicioConfiguracionHorario.listaProfesoresActual.subscribe(lista => {
       this.horarioActivo = lista;
     });
   }
 
-  cargarInformacion(materia: MateriaClass,posicion: number){
-
+  cargarInformacion(materia: MateriaClass, posicion: number) {
     this.materiaActiva = materia;
     this.posicion = posicion;
-
   }
 
 }
