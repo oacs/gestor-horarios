@@ -1,0 +1,55 @@
+div.opciones {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    height: calc(100vh - 100px);
+    width: 100vw;
+    background-color: #f0f7f7;
+    z-index: 9999999999999999999999999;
+}
+
+div.opciones div.grid-opciones {
+    display: grid;
+    margin: 5% 10%;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    justify-content: space-between;
+}
+
+div.opciones div.grid-opciones div.opcion {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: 0 3px 4px 0 rgba(255, 255, 255, 0.2), 0 3px 3px -2px rgba(255, 255, 255, .3), 0 1px 8px 0 rgba(255, 255, 255, .19);
+    height: 200px;
+    padding: 10px;
+}
+
+
+.form-group{
+    display:block;
+    margin: 0 0 10px 0;
+}
+
+div.opciones div.grid-opciones div.opcion label { }
+div.opciones div.grid-opciones div.opcion input[type="text"],
+div.opciones div.grid-opciones div.opcion select { 
+    width: 100%; 
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+    margin: 10px 0px ;
+    border: solid 1px rgba(0, 0, 0, 0.5);
+}
+
+
+div.opciones div.grid-opciones div.opcion button {
+    background: #83ccae;
+    border: none;
+    height: 30px;
+    width: 100px;
+    color: #FFF;
+    font-size: 15px;
+    margin-right: 2px;
+}

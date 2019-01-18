@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppConfig } from '../../../environments/environment';
+import { Materiaxpensum } from '../materiasxpensum/materiasxpensum.service';
 
 export interface Materia {
   id: number;
@@ -11,6 +12,8 @@ export interface Materia {
   maxH?: string;
   prelaciones?: Materia[];
 }
+
+// Listo
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +31,13 @@ export class MateriaService {
     return this.http.get<Materia>(AppConfig.api + 'materia/' + id);
   }
 
+  public getPrelantes(id: number): Observable<Materiaxpensum> {
+    return this.http.get<Materiaxpensum>(AppConfig.api + 'materia/' + id + '/prelantes');
+  }
+
+  public getPrelandos(id: number): Observable<Materiaxpensum> {
+    return this.http.get<Materiaxpensum>(AppConfig.api + 'materia/' + id + '/prelandos');
+  }
   public updateMateria(materia: Materia, id: number): Observable<any> {
     return this.http.put(AppConfig.api + 'materia/' + id, materia);
   }

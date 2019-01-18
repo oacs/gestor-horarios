@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PensumService, Pensum } from '../../../providers/pensum/pensum.service';
 import { MateriaService, Materia } from '../../../providers/materia/materia.service';
 import { MateriasxpensumService } from '../../../providers/materiasxpensum/materiasxpensum.service';
+import { ServicioOpcionesPensumService } from '../../../providers/servicioOpcionesPensum/servicio-opciones-pensum.service';
 
 interface Semestre {
   numero: number;
@@ -26,7 +27,10 @@ interface Semestre {
 
 export class PensumComponent implements OnInit {
 
+  public pensum_activo: Pensum;
+  public id_pensum: string;
   public pensums: Pensum[];
+  public pensumActivo: Pensum;
   public materias: Materia[];
   public info: Materia[];
   public limite: number;
@@ -42,11 +46,6 @@ export class PensumComponent implements OnInit {
   public posicion: number;
   public semestres: Semestre[];
   public materiasEnDrag: number;
-
-  // Teipe de opciones
-  public opciones: boolean;
-  public activeNuevoPensum: boolean;
-  public activeModificarPensum: boolean;
 
   // Cestari con su modal chimbo
   public displayModalNuevo: string;
@@ -100,10 +99,8 @@ export class PensumComponent implements OnInit {
     private pensumSevice: PensumService,
     private materiasService: MateriaService,
     private materiasxpensumService: MateriasxpensumService,
-    private formModal: FormBuilder) {
-    this.opciones = true;
-    this.activeModificarPensum = false;
-    this.activeNuevoPensum = false;
+    private formModal: FormBuilder,
+    private servicioOpcionesPensum: ServicioOpcionesPensumService) {
 
     this.pensumSevice.getPensums().subscribe(pensums => {
       this.pensums = pensums;
@@ -125,27 +122,6 @@ export class PensumComponent implements OnInit {
 
     this.displayModalNuevo = 'none';
     this.displayModalModificar = 'none';
-
-    this.materiaForm = this.formModal.group({
-      nombre: ['', Validators.required],
-      // horas: ['', Validators.required],
-      // horasMax: ['', Validators.required]
-    });
-
-    this.updateMatterForm = this.formModal.group({
-      nombre: ['', Validators.required],
-      // horas: ['', Validators.required],
-      // horasMax: ['', Validators.required]
-    });
-
-    this.createPensumForm = this.formModal.group({
-      fecha: ['', Validators.required],
-    });
-
-    this.modifyPensumForm = this.formModal.group({
-      option: ['', Validators.required],
-    });
-
   }
 
   /* Cambia el tipo de display (cuando se presiona alguno de los botones) */
@@ -252,16 +228,16 @@ export class PensumComponent implements OnInit {
     }
   }
 
-  deleteMatter() {
-    console.log(this.materiaTemporal);
-    this.materiasService.deleteMateria(this.materiaTemporal).subscribe(data => {
-      console.log(data);
-      if (data === null) {
-        this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
-        this.displayModalModificar = 'none';
-      }
-    });
-  }
+  // deleteMatter() {
+  //   console.log(this.materiaTemporal);
+  //   this.materiasService.deleteMateria(this.materiaTemporal).subscribe(data => {
+  //     console.log(data);
+  //     if (data === null) {
+  //       this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
+  //       this.displayModalModificar = 'none';
+  //     }
+  //   });
+  // }
 
   crearPensum() {
     if (this.createPensumForm.valid) {
@@ -271,58 +247,87 @@ export class PensumComponent implements OnInit {
           pensumTemp.id = data.id;
           this.pensums.push(pensumTemp);
           this.abrirPensum(data.id);
-
-          this.opciones = false;
         }
       });
     }
   }
 
-  toggleActiveNuevo(event) {
-    event.stopPropagation();
-
-    if (this.activeNuevoPensum === false) {
-      this.activeNuevoPensum = true;
-    } else {
-      this.activeNuevoPensum = false;
-    }
-
-    console.log(this.activeNuevoPensum);
-  }
-
-  toggleActiveModificar(event) {
-    event.stopPropagation();
-    if (this.activeModificarPensum === false) {
-      this.activeModificarPensum = true;
-    } else {
-      this.activeModificarPensum = false;
-    }
-
-    console.log(this.activeModificarPensum);
-  }
 
   modificarPensum() {
     console.log(this.modifyPensumForm.value);
     if (this.modifyPensumForm.valid) {
       this.abrirPensum(this.modifyPensumForm.value.option);
-      this.opciones = false;
     }
   }
 
   guardarPensum() {
-    console.log('Guardar pensum');
+    this.pensumActivo = {} as Pensum;
+    this.pensumActivo.id = 2;
+    this.semestres.forEach((semestre, i) => {
+      semestre.materias.forEach((materia, j) => {
+        this.materiasxpensumService.insertMateriaxpensum({
+          id_materia: materia.id,
+          id_pensum: this.pensumActivo.id,
+          maxH: 4,
+          horas: 6,
+          semestre: semestre.numero
+        }).subscribe(mensaje => {
+          console.log(mensaje);
+        });
+      });
+    });
+    const aux: Materia[] = [];
+    this.semestres.forEach(semestre => {
+      semestre.materias.forEach(materia => {
+        aux.push(materia);
+      });
+    });
+    const infoAux: Materia[] = this.materias.filter(mat => !aux.includes(mat));
+    infoAux.forEach(materia => {
+      this.materiasxpensumService.insertMateriaxpensum({
+        id_materia: materia.id,
+        id_pensum: this.pensumActivo.id,
+        maxH: 4,
+        horas: 6,
+        semestre: 0
+      }).subscribe(mensaje => {
+        console.log(mensaje);
+      });
+    });
+  }
+
+  cargarPensum() {
+    this.materiasxpensumService.getMateriasxPensumId(this.pensumActivo.id).subscribe(materiasxpensum => {
+      materiasxpensum.forEach(materia => {
+        if (materia.semestre !== 0) {
+          this.semestres[materia.semestre - 1].materias.push(materia);
+        }
+        this.materias.push({
+          nombre: materia.nombre,
+          horas: materia.horas,
+          id: materia.id,
+          maxH: materia.maxH,
+          semestre: materia.semestre,
+          prelaciones: []
+        });
+      });
+    });
   }
 
   abrirPensum(id: number) {
-   /* this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
-      console.log(materias);
-      materias.forEach(materia => {
-        this.semestres[materia.semestre].materias.push(materia);
-      });
-    });+*/
+    /* this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
+       console.log(materias);
+       materias.forEach(materia => {
+         this.semestres[materia.semestre].materias.push(materia);
+       });
+     });+*/
   }
 
   ngOnInit() {
+    this.servicioOpcionesPensum.pensumActivo.subscribe( pensumActivo => {
+      this.pensum_activo = pensumActivo;
+    });
+
     this.semestres = [
       { numero: 1, materias: [] },
       { numero: 2, materias: [] },
