@@ -6,6 +6,6 @@
 export const AppConfig = {
   production: false,
   environment: 'DEV',
-  api: 'http://localhost:3000/',
+  api: 'http://localhost:3005/',
   tables: ['pensum', 'seccion', 'profesor', 'prelacion', 'materia', 'materia_x_pensum']
 };
