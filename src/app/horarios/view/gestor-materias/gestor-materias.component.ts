@@ -20,6 +20,7 @@ export class GestorMateriasComponent implements OnInit {
   public materiaActiva: MateriaClass;
   public listaMateria: Materia[];
   public seccionesActivas: SeccionClass[];
+  public posicion: number;
 
   constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) { }
 
@@ -33,10 +34,10 @@ export class GestorMateriasComponent implements OnInit {
     });
   }
 
-  cargarInformacion(materia: MateriaClass){
-    
+  cargarInformacion(materia: MateriaClass,posicion: number){
+
     this.materiaActiva = materia;
-    this.seccionesActivas = materia.secciones;
+    this.posicion = posicion;
 
   }
 
