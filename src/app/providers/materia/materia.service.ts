@@ -8,8 +8,8 @@ export interface Materia {
   id: number;
   nombre: string;
   semestre?: number;
-  horas?: string;
-  maxH?: string;
+  horas?: number;
+  maxH?: number;
   prelaciones?: Materia[];
 }
 
