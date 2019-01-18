@@ -1,0 +1,114 @@
+
+div.container {
+    overflow-y: auto;
+    height: calc(100vh - 120px);
+}
+
+div.header {
+    text-align: justify;
+    color: #333333;
+    font-size: 15px;
+    margin: 15px 10% 0 10%;       
+}
+
+
+div.header button {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.616);
+    background-color: white;
+    width: 15%;
+    height: 40px;
+    border: none;
+    margin: 15px;
+    box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+}
+
+div.header button:hover {
+    transform: scale(1.001);
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
+}
+
+div.header select {
+    margin: 15px 0px 15px 15px ;
+    color: rgba(0, 0, 0, 0.616);
+    font-size: 14px;
+    height: 40px;
+    width: 80%;
+    padding: 8px;
+    border: none;
+}
+
+div.header h1 {
+    margin: 10px 10px 10px 0px;
+}
+
+
+
+
+div.content {
+    width: calc(100% - 20%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch; 
+    margin: 15px 10% 10% 10%;       
+}
+
+div.content div.card {
+    width: 285px;
+    height: 185px;
+    margin: 10px 30px 10px 0px;
+    background: #FFF;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.card p {
+    font-size: 15px;
+    color: #93cecc;
+    font-weight: 600;
+}
+
+div.card div.input-group input[type="number"] {
+    background-color: none;
+    border: none;
+    margin-left: 10%;
+    width: 30%;
+    text-align: center;
+}
+
+
+
+a.float-right {
+    display: block;
+    position: absolute;
+    background-color: #93cecc;
+    border-radius: 5px;
+    height: 60px;
+    width: 60px;
+    z-index: 999999;
+    bottom: 10%;
+    right: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
+    text-decoration: none;
+}
+
+a.float:hover {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
+    
+}
+
+a.float i.fa.fa-arrow-right {
+    color: white;
+    font-size: 23px;
+}
+

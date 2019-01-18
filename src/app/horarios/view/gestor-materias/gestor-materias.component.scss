@@ -1,0 +1,36 @@
+a.float-left,
+a.float-right {
+    display: block;
+    position: absolute;
+    background-color: #93cecc;
+    border-radius: 5px;
+    height: 60px;
+    width: 60px;
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
+    text-decoration: none;
+    bottom: 10%;
+}
+
+a.float-right {
+    right: 4%;
+}
+
+a.float-left {
+    left: 4%;
+}
+
+a.float:hover {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
+    
+}
+
+a.float i.fa.fa-arrow-right {
+    color: white;
+    font-size: 23px;
+}

@@ -5,9 +5,13 @@ import { HomeModule } from './home/home.module';
 import { MateriasModule } from './materias/materias.module';
 import { PensumModule } from './pensum/pensum.module';
 import { ProfesoresModule } from './profesores/profesores.module';
+import { HorariosModule } from './horarios/horarios.module';
 
 let routes: Routes = [
-
+    {
+        path: 'horarios',
+        loadChildren: './horarios/horarios.module#HorariosModule'
+    },
     {
         path: 'pensum',
         loadChildren: './pensum/pensum.module#PensumModule'
@@ -43,6 +47,10 @@ if (isDevMode()) {
             path: 'profesores',
             loadChildren: () => ProfesoresModule
         },
+        {
+            path: 'horarios',
+            loadChildren: () => HorariosModule
+        }
     ];
 }
 
