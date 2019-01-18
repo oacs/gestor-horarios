@@ -1,22 +1,23 @@
-import { Materia } from './materia';
-import { Seccion } from './seccion';
+import { MateriaClass } from './materiaClass';
+import { SeccionClass } from './seccionClass';
 import { BloqueHoras } from './BloqueHoras';
 import { ordenarPorDia } from '../databaseTransalations/datoToString';
 
 export const CANTIDAD_DE_SEMESTRES = 10;
-export class HorarioPeriodo {
+
+
+export class HorarioPeriodoClass {
     /**
      * @description materias por semestres de un periodo de un pensum
      * @memberof HorarioSemestre
      */
-    public materiasPorSemestre: Materia[][];
+    public materiasPorSemestre: MateriaClass[][];
     /**
      * @description nombre del periodo
      * @type {string}
      * @memberof HorarioSemestre
      */
     public periodo: string;
-
     /**
      * @description Crea una instancia de HorarioSemestre.
      * @memberof HorarioSemestre
@@ -27,7 +28,6 @@ export class HorarioPeriodo {
             this.materiasPorSemestre.push([]);
         }
     }
-
     // /**
     //  * @description agrega la materia al arreglo de materias
     //  * @param materia materia a agregar
@@ -36,7 +36,6 @@ export class HorarioPeriodo {
     // public agregarMateria(materia: Materia) {
     //     this.materiasPorSemestre.push(materia);
     // }
-
     // /**
     //  * @description agrega todas las materias de un arreglo dado al arreglo de materias
     //  * @param {Materia[]} materias materias a agregar
@@ -47,7 +46,6 @@ export class HorarioPeriodo {
     //         this.materia.push(materia);
     //     });
     // }
-
     public obtenerBloquesPosibles(idMateria: string, semestre: number, idSeccion: string): BloqueHoras[] {
         const seccionAux = this.obtenerSeccion(idMateria, semestre, idSeccion);
         const materiaAux = this.obtenerMateria(idMateria, semestre);
@@ -63,7 +61,6 @@ export class HorarioPeriodo {
                 });
             });
         }
-
         // Semestre actual
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
             materia.secciones.forEach(seccion => {
@@ -74,7 +71,6 @@ export class HorarioPeriodo {
                 }
             });
         });
-
         // Semestre siguiente
         if (semestre < 10 && this.materiasPorSemestre[semestre] != null) {
             this.materiasPorSemestre[semestre].forEach(materia => {
@@ -100,7 +96,6 @@ export class HorarioPeriodo {
         // console.log('--------------\n');
         return this.invertirBloques(noDisponible);
     }
-
     public compactarBloques(bloques: BloqueHoras[]): BloqueHoras[] {
         let flag = -1;
         let del: number[] = [];
@@ -109,24 +104,32 @@ export class HorarioPeriodo {
             bloques.forEach((a, i) => {
                 // console.log(`​HorarioPeriodo -> del.indexOf(${i})`, del.indexOf(i));
                 if (del.indexOf(i) === -1) {
-
                     bloques.forEach((b, j) => {
                         if (i !== j) {
                             switch (this.compararBloques(a, b)) {
-                                case 1: a.inicio = b.inicio;
+                                case 1:
+                                    a.inicio = b.inicio;
                                     flag = 1;
                                     // console.log(del.indexOf(j));
-                                    if (del.indexOf(j) === -1) { del.push(j); }
+                                    if (del.indexOf(j) === -1) {
+                                        del.push(j);
+                                    }
                                     break;
-                                case 2: a.fin = b.fin;
+                                case 2:
+                                    a.fin = b.fin;
                                     flag = 1;
                                     // console.log(del.indexOf(j));
-                                    if (del.indexOf(j) === -1) { del.push(j); }
+                                    if (del.indexOf(j) === -1) {
+                                        del.push(j);
+                                    }
                                     break;
-                                case 3: a.fin = b.fin > a.fin ? b.fin : a.fin;
+                                case 3:
+                                    a.fin = b.fin > a.fin ? b.fin : a.fin;
                                     flag = 1;
                                     // console.log(del.indexOf(j));
-                                    if (del.indexOf(j) === -1) { del.push(j); }
+                                    if (del.indexOf(j) === -1) {
+                                        del.push(j);
+                                    }
                                     break;
                             }
                         }
@@ -146,7 +149,6 @@ export class HorarioPeriodo {
         // console.log('Resultado -> bloques', bloques);
         return bloques;
     }
-
     public compararBloquesDeHora(a: BloqueHoras[], b: BloqueHoras[]): number {
         a.forEach(bloqueA => {
             b.forEach(bloqueB => {
@@ -158,7 +160,6 @@ export class HorarioPeriodo {
         });
         return 0;
     }
-
     public compararBloques(a: BloqueHoras, b: BloqueHoras): number {
         if (a.dia === b.dia) {
             // A esta por encima de B
@@ -181,7 +182,6 @@ export class HorarioPeriodo {
         }
         return 0;
     }
-
     public invertirBloques(bloques: BloqueHoras[]): BloqueHoras[] {
         let buffer: BloqueHoras[] = [];
         let prev = 0;
@@ -213,9 +213,8 @@ export class HorarioPeriodo {
         buffer = ordenarPorDia(buffer);
         return buffer;
     }
-
-    public obtenerSeccion(idMateria: string, semestre: number, idSeccion: string): Seccion {
-        let seccionAux: Seccion = null;
+    public obtenerSeccion(idMateria: string, semestre: number, idSeccion: string): SeccionClass {
+        let seccionAux: SeccionClass = null;
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
             materia.secciones.forEach(seccion => {
                 if (seccion.id === idSeccion) {
@@ -226,11 +225,9 @@ export class HorarioPeriodo {
         });
         return seccionAux;
     }
-
-    public obtenerMateria(idMateria: string, semestre: number): Materia {
-        let aux: Materia = null;
+    public obtenerMateria(idMateria: string, semestre: number): MateriaClass {
+        let aux: MateriaClass = null;
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
-
             if (materia.id === idMateria) {
                 // console.log(materia);
                 aux = materia;
@@ -241,5 +238,4 @@ export class HorarioPeriodo {
     }
     public verificarBloqueEnHorario() { }
     public guardarBloqueEnHorario() { }
-
 }

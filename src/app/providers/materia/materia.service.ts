@@ -21,22 +21,22 @@ export class MateriaService {
   }
 
   public getMaterias(): Observable<Materia[]> {
-    return this.http.get<Materia[]>(AppConfig.api + 'materias');
+    return this.http.get<Materia[]>(AppConfig.api + 'materia');
   }
 
   public getMateria(id: number): Observable<Materia> {
-    return this.http.get<Materia>(AppConfig.api + 'materias/' + id);
+    return this.http.get<Materia>(AppConfig.api + 'materia/' + id);
   }
 
   public updateMateria(materia: Materia, id: number): Observable<any> {
-    return this.http.put(AppConfig.api + 'materias/' + id, materia);
+    return this.http.put(AppConfig.api + 'materia/' + id, materia);
   }
 
   public insertMateria(materia: Materia): Observable<any> {
-    return this.http.post(AppConfig.api + 'materias/', materia);
+    return this.http.post(AppConfig.api + 'materia/', materia);
   }
 
   public deleteMateria(materia: Materia): Observable<any> {
-    return this.http.delete(AppConfig.api + 'materias/' + materia.id);
+    return this.http.delete(AppConfig.api + 'materia/' + materia.id);
   }
 }

@@ -1,40 +1,40 @@
-import { Profesor } from './profesor';
+import { ProfesorClass } from './profesorClass';
 import { stringToDisponibilidad } from '../databaseTransalations/stringToData';
 import { DisponibilidadToString } from '../databaseTransalations/datoToString';
-import { Seccion } from './seccion';
-import { Materia } from './materia';
+import { SeccionClass } from './seccionClass';
+import { MateriaClass } from './materiaClass';
 import { BloqueHoras } from './BloqueHoras';
-import { HorarioPeriodo } from './horario-semestre';
+import { HorarioPeriodoClass } from './HorarioPeriodoClass';
 
-export const profesores: Profesor[] = [
+export const profesores: ProfesorClass[] = [
     {
         nombre: 'Oscar',
         correo: 'oacs@gmail.com',
         disponibilidad: stringToDisponibilidad('0131571,11418A1'),
-        id: '0'
+        id: 0
     }
 ];
 
-export const secciones: Seccion[] = [
-    new Seccion('401', profesores[0])
+export const secciones: SeccionClass[] = [
+    new SeccionClass('401', profesores[0])
 ];
-const matematica =  new Materia('matematica', '0', 1, 0, 2);
+const matematica = new MateriaClass('matematica', '0', 1, 0, 2);
 secciones[0].BloqueHorasFinal.push(new BloqueHoras(0, 1, 3));
 matematica.secciones.push(secciones[0]);
-const prog =  new Materia('prog1', '1', 2, 0, 2);
+const prog = new MateriaClass('prog1', '1', 2, 0, 2);
 prog.secciones.push(secciones[0]);
 prog.prelaciones.push(matematica);
 
-export const materiasPorSemestre: Materia[][] = [
+export const materiasPorSemestre: MateriaClass[][] = [
     [
-       matematica
+        matematica
     ],
     [
         prog
     ]
 ];
 
-const hs: HorarioPeriodo = new HorarioPeriodo();
+const hs: HorarioPeriodoClass = new HorarioPeriodoClass();
 hs.materiasPorSemestre = materiasPorSemestre;
 
 

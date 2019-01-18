@@ -9,32 +9,16 @@
             Puedes cargar un archivo de horario y posteriormente aparecerá en la lista para su gestión.
         </p>
         <p style="display: inline-block;">Selecciona un pensum: </p>
-        <select name="" id="">
-                <option value="">Pensum 1</option>
-                <option value="">Pensum 2</option>
-                <option value="">Pensum 3</option>
+            <select name="" id="" *ngFor="let pensum of listaPensum" [formControl]="selectPensum" required>
+                <option value="">{{pensum.fecha | titlecase }}</option>
             </select>
         <br>
-        <p style="display: inline-block;">Cargar pensum de archivo: </p> <button>CARGAR</button>
+        <p style="display: inline-block;">Cargar pensum de archivo: </p> <button (click)="loadFile()">CARGAR</button>
     </div>
 
-    <div class="content">
+    <div class="content" *ngFor="let materia of listaMateria">
         <div class="card">
-            <p>Matemática Básica</p>
-            <div class="input-group">
-                <p>N° secciones:</p>
-                <input type="number" value="0">
-            </div>
-        </div>
-        <div class="card">
-            <p>Matemática Básica</p>
-            <div class="input-group">
-                <p>N° secciones:</p>
-                <input type="number" value="0">
-            </div>
-        </div>
-        <div class="card">
-            <p>Matemática Básica</p>
+            <p>{{materia.nombre | titlecase }}</p>
             <div class="input-group">
                 <p>N° secciones:</p>
                 <input type="number" value="0">

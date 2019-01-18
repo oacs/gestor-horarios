@@ -1,201 +1,203 @@
-
-
 <div class="content">
-    
+
   <div class="top-menu">
-      <input type="text" class="finder" placeholder="Buscar...">
-      <button class="button" (click)="showNewModal()">Nuevo</button>
-      <button class="button">Eliminar</button>
+    <form [formGroup]="buscador">
+      <input type="text" class="finder" formControlName="texto" placeholder="Buscar...">
+    </form>
+    <button class="button" (click)="showNewModal()">Nuevo</button>
+    <button *ngIf="profesorSeleccionado.nombre != ''" class="button" (click)="eliminarProfesor()">Eliminar</button>
   </div>
-    <!--
+  <!--
   Modal para crear nueva materia
  -->
-<div *ngIf="newProfesor" class="contenedor-modal">
-  <div  class="form-modal">
-    <i class="fa fa-times" (click)="this.newProfesor = false;"></i>
-    <h2>Crear nuevo profesor</h2>
-    <form [formGroup]="profesorForm">
-      <label class="form-group">
-        Nombre <br>
-        <input type="text" class="input-text-form" formControlName="nombre" required>
-      </label>
-      <label class="form-group">
-        Correo Electronico <br>
-        <input type="text" class="input-text-form" formControlName="email" required>
-      </label>
-    <p style="text-align: center;">
-      <button type="button" class="accept-button-form">Guardar</button>
-    </p>
-    </form>
+  <div *ngIf="newProfesor" class="contenedor-modal">
+    <div class="form-modal">
+      <i class="fa fa-times" (click)="this.newProfesor = false;"></i>
+      <h2>Crear nuevo profesor</h2>
+      <form [formGroup]="profesorForm">
+        <label class="form-group">
+          Nombre <br>
+          <input type="text" class="input-text-form" formControlName="nombre" required>
+        </label>
+        <label class="form-group">
+          Correo Electronico <br>
+          <input type="text" class="input-text-form" formControlName="correo" required>
+        </label>
+        <p style="text-align: center;">
+          <button type="button" class="accept-button-form" (click)="guardarProfesor()">Guardar</button>
+        </p>
+      </form>
+    </div>
   </div>
-</div>
 
 
   <div class="content-info">
-          <h2 class="sub-title">nombre del profesor:</h2>
-          <h2 class="sub-title">correo electronico:</h2>
-          <h2 class="sub-title">disponibilidad:</h2>
+    <h2 class="sub-title">nombre del profesor: {{profesorSeleccionado.nombre}}</h2>
+    <h2 class="sub-title">correo electronico: {{profesorSeleccionado.correo}}</h2>
+    <h2 class="sub-title">disponibilidad: </h2>
 
-          <table class="disp-table">
-                  <tr>
-                      <th style="border: none;"></th>                            
-                      <th class="first-table">Lunes</th>
-                      <th class="first-table">Martes</th> 
-                      <th class="first-table">Miercoles</th>
-                      <th class="first-table">Jueves</th>
-                      <th class="first-table">Viernes</th>
+    <table class="disp-table">
+      <tr>
+        <th style="border: none;"></th>
+        <th class="first-table">Lunes</th>
+        <th class="first-table">Martes</th>
+        <th class="first-table">Miercoles</th>
+        <th class="first-table">Jueves</th>
+        <th class="first-table">Viernes</th>
 
-                  </tr>
-                  <tr>
-                      <th class="first-table">7:00 - 7:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">8:00 - 8:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">9:00 - 9:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">9:00 - 9:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">7:00 - 7:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">8:00 - 8:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">9:00 - 9:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">9:00 - 9:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">7:00 - 7:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">8:00 - 8:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">9:00 - 9:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">9:00 - 9:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">7:00 - 7:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-                  <tr>
-                      <th class="first-table">8:00 - 8:50</th>                            
-                      <th></th>
-                      <th></th> 
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                  </tr>
-          </table>
+      </tr>
+      <tr *ngFor="let bloque of horario[0]; let i = index">
+        <th class="first-table">{{hora[i]}} - {{hora[i].split(':')[0]}}:50{{hora[i][hora[i].length-2] +
+          hora[i][hora[i].length-1]}}</th>
+        <ng-container *ngFor="let dia of [0,1,2,3,4]; let j = index">
 
-          <div class="old-reference">
-              <p>Periodo xxxx:  <i class="fa fa-angle-down"></i></p>
+          <th (click)="cambiarPrioridad(1,j,i)" (auxclick)="cambiarPrioridad(-1, j, i)" *ngIf="horario[j][i] != 0"
+            [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}">{{horario[j][i]}}</th>
+          <th (click)="cambiarPrioridad(1,j, i)" (auxclick)="cambiarPrioridad(-1, j ,i)" *ngIf="horario[j][i] == 0"></th>
+        </ng-container>
+      </tr>
+      <!-- <tr>
+        <th class="first-table">8:00 - 8:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">9:00 - 9:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">9:00 - 9:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">7:00 - 7:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">8:00 - 8:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">9:00 - 9:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">9:00 - 9:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">7:00 - 7:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">8:00 - 8:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">9:00 - 9:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">9:00 - 9:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">7:00 - 7:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th class="first-table">8:00 - 8:50</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr> -->
+    </table>
 
-              <table class="disp-table">
-                  <tr>
-                      <th>Dia</th>                            
-                      <th>Hora</th>
-                  </tr>
-                  <tr>
-                      <th>lunes</th>                            
-                      <th>6-8</th>
-                  </tr>
-                  <tr>
-                      <th>miercoles</th>                            
-                      <th>2-3</th>
-                  </tr>
-              </table>
-              
-              <p>Periodo yyyy:  <i class="fa fa-angle-down"></i></p>
+    <div class="old-reference">
+      <p>Periodo xxxx: <i class="fa fa-angle-down"></i></p>
 
-              <table class="disp-table">
-                  <tr>
-                      <th>Dia</th>                            
-                      <th>Hora</th>
-                  </tr>
-                  <tr>
-                      <th>martes</th>                            
-                      <th>6-8</th>
-                  </tr>
-                  <tr>
-                      <th>viernes</th>                            
-                      <th>2-3</th>
-                  </tr>
-              </table>
+      <table class="disp-table">
+        <tr>
+          <th>Dia</th>
+          <th>Hora</th>
+        </tr>
+        <tr>
+          <th>lunes</th>
+          <th>6-8</th>
+        </tr>
+        <tr>
+          <th>miercoles</th>
+          <th>2-3</th>
+        </tr>
+      </table>
 
-          </div>
+      <p>Periodo yyyy: <i class="fa fa-angle-down"></i></p>
+
+      <table class="disp-table">
+        <tr>
+          <th>Dia</th>
+          <th>Hora</th>
+        </tr>
+        <tr>
+          <th>martes</th>
+          <th>6-8</th>
+        </tr>
+        <tr>
+          <th>viernes</th>
+          <th>2-3</th>
+        </tr>
+      </table>
+
+    </div>
   </div>
 
 </div>
@@ -203,21 +205,21 @@
 
 <div class="rightColumn">
   <ul>
-      <li>
-          <div class="circularName">jz</div>
-          <p class="right-name">jose andres zacarias</p>
-      </li>
-      <li>
-          <div class="circularName">ac</div>
-          <p class="right-name">antonio cestari</p>
-      </li>
-      <li>
-          <div class="circularName">eg</div>
-          <p class="right-name">eduardo andres gonzalez</p>
-      </li>
-      <li>
-          <div class="circularName">oc</div>
-          <p class="right-name">oscar castillejo</p>
-      </li>
+    <li *ngFor="let profesor of profesores" (click)="selectProfesor(profesor)">
+      <div class="circularName">{{profesor.nombre[0]}}</div>
+      <p class="right-name">{{profesor.nombre}}</p>
+    </li>
+    <!-- <li>
+      <div class="circularName">ac</div>
+      <p class="right-name">antonio cestari</p>
+    </li>
+    <li>
+      <div class="circularName">eg</div>
+      <p class="right-name">eduardo andres gonzalez</p>
+    </li>
+    <li>
+      <div class="circularName">oc</div>
+      <p class="right-name">oscar castillejo</p>
+    </li> -->
   </ul>
 </div>
