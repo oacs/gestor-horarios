@@ -335,7 +335,7 @@ export class PensumComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.servicioOpcionesPensum.pensumActivo.subscribe( pensumActivo => {
+    this.servicioOpcionesPensum.pensumActivo.subscribe(pensumActivo => {
       this.pensumActivo = pensumActivo;
     });
 

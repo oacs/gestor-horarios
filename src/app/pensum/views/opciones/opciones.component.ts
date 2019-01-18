@@ -18,12 +18,17 @@ export class OpcionesComponent implements OnInit {
   public modifyPensumForm: FormGroup;
 
   constructor(private servicioOpcionesPensum: ServicioOpcionesPensumService,
-              private formModal: FormBuilder,
-              private pensumSevice: PensumService,
-              private router: Router ) {
+    private formModal: FormBuilder,
+    private pensumSevice: PensumService,
+    private router: Router) {
 
     this.activeNuevoPensum = false;
     this.activeModificarPensum = false;
+
+    this.pensumSevice.getPensums().subscribe(pensums => {
+      this.listaPensums = pensums;
+      // console.log(pensums);
+    });
 
     /* BD */
     this.pensumSevice.getPensums().subscribe(pensums => {
