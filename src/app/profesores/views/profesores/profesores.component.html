@@ -1,3 +1,223 @@
-<p>
-  profesores works!
-</p>
+
+
+<div class="content">
+    
+  <div class="top-menu">
+      <input type="text" class="finder" placeholder="Buscar...">
+      <button class="button" (click)="showNewModal()">Nuevo</button>
+      <button class="button">Eliminar</button>
+  </div>
+    <!--
+  Modal para crear nueva materia
+ -->
+<div *ngIf="newProfesor" class="contenedor-modal">
+  <div  class="form-modal">
+    <i class="fa fa-times" (click)="this.newProfesor = false;"></i>
+    <h2>Crear nuevo profesor</h2>
+    <form [formGroup]="profesorForm">
+      <label class="form-group">
+        Nombre <br>
+        <input type="text" class="input-text-form" formControlName="nombre" required>
+      </label>
+      <label class="form-group">
+        Correo Electronico <br>
+        <input type="text" class="input-text-form" formControlName="email" required>
+      </label>
+    <p style="text-align: center;">
+      <button type="button" class="accept-button-form">Guardar</button>
+    </p>
+    </form>
+  </div>
+</div>
+
+
+  <div class="content-info">
+          <h2 class="sub-title">nombre del profesor:</h2>
+          <h2 class="sub-title">correo electronico:</h2>
+          <h2 class="sub-title">disponibilidad:</h2>
+
+          <table class="disp-table">
+                  <tr>
+                      <th style="border: none;"></th>                            
+                      <th class="first-table">Lunes</th>
+                      <th class="first-table">Martes</th> 
+                      <th class="first-table">Miercoles</th>
+                      <th class="first-table">Jueves</th>
+                      <th class="first-table">Viernes</th>
+
+                  </tr>
+                  <tr>
+                      <th class="first-table">7:00 - 7:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">8:00 - 8:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">9:00 - 9:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">9:00 - 9:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">7:00 - 7:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">8:00 - 8:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">9:00 - 9:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">9:00 - 9:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">7:00 - 7:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">8:00 - 8:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">9:00 - 9:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">9:00 - 9:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">7:00 - 7:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+                  <tr>
+                      <th class="first-table">8:00 - 8:50</th>                            
+                      <th></th>
+                      <th></th> 
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                  </tr>
+          </table>
+
+          <div class="old-reference">
+              <p>Periodo xxxx:  <i class="fa fa-angle-down"></i></p>
+
+              <table class="disp-table">
+                  <tr>
+                      <th>Dia</th>                            
+                      <th>Hora</th>
+                  </tr>
+                  <tr>
+                      <th>lunes</th>                            
+                      <th>6-8</th>
+                  </tr>
+                  <tr>
+                      <th>miercoles</th>                            
+                      <th>2-3</th>
+                  </tr>
+              </table>
+              
+              <p>Periodo yyyy:  <i class="fa fa-angle-down"></i></p>
+
+              <table class="disp-table">
+                  <tr>
+                      <th>Dia</th>                            
+                      <th>Hora</th>
+                  </tr>
+                  <tr>
+                      <th>martes</th>                            
+                      <th>6-8</th>
+                  </tr>
+                  <tr>
+                      <th>viernes</th>                            
+                      <th>2-3</th>
+                  </tr>
+              </table>
+
+          </div>
+  </div>
+
+</div>
+
+
+<div class="rightColumn">
+  <ul>
+      <li>
+          <div class="circularName">jz</div>
+          <p class="right-name">jose andres zacarias</p>
+      </li>
+      <li>
+          <div class="circularName">ac</div>
+          <p class="right-name">antonio cestari</p>
+      </li>
+      <li>
+          <div class="circularName">eg</div>
+          <p class="right-name">eduardo andres gonzalez</p>
+      </li>
+      <li>
+          <div class="circularName">oc</div>
+          <p class="right-name">oscar castillejo</p>
+      </li>
+  </ul>
+</div>

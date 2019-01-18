@@ -1,0 +1,219 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+   width: 100%;
+   height: 80px;
+   background: #83CCAE;
+   border-bottom: 40px solid #93CECC; 
+}
+body{
+   background: #d3d1d1;
+   margin: 0;
+}
+
+.contenedor-modal {
+   height: 100%;
+   width: 100%;
+   background-color: rgba(0,0,0,0.03);
+   z-index: 9999999;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+.contenedor-modal .form-modal{
+   transform: translate(-50%,-50%);
+   margin-left: calc(50% - 40px);
+   margin-right: 0%;
+   margin-top: 25%;
+   margin-bottom: 0%;
+   background: white;
+   padding: 40px;
+   width: 50vw;
+   height: 50vh;
+   box-shadow: 0 3px 4px 0 rgba(255, 255, 255, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
+}
+.contenedor-modal .form-modal h2 { text-align: center; color: rgba(0,0,0,0.6);}
+.contenedor-modal .form-modal label { margin: 10% 0%; }
+.contenedor-modal .form-modal input[type="text"] { width: 100%; padding-top: 5px; padding-bottom: 5px; margin: 10px 0px }
+.contenedor-modal .form-modal button { margin-left: 1px; }
+.contenedor-modal .form-modal i.fa.fa-times { 
+    cursor: pointer; 
+    color: #a6a6a6; 
+    transition: all 0.3s ease-in-out; 
+    font-size: 20px;
+    display: block;
+    float: right;
+}
+.contenedor-modal .form-modal i.fa.fa-times:hover { color: rgba(0,0,0,0.6);}
+
+.form-group{
+    display:block;
+    margin: 0 0 10px 0;
+}
+
+.form-group .input-text-form{
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+}
+
+.form-group .input-number-form{
+    border: 1px solid #a6a6a6;
+    border-radius: 3px;
+    width: 45px;
+}
+
+.accept-button-form{
+    background: #83ccae;
+    border: none;
+    height: 30px;
+    width: 100px;
+    color: #FFF;
+    font-size: 15px;
+}
+
+.accept-button-form:hover{
+    background: #49a07d;
+}
+
+.content{
+   width: calc(80% - 30px);
+   background: #F0F7F7;
+   height: calc(100vh - 120px);
+   display: inline-block;
+   float: left;
+   padding: 10px 15px;
+   overflow-y: scroll;
+
+}
+
+.content .top-menu{
+   display: flex;
+   width: 100%;
+   background: inherit;
+   height: 115px;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.content .top-menu .finder{
+   width: 250px;
+   height: 35px;
+   border-radius: 20px;
+   border: none;
+   color: #919191;
+   padding-left: 15px;
+
+}
+
+.content .top-menu .button{
+   border: none;
+   background: white;
+   color: #919191;
+   height: 50px;
+   width: 120px;
+   border-radius: 3px;
+}
+.content .content-info{
+   width: calc(100% - 25px);
+   background: white;
+   height: auto;
+   margin-top:15px;
+   border-radius:3px;
+   padding-left: 25px;
+   padding-top: 25px;
+}
+
+.content .content-info .sub-title{
+
+   text-transform: capitalize;
+   color: #333;
+   margin: 13px 0;
+
+}
+
+
+.content .content-info .disp-table{
+   width: calc(85% - 25px);
+   background: #E3E7E7;
+  margin: 15px 0;
+  border: 3px solid #AFDBD9;
+  border-radius: 3px;
+}
+.content .content-info .disp-table tr{
+   height: 25px;
+}
+
+
+.content .content-info .disp-table th{
+
+   border-right: 1px solid #FFF;
+   border-bottom: 1px solid #FFF;
+}
+
+.content .content-info .disp-table th.first-table{
+   background: #FFF;
+   border-radius: 10px;
+   border: none;
+   color: #B5B5B5;
+}
+
+
+
+.content .content-info .table th.limit{
+   background: #FFF;
+   border-radius: 10px;
+}
+
+.content .content-info .old-reference{
+
+
+}
+
+.content .content-info .old-reference p{
+   cursor: pointer;
+   display: inline-block;
+}
+
+
+
+
+.rightColumn{
+   width: 20%;
+   background: #d0dada;
+   height: calc(100vh - 100px);
+   display: inline-block;
+   overflow-y: auto;
+}
+
+.rightColumn .circularName{
+   background: white;
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 35px;
+   color: #908e8e;
+   font-weight: bold;
+   margin: 15px 5px;
+}
+
+.rightColumn ul{
+   padding: 3px;
+}
+
+
+
+.rightColumn li{
+   display: flex;
+   justify-content: flex-start;
+   text-transform: capitalize;
+   align-items: center;
+}
+
+
+
+
