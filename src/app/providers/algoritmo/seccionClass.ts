@@ -1,7 +1,7 @@
-import { Profesor } from './profesor';
+import { ProfesorClass } from './profesorClass';
 import { BloqueHoras } from './BloqueHoras';
 
-export class Seccion {
+export class SeccionClass {
     /**
      * @description id de la seccion generado
      * @memberof Seccion
@@ -16,7 +16,7 @@ export class Seccion {
      * @description profesor que da clases en esta seccion
      * @memberof Seccion
      */
-    public profesor: Profesor;
+    public profesor: ProfesorClass;
     /**
      * @description posiciones posibles para bloques de clases
      * @memberof Seccion
@@ -28,7 +28,7 @@ export class Seccion {
      * @param {string} id id de la seccion
      * @memberof Seccion
      */
-    constructor(id: string, profesor: Profesor) {
+    constructor(id: string, profesor: ProfesorClass) {
         this.id = id;
         this.BloqueHorasFinal = [];
         this.BloqueHorasPosible = [];

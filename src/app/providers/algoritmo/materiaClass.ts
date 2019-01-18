@@ -1,6 +1,6 @@
-import { Seccion } from './seccion';
+import { SeccionClass } from './seccionClass';
 
-export class Materia {
+export class MateriaClass {
     /**
      * @description Nombre de la materia
      * */
@@ -24,11 +24,11 @@ export class Materia {
     /**
      * @description Materias que prelan esta materia
      * */
-    public prelaciones: Materia[];
+    public prelaciones: MateriaClass[];
     /**
      *  @description Secciones que posee la materia
      * */
-    public secciones: Seccion[];
+    public secciones: SeccionClass[];
 
     /**
      * @description Creates an instance of Materia.
@@ -38,7 +38,7 @@ export class Materia {
      * @param {number} horas cantidad de horas a ver
      * @param {number} horasMax cantidad de horas maxima en un bloque de disponibilidad
      * @param {number} secciones cantiadad de secciones a crear para esta materia
-     * @memberof Materia
+     * @memberof MateriaClass
      */
     constructor(nombre: string, id: string, semestre: number, horas: number, horasMax: number) {
         this.nombre = nombre;
