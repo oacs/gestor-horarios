@@ -1,0 +1,44 @@
+<div class="opciones">
+  <div class="grid-opciones">
+    
+    <div class="opcion" (click)="this.activeNuevoPensum = true;">
+        <div class="title">Nuevo pensum</div>  
+      <div *ngIf="this.activeNuevoPensum" class="inputNuevo">
+        <form [formGroup]="createPensumForm">
+          <label class="form-group">
+            Nombre          
+            <input type="text" placeholder="Nombre del pensum" formControlName="nombre" required>
+          </label>
+          <button (click)="crearPensum()">Crear</button>      
+          <button (click)="toggleActiveNuevo($event);">Cancelar</button>      
+        </form>
+      </div>
+    </div>
+
+    <div class="opcion" (click)="this.activeModificarPensum = true">
+        <div class="title">Modificar pensum existente</div>
+      <div *ngIf="this.activeModificarPensum" class="inputModificar">
+        <form [formGroup]="modifyPensumForm">
+          
+          <label class="form-group">
+            Nombre de pensum
+            <select  formControlName="option"> 
+                <option [value]="pensum.id" *ngFor="let pensum of pensums"required>{{pensum.fecha}}</option>
+              </select>
+          </label>
+          <button (click)="modificarPensum()">Modificar</button>
+          <button (click)="toggleActiveModificar($event)">Cancelar</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="opcion">
+      <div class="title">Importar pensum desde archivo</div>
+    </div>
+
+    <div class="opcion">
+      <div class="title">Exportar pensum existente</div>
+    </div>
+
+  </div>
+</div>

@@ -5,6 +5,8 @@ import { MateriaService, Materia } from '../../../providers/materia/materia.serv
 import { ServicioConfiguracionHorariosService } from '../../../providers/servicioConfiguracionHorarios/servicio-configuracion-horarios.service';
 import { HorarioPeriodoClass } from '../../../providers/algoritmo/HorarioPeriodoClass';
 import { ProfesorClass } from '../../../providers/algoritmo/profesorClass';
+import { MateriaClass } from '../../../providers/algoritmo/materiaClass';
+import { SeccionClass } from '../../../providers/algoritmo/seccionClass';
 
 @Component({
   selector: 'app-gestor-materias',
@@ -15,7 +17,10 @@ export class GestorMateriasComponent implements OnInit {
   horarioActivo: HorarioPeriodoClass;
   listaProfesores: ProfesorClass[];
 
+  public materiaActiva: MateriaClass;
   public listaMateria: Materia[];
+  public seccionesActivas: SeccionClass[];
+  public posicion: number;
 
   constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) { }
 
@@ -27,6 +32,13 @@ export class GestorMateriasComponent implements OnInit {
     this.servicioConfiguracionHorario.listaProfesoresActual.subscribe( lista => {
       this.horarioActivo = lista;
     });
+  }
+
+  cargarInformacion(materia: MateriaClass,posicion: number){
+
+    this.materiaActiva = materia;
+    this.posicion = posicion;
+
   }
 
 }
