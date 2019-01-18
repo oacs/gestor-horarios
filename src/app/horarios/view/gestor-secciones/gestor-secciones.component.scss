@@ -39,6 +39,11 @@ div.header select {
     border: none;
 }
 
+div.header select:focus {
+    border: 2px solid#93cecc;
+    outline: none;
+}
+
 div.header h1 {
     margin: 10px 10px 10px 0px;
 }
@@ -91,8 +96,8 @@ a.float-right {
     height: 60px;
     width: 60px;
     z-index: 999999;
-    bottom: 10%;
-    right: 4%;
+    bottom: 42%;
+    right: 3%;
     display: flex;
     justify-content: center;
     align-items: center;
