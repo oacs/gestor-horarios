@@ -101,7 +101,7 @@ export class PensumComponent implements OnInit {
     private materiasService: MateriaService,
     private materiasxpensumService: MateriasxpensumService,
     private formModal: FormBuilder) {
-    this.opciones = false;
+    this.opciones = true;
     this.activeModificarPensum = false;
     this.activeNuevoPensum = false;
 
@@ -314,12 +314,12 @@ export class PensumComponent implements OnInit {
   }
 
   abrirPensum(id: number) {
-    this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
+   /* this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
       console.log(materias);
       materias.forEach(materia => {
         this.semestres[materia.semestre].materias.push(materia);
       });
-    });
+    });+*/
   }
 
   ngOnInit() {
