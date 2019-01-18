@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MateriaService, Materia } from '../../../providers/materia/materia.service';
+
 // tslint:disable-next-line:max-line-length
 import { ServicioConfiguracionHorariosService } from '../../../providers/servicioConfiguracionHorarios/servicio-configuracion-horarios.service';
 import { HorarioPeriodoClass } from '../../../providers/algoritmo/HorarioPeriodoClass';
@@ -12,6 +14,8 @@ import { ProfesorClass } from '../../../providers/algoritmo/profesorClass';
 export class GestorMateriasComponent implements OnInit {
   horarioActivo: HorarioPeriodoClass;
   listaProfesores: ProfesorClass[];
+
+  public listaMateria: Materia[];
 
   constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) { }
 

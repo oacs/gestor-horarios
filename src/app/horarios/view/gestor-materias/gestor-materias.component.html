@@ -13,81 +13,13 @@
       </div>
       <p style="text-align: center; font-size: 12px; margin-top: -12px">Semestre</p>
       <div class="contenedor-materias">
-          <div class="materia">
-              <p>Matemática Básica</p>
+
+          <div class="materia" *ngFor="let materia of listaMateria">
+              <p>{{materia.nombre | titlecase }}</p>
               <p>Cantidad de secciones: 2</p>
               <p>Cantidad de secciones: 1</p>
           </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 2</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
-          <div class="materia">
-              <p>Matemática Básica</p>
-              <p>Cantidad de secciones: 2</p>
-              <p>Secciones asignadas: 0</p>
-          </div>
+         
       </div>
 
   </div>

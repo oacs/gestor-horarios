@@ -34,7 +34,7 @@ export interface Profesor {
 //   id_pensum: number;
 // }
 
-
+// Listo
 
 
 @Injectable({
