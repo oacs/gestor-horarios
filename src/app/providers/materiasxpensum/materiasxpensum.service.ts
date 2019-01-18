@@ -12,6 +12,7 @@ export interface Materiaxpensum {
   semestre: number;
 }
 
+// Listo
 @Injectable({
   providedIn: 'root'
 })
@@ -28,11 +29,15 @@ export class MateriasxpensumService {
     return this.http.get<Materia[]>(AppConfig.api + 'materia_x_pensum/' + idPensum);
   }
 
-  public insertMateria(materiaxpensum: Materiaxpensum): Observable<any> {
+  public insertMateriaxpensum(materiaxpensum: Materiaxpensum): Observable<any> {
     return this.http.post(AppConfig.api + 'materia_x_pensum/', materiaxpensum);
   }
 
-  public deleteMateria(idMateria: number, idPensum: number): Observable<any> {
+  public deleteMateriaxpensum(idMateria: number, idPensum: number): Observable<any> {
     return this.http.delete(AppConfig.api + `materia_x_pensum/${idMateria}/${idPensum}`);
+  }
+
+  public deleteMateriaxpensumByPensum(idPensum: number): Observable<any> {
+    return this.http.delete(AppConfig.api + `materia_x_pensum/${idPensum}`);
   }
 }
