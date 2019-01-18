@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HorarioPeriodo } from '../../../providers/algoritmo/horario-semestre';
-import { Profesor } from '../../../providers/algoritmo/profesor';
+import { HorarioPeriodoClass } from '../../../providers/algoritmo/HorarioPeriodoClass';
+import { ProfesorClass } from '../../../providers/algoritmo/profesorClass';
 // tslint:disable-next-line:max-line-length
 import { ServicioConfiguracionHorariosService } from '../../../providers/servicioConfiguracionHorarios/servicio-configuracion-horarios.service';
 
@@ -10,8 +10,8 @@ import { ServicioConfiguracionHorariosService } from '../../../providers/servici
   styleUrls: ['./gestor-horarios.component.scss']
 })
 export class GestorHorariosComponent implements OnInit {
-  horarioActivo: HorarioPeriodo;
-  listaProfesores: Profesor[];
+  horarioActivo: HorarioPeriodoClass;
+  listaProfesores: ProfesorClass[];
 
   constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) {}
 
