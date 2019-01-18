@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 html, body {
   margin: 0;
@@ -10,4 +9,13 @@ html, body {
 body {
   font-family: 'Montserrat';
   background-color: #f0f7f7;
+}
+
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/montserrat-v12-latin-regular.woff2') format('woff2'),
+       url('./assets/fonts/montserrat-v12-latin-regular.woff') format('woff'),
+       url('./assets//fonts/montserrat-v12-latin-regular.ttf') format('truetype'),
+       url('./assets/fonts/montserrat-v12-latin-regular.eot') format('eot');
 }
