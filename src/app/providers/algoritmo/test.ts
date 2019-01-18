@@ -47,5 +47,5 @@ console.log('\nInvertiro:');
 console.log(hs.invertirBloques(profesores[0].disponibilidad));
 
 console.log('Secciones\n');
-console.log(hs.obtenerBloquesPosibles('1', 2, '401'));
+console.log(hs.obtenerBloquesPosibles(1, 2, '401'));
 // console.log(secciones[0]);

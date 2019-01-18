@@ -46,7 +46,7 @@ export class HorarioPeriodoClass {
     //         this.materia.push(materia);
     //     });
     // }
-    public obtenerBloquesPosibles(idMateria: string, semestre: number, idSeccion: string): BloqueHoras[] {
+    public obtenerBloquesPosibles(idMateria: number, semestre: number, idSeccion: string): BloqueHoras[] {
         const seccionAux = this.obtenerSeccion(idMateria, semestre, idSeccion);
         const materiaAux = this.obtenerMateria(idMateria, semestre);
         let noDisponible: BloqueHoras[] = [];
@@ -213,7 +213,7 @@ export class HorarioPeriodoClass {
         buffer = ordenarPorDia(buffer);
         return buffer;
     }
-    public obtenerSeccion(idMateria: string, semestre: number, idSeccion: string): SeccionClass {
+    public obtenerSeccion(idMateria: number, semestre: number, idSeccion: string): SeccionClass {
         let seccionAux: SeccionClass = null;
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
             materia.secciones.forEach(seccion => {
@@ -225,7 +225,7 @@ export class HorarioPeriodoClass {
         });
         return seccionAux;
     }
-    public obtenerMateria(idMateria: string, semestre: number): MateriaClass {
+    public obtenerMateria(idMateria: number, semestre: number): MateriaClass {
         let aux: MateriaClass = null;
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
             if (materia.id === idMateria) {
