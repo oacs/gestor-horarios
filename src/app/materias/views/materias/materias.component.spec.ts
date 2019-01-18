@@ -1,20 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GestorComponent } from './gestor.component';
+import { MateriasComponent } from './materias.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('GestorComponent', () => {
-  let component: GestorComponent;
-  let fixture: ComponentFixture<GestorComponent>;
+describe('MateriasComponent', () => {
+  let component: MateriasComponent;
+  let fixture: ComponentFixture<MateriasComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GestorComponent ]
+      declarations: [MateriasComponent],
+      imports: [ReactiveFormsModule,
+        FormsModule,
+        HttpClientTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GestorComponent);
+    fixture = TestBed.createComponent(MateriasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
