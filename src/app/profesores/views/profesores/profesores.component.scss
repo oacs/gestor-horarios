@@ -45,6 +45,11 @@ body{
    padding-bottom: 5px; 
    margin: 10px 0px;
 }
+.contenedor-modal .form-modal input[type="text"]:focus{
+   border: 2px solid #93cecc;
+   outline: none;
+}
+
 .contenedor-modal .form-modal button { margin-left: 1px; }
 .contenedor-modal .form-modal i.fa.fa-times { 
     cursor: pointer; 
@@ -73,7 +78,8 @@ body{
 }
 
 .accept-button-form{
-    background: #83ccae;
+    background: #93cecc;
+    border-radius: 5px;
     border: none;
     height: 30px;
     width: 100px;
@@ -116,14 +122,30 @@ body{
 
 }
 
+.content .top-menu .finder:focus{
+
+   border: 2px solid #93cecc;
+   outline: none;
+
+}
+
+
 .content .top-menu .button{
    border: none;
    background: white;
+   cursor: pointer;
    color: #919191;
    height: 50px;
    width: 120px;
    border-radius: 3px;
 }
+
+.content .top-menu .button:focus{
+   border: 2px solid #93cecc;
+   outline: none;
+
+}
+
 .content .content-info{
    width: calc(100% - 25px);
    background: white;
@@ -221,6 +243,7 @@ body{
    justify-content: flex-start;
    text-transform: capitalize;
    align-items: center;
+   cursor: pointer;
 }
 
 
