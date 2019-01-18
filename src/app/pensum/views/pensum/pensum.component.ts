@@ -101,7 +101,7 @@ export class PensumComponent implements OnInit {
     private materiasService: MateriaService,
     private materiasxpensumService: MateriasxpensumService,
     private formModal: FormBuilder) {
-    this.opciones = true;
+    this.opciones = false;
     this.activeModificarPensum = false;
     this.activeNuevoPensum = false;
 
