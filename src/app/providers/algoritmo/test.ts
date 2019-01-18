@@ -18,10 +18,10 @@ export const profesores: ProfesorClass[] = [
 export const secciones: SeccionClass[] = [
     new SeccionClass('401', profesores[0])
 ];
-const matematica = new MateriaClass('matematica', '0', 1, 0, 2);
+const matematica = new MateriaClass('matematica', 0, 1, 0, 2);
 secciones[0].BloqueHorasFinal.push(new BloqueHoras(0, 1, 3));
 matematica.secciones.push(secciones[0]);
-const prog = new MateriaClass('prog1', '1', 2, 0, 2);
+const prog = new MateriaClass('prog1', 1, 2, 0, 2);
 prog.secciones.push(secciones[0]);
 prog.prelaciones.push(matematica);
 
