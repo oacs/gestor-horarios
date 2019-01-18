@@ -13,7 +13,7 @@ export class ServicioConfiguracionHorariosService {
 
   private lista: ProfesorClass[];
   private listaProfesores = new BehaviorSubject<ProfesorClass[]>(this.lista);
-  public listaProfesoresActual = this.horarioPeriodo.asObservable();
+  public listaProfesoresActual = this.listaProfesores.asObservable();
 
   constructor() { }
 
