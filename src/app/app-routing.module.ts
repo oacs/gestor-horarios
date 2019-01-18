@@ -5,9 +5,9 @@ import { CoreModule } from './modules/core/core.module';
 import { PensumModule } from './modules/pensum/pensum.module';
 import { GestorModule } from './modules/gestor/gestor.module';
 import { HomeModule } from './modules/home/home.module';
+import { ProfesoresComponent } from './modules/profesores/profesores/profesores.component';
 
 let routes: Routes = [
-
     {
         path: 'pensum',
         loadChildren:  './modules/pensum/pensum.module#PensumModule'
@@ -19,6 +19,10 @@ let routes: Routes = [
     {
         path: '',
         loadChildren: './modules/home/home.module#HomeModule'
+    },
+    {
+        path: 'profesores',
+        loadChildren: './modules/profesores/profesores.module#ProfesoresModule'
     }
 ];
 if (isDevMode()) {
@@ -34,6 +38,10 @@ if (isDevMode()) {
         {
             path: '',
             loadChildren: () => HomeModule
+        },
+        {
+            path: 'profesores',
+            loadChildren: () => ProfesoresComponent
         }
     ];
 }

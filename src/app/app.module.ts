@@ -25,6 +25,7 @@ import { CoreModule } from './modules/core/core.module';
 import { PensumModule } from './modules/pensum/pensum.module';
 import { GestorModule } from './modules/gestor/gestor.module';
 import { HomeModule } from './modules/home/home.module';
+import { ProfesoresModule } from './modules/profesores/profesores.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule,
     PensumModule,
     GestorModule,
+    ProfesoresModule,
     HomeModule,
 
     //
