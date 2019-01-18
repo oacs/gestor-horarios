@@ -14,7 +14,7 @@
       <p style="text-align: center; font-size: 12px; margin-top: -12px">Semestre</p>
       <div class="contenedor-materias">
 
-          <div class="materia" *ngFor="let materia of listaMateria">
+          <div class="materia" *ngFor="let materia of listaMateria" (click)="cargarInformacion(materia)">
               <p>{{materia.nombre | titlecase }}</p>
               <p>Cantidad de secciones: 2</p>
               <p>Cantidad de secciones: 1</p>
@@ -24,14 +24,9 @@
 
   </div>
   <div class="info">
-      <div class="info-container">
-          <h1 class="titulo-materia">Matemática Básica</h1>
+      <div class="info-container" *ngIf="materiaActiva">
+          <h1 class="titulo-materia" >{{materiaActiva.nombre | titlecase }}</h1>
           <p class="titulo-seccion">Sección 401</p>
-          <select name="" id="">
-              <option value="">Clarysse Quijada</option>
-              <option value="">Maxwell Martinez</option>
-          </select>
-          <p class="titulo-seccion">Sección 402</p>
           <select name="" id="">
               <option value="">Clarysse Quijada</option>
               <option value="">Maxwell Martinez</option>
