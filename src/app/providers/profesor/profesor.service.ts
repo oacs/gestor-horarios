@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { AppConfig } from '../../../environments/environment';
 
 export interface Profesor {
-  id: number;
-  disp: string;
+  id?: number;
+  disp?: string;
   nombre: string;
   correo: string;
 }
@@ -51,6 +51,10 @@ export class ProfesorService {
 
   public getProfesor(id: number): Observable<Profesor> {
     return this.http.get<Profesor>(AppConfig.api + 'profesores/' + id);
+  }
+
+  public deleteProfesor(id: number): Observable<Profesor> {
+    return this.http.delete<Profesor>(AppConfig.api + 'profesores/' + id);
   }
 
   public updateProfesor(profesor: Profesor): Observable<any> {
