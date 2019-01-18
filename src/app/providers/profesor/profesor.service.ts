@@ -53,6 +53,10 @@ export class ProfesorService {
     return this.http.get<Profesor>(AppConfig.api + 'profesores/' + id);
   }
 
+  public getHorariosAnteriores(id: number): Observable<Profesor> {
+    return this.http.get<Profesor>(AppConfig.api + 'profesores/' + id + '/horariosAnteriores');
+  }
+
   public deleteProfesor(id: number): Observable<Profesor> {
     return this.http.delete<Profesor>(AppConfig.api + 'profesores/' + id);
   }
