@@ -13,8 +13,12 @@ let routes: Routes = [
         loadChildren: './pensum/pensum.module#PensumModule'
     },
     {
-        path: 'gestor',
-        loadChildren: './gestor/gestor.module#GestorModule'
+        path: 'materias',
+        loadChildren: './materias/materias.module#MateriasModule'
+    },
+    {
+        path: 'profesores',
+        loadChildren: './profesores/profesores.module#ProfesoresModule'
     },
     {
         path: '',

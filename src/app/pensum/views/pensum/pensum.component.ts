@@ -3,7 +3,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PensumService } from '../../../providers/pensum/pensum.service';
+import { PensumService, Pensum } from '../../../providers/pensum/pensum.service';
 import { MateriaService, Materia } from '../../../providers/materia/materia.service';
 import { MateriasxpensumService } from '../../../providers/materiasxpensum/materiasxpensum.service';
 
@@ -314,7 +314,7 @@ export class PensumComponent implements OnInit {
   }
 
   abrirPensum(id: number) {
-    this.materiasxpensumService.getMateriasPensum(id).subscribe(materias => {
+    this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
       console.log(materias);
       materias.forEach(materia => {
         this.semestres[materia.semestre].materias.push(materia);
