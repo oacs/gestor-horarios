@@ -5,7 +5,7 @@
       <input type="text" class="finder" formControlName="texto" placeholder="Buscar...">
     </form>
     <button class="button" (click)="showNewModal()">Nuevo</button>
-    <button class="button">Eliminar</button>
+    <button *ngIf="profesorSeleccionado.nombre != ''" class="button" (click)="eliminarProfesor()">Eliminar</button>
   </div>
   <!--
   Modal para crear nueva materia
@@ -21,10 +21,10 @@
         </label>
         <label class="form-group">
           Correo Electronico <br>
-          <input type="text" class="input-text-form" formControlName="email" required>
+          <input type="text" class="input-text-form" formControlName="correo" required>
         </label>
         <p style="text-align: center;">
-          <button type="button" class="accept-button-form">Guardar</button>
+          <button type="button" class="accept-button-form" (click)="guardarProfesor()">Guardar</button>
         </p>
       </form>
     </div>

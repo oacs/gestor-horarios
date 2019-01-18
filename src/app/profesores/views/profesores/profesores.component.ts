@@ -23,16 +23,15 @@ export class ProfesoresComponent implements OnInit {
   public horario: number[][];
 
   constructor(
-    private formModal: FormBuilder,
     private profesorService: ProfesorService,
     private fb: FormBuilder
   ) {
     this.buscador = this.fb.group({ texto: [''] });
     this.newProfesor = false;
     this.profesorSeleccionado = new ProfesorClass(0, '', '', '');
-    this.profesorForm = this.formModal.group({
+    this.profesorForm = this.fb.group({
       nombre: ['', Validators.required],
-      email: ['', Validators.required]
+      correo: ['', Validators.required]
 
     });
     this.profesorService.getProfesores().subscribe(profesores => {
@@ -97,6 +96,33 @@ export class ProfesoresComponent implements OnInit {
         bloque = 0;
       });
     }
+  }
+
+  public guardarProfesor() {
+    if (this.profesorForm.valid) {
+      this.profesorService.insertProfesor(
+        {
+          nombre: this.profesorForm.get('nombre').value,
+          correo: this.profesorForm.get('correo').value,
+          disp: ''
+        }
+      ).subscribe(res => {
+        console.log(res);
+        this.auxProfesores.push({
+          id: res.id,
+          nombre: this.profesorForm.get('nombre').value,
+          correo: this.profesorForm.get('correo').value,
+          disp: ''
+        });
+        this.newProfesor = false;
+        this.profesorForm.setValue({ nombre: '', correo: '' });
+      });
+    }
+  }
+  public eliminarProfesor() {
+    this.profesorService.deleteProfesor(this.profesorSeleccionado.id).subscribe(res => {
+      console.log(res);
+    });
   }
 
 }
