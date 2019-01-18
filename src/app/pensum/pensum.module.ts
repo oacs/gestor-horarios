@@ -6,11 +6,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdministradorDragComponent } from './components/administrador-drag/administrador-drag.component';
 import { PensumService } from '../providers/pensum/pensum.service';
+import { OpcionesComponent } from './views/opciones/opciones.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PensumComponent
+  },
+  {
+    path: 'opciones',
+    component: OpcionesComponent
   }
 ];
 
@@ -22,7 +27,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [PensumComponent, AdministradorDragComponent],
+  declarations: [PensumComponent, AdministradorDragComponent, OpcionesComponent],
   providers: [PensumService]
 })
 export class PensumModule { }

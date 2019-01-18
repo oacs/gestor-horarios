@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PensumService, Pensum } from '../../../providers/pensum/pensum.service';
 import { MateriaService, Materia } from '../../../providers/materia/materia.service';
 import { MateriasxpensumService } from '../../../providers/materiasxpensum/materiasxpensum.service';
+import { ServicioOpcionesPensumService } from '../../../providers/servicioOpcionesPensum/servicio-opciones-pensum.service';
 
 interface Semestre {
   numero: number;
@@ -26,6 +27,8 @@ interface Semestre {
 
 export class PensumComponent implements OnInit {
 
+  public pensum_activo: Pensum;
+  public id_pensum: string;
   public pensums: Pensum[];
   public materias: Materia[];
   public info: Materia[];
@@ -42,11 +45,6 @@ export class PensumComponent implements OnInit {
   public posicion: number;
   public semestres: Semestre[];
   public materiasEnDrag: number;
-
-  // Teipe de opciones
-  public opciones: boolean;
-  public activeNuevoPensum: boolean;
-  public activeModificarPensum: boolean;
 
   // Cestari con su modal chimbo
   public displayModalNuevo: string;
@@ -100,10 +98,8 @@ export class PensumComponent implements OnInit {
     private pensumSevice: PensumService,
     private materiasService: MateriaService,
     private materiasxpensumService: MateriasxpensumService,
-    private formModal: FormBuilder) {
-    this.opciones = true;
-    this.activeModificarPensum = false;
-    this.activeNuevoPensum = false;
+    private formModal: FormBuilder,
+    private servicioOpcionesPensum: ServicioOpcionesPensumService) {
 
     this.pensumSevice.getPensums().subscribe(pensums => {
       this.pensums = pensums;
@@ -125,27 +121,6 @@ export class PensumComponent implements OnInit {
 
     this.displayModalNuevo = 'none';
     this.displayModalModificar = 'none';
-
-    this.materiaForm = this.formModal.group({
-      nombre: ['', Validators.required],
-      // horas: ['', Validators.required],
-      // horasMax: ['', Validators.required]
-    });
-
-    this.updateMatterForm = this.formModal.group({
-      nombre: ['', Validators.required],
-      // horas: ['', Validators.required],
-      // horasMax: ['', Validators.required]
-    });
-
-    this.createPensumForm = this.formModal.group({
-      fecha: ['', Validators.required],
-    });
-
-    this.modifyPensumForm = this.formModal.group({
-      option: ['', Validators.required],
-    });
-
   }
 
   /* Cambia el tipo de display (cuando se presiona alguno de los botones) */
@@ -252,16 +227,16 @@ export class PensumComponent implements OnInit {
     }
   }
 
-  deleteMatter() {
-    console.log(this.materiaTemporal);
-    this.materiasService.deleteMateria(this.materiaTemporal).subscribe(data => {
-      console.log(data);
-      if (data === null) {
-        this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
-        this.displayModalModificar = 'none';
-      }
-    });
-  }
+  // deleteMatter() {
+  //   console.log(this.materiaTemporal);
+  //   this.materiasService.deleteMateria(this.materiaTemporal).subscribe(data => {
+  //     console.log(data);
+  //     if (data === null) {
+  //       this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
+  //       this.displayModalModificar = 'none';
+  //     }
+  //   });
+  // }
 
   crearPensum() {
     if (this.createPensumForm.valid) {
@@ -272,40 +247,16 @@ export class PensumComponent implements OnInit {
           this.pensums.push(pensumTemp);
           this.abrirPensum(data.id);
 
-          this.opciones = false;
         }
       });
     }
   }
 
-  toggleActiveNuevo(event) {
-    event.stopPropagation();
-
-    if (this.activeNuevoPensum === false) {
-      this.activeNuevoPensum = true;
-    } else {
-      this.activeNuevoPensum = false;
-    }
-
-    console.log(this.activeNuevoPensum);
-  }
-
-  toggleActiveModificar(event) {
-    event.stopPropagation();
-    if (this.activeModificarPensum === false) {
-      this.activeModificarPensum = true;
-    } else {
-      this.activeModificarPensum = false;
-    }
-
-    console.log(this.activeModificarPensum);
-  }
 
   modificarPensum() {
     console.log(this.modifyPensumForm.value);
     if (this.modifyPensumForm.valid) {
       this.abrirPensum(this.modifyPensumForm.value.option);
-      this.opciones = false;
     }
   }
 
@@ -323,6 +274,10 @@ export class PensumComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.servicioOpcionesPensum.pensumActivo.subscribe( pensumActivo => {
+      this.pensum_activo = pensumActivo;
+    });
+
     this.semestres = [
       { numero: 1, materias: [] },
       { numero: 2, materias: [] },
