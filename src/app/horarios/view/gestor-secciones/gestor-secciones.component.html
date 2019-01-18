@@ -17,13 +17,14 @@
   </div>
 
   <div class="content">
-    <div class="card" *ngFor="let materia of listaMateria">
+    <app-carta-materia *ngFor="let materia of listaMateria" [materia]="materia"></app-carta-materia>
+    <!-- <div class="card" *ngFor="let materia of listaMateria">
       <p>{{materia.nombre | titlecase }}</p>
       <div class="input-group">
         <p>N° secciones:</p>
         <input type="number" value="0">
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 

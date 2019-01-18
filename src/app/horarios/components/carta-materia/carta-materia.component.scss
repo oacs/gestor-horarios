@@ -1,0 +1,26 @@
+div.card {
+  width: 285px;
+  height: 185px;
+  margin: 10px 30px 10px 0px;
+  background: #FFF;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.card p {
+  font-size: 15px;
+  color: #93cecc;
+  font-weight: 600;
+}
+
+div.card div.input-group input[type="number"] {
+  background-color: none;
+  border: none;
+  margin-left: 10%;
+  width: 30%;
+  text-align: center;
+}
