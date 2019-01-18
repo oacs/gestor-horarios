@@ -10,7 +10,7 @@ import { OpcionesComponent } from './views/opciones/opciones.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'gestor',
     component: PensumComponent
   },
   {

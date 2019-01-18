@@ -73,6 +73,7 @@ export class OpcionesComponent implements OnInit {
       id: -1,
       fecha: this.createPensumForm.get('nombre').value
     });
+    this.router.navigate(['/pensum/gestor']);
   }
 
   modificarPensum() {
@@ -80,6 +81,7 @@ export class OpcionesComponent implements OnInit {
       id: -1,
       fecha: this.modifyPensumForm.get('option').value
     });
+    this.router.navigate(['/pensum/gestor']);
   }
 
 
