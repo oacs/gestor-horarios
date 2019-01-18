@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdministradorDragComponent } from './administrador-drag.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 describe('AdministradorDragComponent', () => {
   let component: AdministradorDragComponent;
@@ -8,9 +9,10 @@ describe('AdministradorDragComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdministradorDragComponent ]
+      imports: [DragDropModule],
+      declarations: [AdministradorDragComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

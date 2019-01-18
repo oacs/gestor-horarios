@@ -5,6 +5,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdministradorDragComponent } from './components/administrador-drag/administrador-drag.component';
+import { PensumService } from '../providers/pensum/pensum.service';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [PensumComponent, AdministradorDragComponent]
+  declarations: [PensumComponent, AdministradorDragComponent],
+  providers: [PensumService]
 })
 export class PensumModule { }

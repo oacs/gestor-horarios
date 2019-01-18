@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MateriasComponent } from './views/materias/materias.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MateriaService } from '../providers/materia/materia.service';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [MateriasComponent]
+  declarations: [MateriasComponent],
+  providers: [MateriaService]
 })
 export class MateriasModule { }
