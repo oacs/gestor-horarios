@@ -6,7 +6,7 @@ import { AppConfig } from '../../../environments/environment';
 export interface Materia {
   id: number;
   nombre: string;
-  semestre?: string;
+  semestre?: number;
   horas?: string;
   maxH?: string;
   prelaciones?: Materia[];
