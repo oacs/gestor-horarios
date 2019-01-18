@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { HorarioPeriodo } from '../algoritmo/horario-semestre';
-import { Profesor } from '../algoritmo/profesor';
-import { Materia } from '../algoritmo/materia';
+import { HorarioPeriodoClass } from '../algoritmo/HorarioPeriodoClass';
+import { ProfesorClass } from '../algoritmo/profesorClass';
+import { MateriaClass } from '../algoritmo/materiaClass';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicioConfiguracionHorariosService {
-  private horarioPeriodo = new BehaviorSubject<HorarioPeriodo>(new HorarioPeriodo());
+  private horarioPeriodo = new BehaviorSubject<HorarioPeriodoClass>(new HorarioPeriodoClass());
   public horarioActual = this.horarioPeriodo.asObservable();
 
-  private lista: Profesor[];
-  private listaProfesores = new BehaviorSubject<Profesor[]>(this.lista);
+  private lista: ProfesorClass[];
+  private listaProfesores = new BehaviorSubject<ProfesorClass[]>(this.lista);
   public listaProfesoresActual = this.horarioPeriodo.asObservable();
 
   constructor() { }
 
-  updateHorarioActual(horarioNuevo: HorarioPeriodo) {
+  updateHorarioActual(horarioNuevo: HorarioPeriodoClass) {
     this.horarioPeriodo.next(horarioNuevo);
   }
 
-  updateListaProfesores(nuevaLista: Profesor[]) {
+  updateListaProfesores(nuevaLista: ProfesorClass[]) {
     this.listaProfesores.next(nuevaLista);
   }
 

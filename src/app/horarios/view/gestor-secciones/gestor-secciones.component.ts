@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HorarioPeriodo } from '../../../providers/algoritmo/horario-semestre';
-import { Profesor } from '../../../providers/algoritmo/profesor';
+import { HorarioPeriodoClass } from '../../../providers/algoritmo/HorarioPeriodoClass';
+import { ProfesorClass } from '../../../providers/algoritmo/profesorClass';
 // tslint:disable-next-line:max-line-length
 import { ServicioConfiguracionHorariosService } from '../../../providers/servicioConfiguracionHorarios/servicio-configuracion-horarios.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -13,8 +13,8 @@ import { MateriaService, Materia } from '../../../providers/materia/materia.serv
   styleUrls: ['./gestor-secciones.component.scss']
 })
 export class GestorSeccionesComponent implements OnInit {
-  horarioActivo: HorarioPeriodo;
-  listaProfesores: Profesor[];
+  horarioActivo: HorarioPeriodoClass;
+  listaProfesores: ProfesorClass[];
 
 
   public selectPensum: FormControl;
