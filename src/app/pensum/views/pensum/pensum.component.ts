@@ -314,12 +314,12 @@ export class PensumComponent implements OnInit {
   }
 
   abrirPensum(id: number) {
-    this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
+   /* this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
       console.log(materias);
       materias.forEach(materia => {
         this.semestres[materia.semestre].materias.push(materia);
       });
-    });
+    });+*/
   }
 
   ngOnInit() {

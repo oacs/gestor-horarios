@@ -152,6 +152,9 @@ div.opciones div.grid-opciones {
 
 div.opciones div.grid-opciones div.opcion {
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #fff;
     box-shadow: 0 3px 4px 0 rgba(255, 255, 255, 0.2), 0 3px 3px -2px rgba(255, 255, 255, .3), 0 1px 8px 0 rgba(255, 255, 255, .19);
     height: 200px;
@@ -164,7 +167,7 @@ div.opciones div.grid-opciones div.opcion {
     margin: 0 0 10px 0;
 }
 
-div.opciones div.grid-opciones div.opcion label { margin: 10% 0%; }
+div.opciones div.grid-opciones div.opcion label { }
 div.opciones div.grid-opciones div.opcion input[type="text"],
 div.opciones div.grid-opciones div.opcion select { 
     width: 100%; 
