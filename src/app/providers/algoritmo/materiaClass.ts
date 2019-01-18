@@ -8,7 +8,7 @@ export class MateriaClass {
     /**
      * @description Id de la materia en bd
      *  */
-    public id: string;
+    public id: number;
     /**
      * @description Numero del semestre
      *  */
@@ -40,7 +40,7 @@ export class MateriaClass {
      * @param {number} secciones cantiadad de secciones a crear para esta materia
      * @memberof MateriaClass
      */
-    constructor(nombre: string, id: string, semestre: number, horas: number, horasMax: number) {
+    constructor(nombre: string, id: number, semestre: number, horas: number, horasMax: number) {
         this.nombre = nombre;
         this.id = id;
         this.semestre = semestre;
