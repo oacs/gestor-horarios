@@ -1,5 +1,5 @@
-import { BloqueHoras } from "./BloqueHoras";
-import { stringToBloqueHoras } from "../databaseTransalations/stringToData";
+import { BloqueHoras } from './BloqueHoras';
+import { stringToBloqueHoras } from '../databaseTransalations/stringToData';
 
 export class Profesor {
     /**

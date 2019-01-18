@@ -1,13 +1,13 @@
-import { Seccion } from "./seccion";
+import { Seccion } from './seccion';
 
 export class Materia {
-    /** 
+    /**
      * @description Nombre de la materia
      * */
     public nombre: string;
     /**
      * @description Id de la materia en bd
-     *  */ 
+     *  */
     public id: string;
     /**
      * @description Numero del semestre
@@ -23,11 +23,11 @@ export class Materia {
     public horasMax: number;
     /**
      * @description Materias que prelan esta materia
-     * */ 
+     * */
     public prelaciones: Materia[];
     /**
      *  @description Secciones que posee la materia
-     * */ 
+     * */
     public secciones: Seccion[];
 
     /**
@@ -50,5 +50,5 @@ export class Materia {
         this.secciones = [];
     }
 
-    
+
 }

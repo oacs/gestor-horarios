@@ -1,5 +1,5 @@
-import { Profesor } from "./profesor";
-import { BloqueHoras } from "./BloqueHoras";
+import { Profesor } from './profesor';
+import { BloqueHoras } from './BloqueHoras';
 
 export class Seccion {
     /**
@@ -33,7 +33,7 @@ export class Seccion {
         this.BloqueHorasFinal = [];
         this.BloqueHorasPosible = [];
         this.profesor = profesor;
-        this.profesor.disponibilidad.map( bloque => {
+        this.profesor.disponibilidad.map(bloque => {
             this.BloqueHorasPosible.push(new BloqueHoras(bloque.dia, bloque.inicio, bloque.fin));
         });
     }

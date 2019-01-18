@@ -21,10 +21,11 @@ import { WebviewDirective } from './directives/webview.directive';
 import { AppComponent } from './app.component';
 
 // Features
-import { CoreModule } from './modules/core/core.module';
-import { PensumModule } from './modules/pensum/pensum.module';
-import { GestorModule } from './modules/gestor/gestor.module';
-import { HomeModule } from './modules/home/home.module';
+import { PensumModule } from './pensum/pensum.module';
+import { HomeModule } from './home/home.module';
+import { MateriasModule } from './materias/materias.module';
+import { ProfesoresModule } from './profesores/profesores.module';
+import { SharedModule } from './shared/shared.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,10 +45,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     DragDropModule,
 
     // Features
-    CoreModule,
-    PensumModule,
-    GestorModule,
     HomeModule,
+    MateriasModule,
+    PensumModule,
+    ProfesoresModule,
+    SharedModule,
 
     //
     TranslateModule.forRoot({
