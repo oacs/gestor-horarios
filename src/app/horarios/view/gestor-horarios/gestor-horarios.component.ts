@@ -13,15 +13,15 @@ export class GestorHorariosComponent implements OnInit {
   horarioActivo: HorarioPeriodoClass;
   listaProfesores: ProfesorClass[];
 
-  constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) {}
+  constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) { }
 
   ngOnInit() {
-    this.servicioConfiguracionHorario.horarioActual.subscribe( horario => {
+    this.servicioConfiguracionHorario.horarioActual.subscribe(horario => {
       this.horarioActivo = horario;
     });
 
-    this.servicioConfiguracionHorario.listaProfesoresActual.subscribe( lista => {
-      this.horarioActivo = lista;
+    this.servicioConfiguracionHorario.listaProfesoresActual.subscribe(lista => {
+      this.listaProfesores = lista;
     });
   }
 

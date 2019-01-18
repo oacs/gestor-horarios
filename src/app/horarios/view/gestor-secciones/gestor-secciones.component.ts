@@ -59,7 +59,7 @@ export class GestorSeccionesComponent implements OnInit {
     });
 
     this.servicioConfiguracionHorario.listaProfesoresActual.subscribe(lista => {
-      this.horarioActivo = lista;
+      this.listaProfesores = lista;
     });
   }
 
@@ -74,6 +74,10 @@ export class GestorSeccionesComponent implements OnInit {
     //     console.log('Alerta: Faltan materias con secciones en 0');
     //   }
     // });
+    this.listaMateria.forEach(materia => {
+      this.horarioActivo.materiasPorSemestre[materia.semestre - 1].push(materia);
+    });
+    this.servicioConfiguracionHorario.updateHorarioActual(this.horarioActivo);
     this.router.navigate(['horarios', 'paso2']);
   }
 
