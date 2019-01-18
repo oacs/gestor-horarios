@@ -1,5 +1,9 @@
-a.float-left,
-a.float-right {
+* {
+    outline: none;
+}
+
+a.float-right,
+a.float-left {
     display: block;
     position: absolute;
     background-color: #93cecc;
@@ -7,6 +11,7 @@ a.float-right {
     height: 60px;
     width: 60px;
     z-index: 999999;
+    bottom: 42%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,23 +19,111 @@ a.float-right {
     color: white;
     box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
     text-decoration: none;
-    bottom: 10%;
 }
 
 a.float-right {
-    right: 4%;
+    right: 3%;
 }
 
 a.float-left {
-    left: 4%;
+    left: 3%;
 }
 
-a.float:hover {
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
-    
+div.view {
+    overflow: hidden;
 }
 
-a.float i.fa.fa-arrow-right {
-    color: white;
-    font-size: 23px;
+div.container {
+    text-align: justify;
+    color: #333333;
+    font-size: 15px;
+    height: calc(100vh - 100px);
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.container div.column {
+    height: calc(100vh - 100px);
+    background-color: white;
+    width: 34%;
+    border-radius: 5px;    
+}
+
+
+div.column div.selectorSemestre {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px 10px 0px;
+    color: #333333;
+}
+
+div.column div.selectorSemestre a {
+    padding: 0px 20px;
+    text-decoration: none;
+    font-size: 35px;
+    color: #9c9c9c;
+}
+
+div.column div.selectorSemestre a:hover {
+    color: #333333;
+}
+
+div.column div.selectorSemestre span.semestre-activo {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+div.column div.contenedor-materias {
+    margin: 15px 15px 200px 15px;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+}
+
+div.column div.contenedor-materias div.materia {
+    border: 1px solid #e7e4e4;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+div.column div.contenedor-materias div.materia:hover {
+    border: 1px solid #93cecc;    
+}
+
+div.container div.info {
+    background-color: white;
+    width: 65%;
+    border-radius: 5px;
+    height: calc(100vh - 100px);
+}
+
+div.container div.info div.info-container {
+    margin: 12px;
+}
+
+div.container div.info div.info-container h1.titulo-materia {
+    text-align: center;
+}
+
+div.container div.info div.info-container p.titulo-seccion {
+    font-size: 18px;
+    margin: 18px 0px 10px 0px;
+}
+
+div.container div.info div.info-container select {
+    width: 100%;
+    color: rgba(0, 0, 0, 0.616);
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e7e4e4;
+}
+
+div.container div.info div.info-container select:hover {
+    border: 1px solid #93cecc;    
+    cursor: pointer;    
 }
