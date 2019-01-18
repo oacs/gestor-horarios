@@ -27,8 +27,6 @@ interface Semestre {
 
 export class PensumComponent implements OnInit {
 
-  public pensum_activo: Pensum;
-  public id_pensum: string;
   public pensums: Pensum[];
   public pensumActivo: Pensum;
   public materias: Materia[];
@@ -106,6 +104,19 @@ export class PensumComponent implements OnInit {
       this.pensums = pensums;
       console.log(pensums);
     });
+
+    this.materiaForm = this.formModal.group({
+      nombre: ['', Validators.required],
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
+    });
+
+    this.updateMatterForm = this.formModal.group({
+      nombre: ['', Validators.required],
+      // horas: ['', Validators.required],
+      // horasMax: ['', Validators.required]
+    });
+
 
     this.semestres = [
       { numero: 1, materias: [] },
@@ -239,7 +250,7 @@ export class PensumComponent implements OnInit {
   //   });
   // }
 
-  crearPensum() {
+  /*crearPensum() {
     if (this.createPensumForm.valid) {
       this.pensumSevice.insertPensum(this.createPensumForm.value).subscribe(data => {
         if (data.id !== null) {
@@ -250,15 +261,15 @@ export class PensumComponent implements OnInit {
         }
       });
     }
-  }
+  }*/
 
 
-  modificarPensum() {
+  /*modificarPensum() {
     console.log(this.modifyPensumForm.value);
     if (this.modifyPensumForm.valid) {
       this.abrirPensum(this.modifyPensumForm.value.option);
     }
-  }
+  }*/
 
   guardarPensum() {
     this.pensumActivo = {} as Pensum;
@@ -325,8 +336,11 @@ export class PensumComponent implements OnInit {
 
   ngOnInit() {
     this.servicioOpcionesPensum.pensumActivo.subscribe( pensumActivo => {
-      this.pensum_activo = pensumActivo;
+      this.pensumActivo = pensumActivo;
     });
+
+    /* Init de valores desde BD */
+    this.cargarPensum();
 
     this.semestres = [
       { numero: 1, materias: [] },
