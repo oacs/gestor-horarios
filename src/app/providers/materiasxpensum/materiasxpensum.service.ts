@@ -7,6 +7,9 @@ import { Materia } from '../materia/materia.service';
 export interface Materiaxpensum {
   id_materia: number;
   id_pensum: number;
+  horas: number;
+  maxH: number;
+  semestre: number;
 }
 
 @Injectable({
@@ -18,18 +21,18 @@ export class MateriasxpensumService {
   }
 
   public getMateriasxpensum(): Observable<Materiaxpensum[]> {
-    return this.http.get<Materiaxpensum[]>(AppConfig.api + 'materiasxpensum');
+    return this.http.get<Materiaxpensum[]>(AppConfig.api + 'materia_x_pensum');
   }
 
   public getMateriasxPensumId(idPensum: number): Observable<Materia[]> {
-    return this.http.get<Materia[]>(AppConfig.api + 'materiasxpensum/' + idPensum);
+    return this.http.get<Materia[]>(AppConfig.api + 'materia_x_pensum/' + idPensum);
   }
 
-  public insertMateria(idMateria: number, idPensum: number): Observable<any> {
-    return this.http.post(AppConfig.api + 'materiasxpensum/', { idMateria: idMateria, idPensum: idPensum });
+  public insertMateria(materiaxpensum: Materiaxpensum): Observable<any> {
+    return this.http.post(AppConfig.api + 'materia_x_pensum/', materiaxpensum);
   }
 
   public deleteMateria(idMateria: number, idPensum: number): Observable<any> {
-    return this.http.delete(AppConfig.api + `materiasxpensum/${idMateria}/${idPensum}`);
+    return this.http.delete(AppConfig.api + `materia_x_pensum/${idMateria}/${idPensum}`);
   }
 }

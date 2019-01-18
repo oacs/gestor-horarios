@@ -27,6 +27,7 @@ interface Semestre {
 export class PensumComponent implements OnInit {
 
   public pensums: Pensum[];
+  public pensumActivo: Pensum;
   public materias: Materia[];
   public info: Materia[];
   public limite: number;
@@ -271,7 +272,6 @@ export class PensumComponent implements OnInit {
           pensumTemp.id = data.id;
           this.pensums.push(pensumTemp);
           this.abrirPensum(data.id);
-
           this.opciones = false;
         }
       });
@@ -310,16 +310,66 @@ export class PensumComponent implements OnInit {
   }
 
   guardarPensum() {
-    console.log('Guardar pensum');
+    this.pensumActivo = {} as Pensum;
+    this.pensumActivo.id = 2;
+    this.semestres.forEach((semestre, i) => {
+      semestre.materias.forEach((materia, j) => {
+        this.materiasxpensumService.insertMateria({
+          id_materia: materia.id,
+          id_pensum: this.pensumActivo.id,
+          maxH: 4,
+          horas: 6,
+          semestre: semestre.numero
+        }).subscribe(mensaje => {
+          console.log(mensaje);
+        });
+      });
+    });
+    const aux: Materia[] = [];
+    this.semestres.forEach(semestre => {
+      semestre.materias.forEach(materia => {
+        aux.push(materia);
+      });
+    });
+    const infoAux: Materia[] = this.materias.filter(mat => !aux.includes(mat));
+    infoAux.forEach(materia => {
+      this.materiasxpensumService.insertMateria({
+        id_materia: materia.id,
+        id_pensum: this.pensumActivo.id,
+        maxH: 4,
+        horas: 6,
+        semestre: 0
+      }).subscribe(mensaje => {
+        console.log(mensaje);
+      });
+    });
+  }
+
+  cargarPensum() {
+    this.materiasxpensumService.getMateriasxPensumId(this.pensumActivo.id).subscribe(materiasxpensum => {
+      materiasxpensum.forEach(materia => {
+        if (materia.semestre !== 0) {
+          this.semestres[materia.semestre - 1].materias.push(materia);
+        }
+        this.materias.push({
+          nombre: materia.nombre,
+          horas: materia.horas,
+          id: materia.id,
+          maxH: materia.maxH,
+          semestre: materia.semestre,
+          prelaciones: []
+        });
+      });
+    });
   }
 
   abrirPensum(id: number) {
-   /* this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
-      console.log(materias);
-      materias.forEach(materia => {
-        this.semestres[materia.semestre].materias.push(materia);
-      });
-    });+*/
+    /* this.materiasxpensumService.getMateriasxPensumId(id).subscribe(materias => {
+       console.log(materias);
+       materias.forEach(materia => {
+         this.semestres[materia.semestre].materias.push(materia);
+       });
+     });+*/
   }
 
   ngOnInit() {
