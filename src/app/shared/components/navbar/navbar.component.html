@@ -1,0 +1,15 @@
+<div class="header">
+  <div class="green-container">
+    <i class="fa fa-th" aria-hidden="true" (click)="toggleMenu()"></i>
+    <span *ngIf="openned" class="nav-icons">
+      <a routerLink="/"> <i class="fa fa-home" aria-hidden="true"></i> </a>
+      <!-- <a routerLink="/test"> test </a> -->
+      <a routerLink="/materias"><i class="fa fa-book" aria-hidden="true"></i> </a>
+      <a routerLink="/profesores"> <i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+      <a routerLink="/pensum"> <i class="fa fa-sitemap" aria-hidden="true"></i> </a>
+
+    </span>
+    <span>Gestionar Materias</span>
+  </div>
+  <div class="blue-container"></div>
+</div>

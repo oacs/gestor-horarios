@@ -1,45 +1,49 @@
 
 import { NgModule, isDevMode } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CoreModule } from './modules/core/core.module';
-import { PensumModule } from './modules/pensum/pensum.module';
-import { GestorModule } from './modules/gestor/gestor.module';
-import { HomeModule } from './modules/home/home.module';
+import { HomeModule } from './home/home.module';
+import { MateriasModule } from './materias/materias.module';
+import { PensumModule } from './pensum/pensum.module';
+import { ProfesoresModule } from './profesores/profesores.module';
 
 let routes: Routes = [
 
     {
         path: 'pensum',
-        loadChildren:  './modules/pensum/pensum.module#PensumModule'
+        loadChildren: './pensum/pensum.module#PensumModule'
     },
     {
         path: 'gestor',
-        loadChildren: './modules/gestor/gestor.module#GestorModule'
+        loadChildren: './gestor/gestor.module#GestorModule'
     },
     {
         path: '',
-        loadChildren: './modules/home/home.module#HomeModule'
+        loadChildren: './home/home.module#HomeModule'
     }
 ];
 if (isDevMode()) {
-     routes = [
+    routes = [
+        {
+            path: '',
+            loadChildren: () => HomeModule
+        },
+        {
+            path: 'materias',
+            loadChildren: () => MateriasModule
+        },
         {
             path: 'pensum',
             loadChildren: () => PensumModule
         },
         {
-            path: 'gestor',
-            loadChildren: () => GestorModule
+            path: 'profesores',
+            loadChildren: () => ProfesoresModule
         },
-        {
-            path: '',
-            loadChildren: () => HomeModule
-        }
     ];
 }
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true})],
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
