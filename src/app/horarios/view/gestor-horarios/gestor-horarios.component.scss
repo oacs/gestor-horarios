@@ -1,3 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+   width: 100%;
+   height: 80px;
+   background: #83CCAE;
+   border-bottom: 40px solid #93CECC; 
+}
+
+
+body{
+    background: #FFF;
+}
+
+.content-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-center h2{
+    text-align: center;
+    text-transform: capitalize;
+    margin: 10px 0 0 0;
+}
+
+
+.timetable{
+    width: 80%;
+    background: #E3E7E7;
+    margin: 16px 0;
+    border: 3px solid #AFDBD9;
+    border-radius: 3px;
+}
+ .timetable tr{
+    height: 25px;
+}
+
+
+ .timetable th{
+
+    border-right: 1px solid #FFF;
+    border-bottom: 1px solid #FFF;
+}
+
+ .timetable th.first-table{
+    background: #FFF;
+    border-radius: 10px;
+    border: none;
+    color: #B5B5B5;
+}
+
+.content-bottom{
+    width: 100%;
+    height: 100px;
+    background: #B5B5B5;
+}
+
+.content-bottom div.blue {
+    background-color: #93cecc;
+    height: 40px;
+}
+
+.content-bottom div.green {
+    background-color: #83ccae;
+    height: 60px;
+}
+
+div.content-bottom div.green div.card-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    left: 10%;
+}
+
+div.content-bottom div.green div.card {
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 85px;
+    margin-left: 23px;
+    margin-top: -30px;
+    background-color: white;
+    box-shadow: 0 3px 4px 0 rgba(255, 255, 255, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
+    overflow: hidden;
+    cursor: grab;
+    transition: all 0.3s ease-in;
+    user-select: none;
+}
+
+div.content-bottom div.green div.card div.infoMateria, div.content-bottom div.green div.newCard div.icono{ 
+    text-align: center;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.7px;
+} 
+
+div.content-bottom div.green div.newCard {
+    font-size: 30px;
+    background-color: white;
+    box-shadow: 0 3px 4px 0 rgba(255, 255, 255, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
+    margin-left: 23px;
+    margin-top: -30px;
+    width: 140px;
+    height: 85px;
+    cursor: pointer;
+    user-select: none;
+}
+
+div.content-bottom div.green div.newCard:hover { 
+    background-color: #e9e9e9;
+}
+
+
+div.content-bottom div.green div.card:hover {
+    top: -6px;
+}
+
+div.arrows {
+    position: absolute;
+    right: 5%;
+    bottom: 45px;
+    transform: rotate(90deg);
+    color: white;
+}
+div.arrows i { padding-right: 10px; opacity: 0.5}
+div.arrows i:hover { opacity: 1}
+
+div.upload i {
+    position: absolute;
+    left: 5%;
+    bottom: 40px;
+    color: white;
+    opacity: 0.5;
+    font-size: 23px;
+    border: solid white 2px;
+    padding: 5px;
+}
+
+div.upload i:hover { opacity: 1;}
+
+div.upload i, div.arrows i {
+    cursor: pointer;
+}
+
+
 a.float-left {
     display: block;
     position: absolute;
@@ -13,6 +167,6 @@ a.float-left {
     color: white;
     box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
     text-decoration: none;
-    bottom: 10%;
-    left: 4%;
+    bottom: 42%;
+    left: 3%;
 }
