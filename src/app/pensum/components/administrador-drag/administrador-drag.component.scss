@@ -17,8 +17,9 @@ div.container div.blue {
 div.container div.green div.card-container {
     position: absolute;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     left: 10%;
+    min-width: calc(100vw - 20%);
 }
 
 div.container div.green div.card {
