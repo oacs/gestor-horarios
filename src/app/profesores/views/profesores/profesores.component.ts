@@ -105,9 +105,9 @@ export class ProfesoresComponent implements OnInit {
   }
   public clearHorario(): void {
     for (let i = 0; i < 7; i++) {
-      this.horario[i].forEach(bloque => {
-        bloque = 0;
-      });
+      for (let j = 0; j < this.horario[i].length; j++) {
+        this.horario[i][j] = 0;
+      }
     }
   }
 
@@ -160,8 +160,8 @@ export class ProfesoresComponent implements OnInit {
   public eliminarProfesor() {
     this.profesorService.deleteProfesor(this.profesorSeleccionado.id).subscribe(res => {
       console.log(res);
-      this.auxProfesores.splice(this.auxProfesores.indexOf(this.profesorSeleccionado) - 1);
-      this.profesores.splice(this.profesores.indexOf(this.profesorSeleccionado) - 1);
+      this.auxProfesores.splice(this.auxProfesores.indexOf(this.profesorSeleccionado) - 1, 1);
+      // this.profesores.splice(this.profesores.indexOf(this.profesorSeleccionado), 1);
       this.profesorSeleccionado = new ProfesorClass(0, '', '', '');
     });
   }
