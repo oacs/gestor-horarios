@@ -28,7 +28,7 @@ export class GestorSeccionesComponent implements OnInit {
     private servicioConfiguracionHorario: ServicioConfiguracionHorariosService,
     private pensumService: PensumService,
     private materiaxPensumService: MateriasxpensumService,
-    private router: Router,
+    private router: Router
   ) {
     this.selectPensum = new FormControl('');
     this.pensumService.getPensums().subscribe(pensums => {
@@ -56,6 +56,7 @@ export class GestorSeccionesComponent implements OnInit {
   ngOnInit() {
     this.servicioConfiguracionHorario.horarioActual.subscribe(horario => {
       this.horarioActivo = horario;
+      console.log(horario);
     });
 
     this.servicioConfiguracionHorario.listaProfesoresActual.subscribe(lista => {

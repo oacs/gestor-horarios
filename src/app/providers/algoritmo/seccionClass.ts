@@ -28,14 +28,18 @@ export class SeccionClass {
      * @param {string} id id de la seccion
      * @memberof Seccion
      */
-    constructor(id: string, profesor: ProfesorClass) {
+    constructor(id: string, profesor?: ProfesorClass) {
         this.id = id;
         this.BloqueHorasFinal = [];
         this.BloqueHorasPosible = [];
-        this.profesor = profesor;
-        this.profesor.disponibilidad.map(bloque => {
-            this.BloqueHorasPosible.push(new BloqueHoras(bloque.dia, bloque.inicio, bloque.fin));
-        });
+        if (profesor != null) {
+            this.profesor = profesor;
+            this.profesor.disponibilidad.map(bloque => {
+                this.BloqueHorasPosible.push(new BloqueHoras(bloque.dia, bloque.inicio, bloque.fin));
+            });
+        } else {
+            this.profesor = null;
+        }
     }
 
 }

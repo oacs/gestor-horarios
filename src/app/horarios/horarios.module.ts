@@ -26,7 +26,7 @@ const routes: Routes = [
   declarations: [GestorMateriasComponent, GestorSeccionesComponent, GestorHorariosComponent, CartaMateriaComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes), 
+    RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule
   ]

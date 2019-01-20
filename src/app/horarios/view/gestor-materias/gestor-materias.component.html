@@ -14,10 +14,10 @@
       <p style="text-align: center; font-size: 12px; margin-top: -12px">Semestre</p>
       <div class="contenedor-materias">
 
-        <div class="materia" *ngFor="let materia of listaMateria; let i of index" (click)="cargarInformacion(materia,i)">
+        <div class="materia" *ngFor="let materia of horarioActivo.materiasPorSemestre[semestreActivo]; index as i"
+          (click)="cargarInformacion(materia,i)">
           <p>{{materia.nombre | titlecase }}</p>
-          <p>Cantidad de secciones: 2</p>
-          <p>Cantidad de secciones: 1</p>
+          <p>Cantidad de secciones: {{materia.secciones.length}}</p>
         </div>
 
       </div>
@@ -26,14 +26,16 @@
     <div class="info">
       <div class="info-container" *ngIf="materiaActiva">
         <h1 class="titulo-materia">{{materiaActiva.nombre | titlecase }}</h1>
-        <p class="titulo-seccion" *ngFor="let seccion of horarioActivo.materiasPorSemestre[materiaActiva.semestre - 1][posicion]">
-          Sección {{seccion.id}}
-
-          <select name="" id="">
-            <option *ngFor="let profesor of listaProfesores" value="{{profesor.nombre}}">{{profesor.nombre}}</option>
-          </select>
-
-        </p>
+        <form [formGroup]="seccionesForm">
+          <p class="titulo-seccion" *ngFor="let seccion of this.horarioActivo.materiasPorSemestre[this.semestreActivo][posicion].secciones">
+            Sección {{seccion.id}}
+            <select [formControlName]="seccion.id">
+              <option *ngFor="let profesor of listaProfesores" [value]="profesor.id" (click)="selectProfesor(profesor, seccion)">
+                {{profesor.nombre}}
+              </option>
+            </select>
+          </p>
+        </form>
       </div>
     </div>
   </div>
