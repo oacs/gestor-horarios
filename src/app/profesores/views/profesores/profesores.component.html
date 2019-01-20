@@ -5,6 +5,7 @@
       <input type="text" class="finder" formControlName="texto" placeholder="Buscar...">
     </form>
     <button class="button" (click)="showNewModal()">Nuevo</button>
+    <button class="button" (click)="guardarHorario()">Guardar</button>
     <button *ngIf="profesorSeleccionado.nombre != ''" class="button" (click)="eliminarProfesor()">Eliminar</button>
   </div>
   <!--

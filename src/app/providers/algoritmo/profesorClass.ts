@@ -38,10 +38,16 @@ export class ProfesorClass {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
+        console.log('​ProfesorClass -> constructor -> disponibilidad', disponibilidad);
         if (typeof (disponibilidad) === 'string') {
+
             this.disponibilidad = stringToDisponibilidad(disponibilidad);
         } else {
-            this.disponibilidad = disponibilidad;
+            if (disponibilidad != null) {
+                this.disponibilidad = disponibilidad;
+            } else {
+                this.disponibilidad = [];
+            }
         }
     }
 

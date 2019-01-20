@@ -105,7 +105,10 @@ export class HorarioPeriodoClass {
                 // console.log(`​HorarioPeriodo -> del.indexOf(${i})`, del.indexOf(i));
                 if (del.indexOf(i) === -1) {
                     bloques.forEach((b, j) => {
-                        if (i !== j) {
+                        if (i !== j && a.dia === b.dia) {
+
+                            console.log('​a, b', a, b);
+                            console.log('compararBloques(a, b)', this.compararBloques(a, b));
                             switch (this.compararBloques(a, b)) {
                                 case 1:
                                     a.inicio = b.inicio;
@@ -116,12 +119,16 @@ export class HorarioPeriodoClass {
                                     }
                                     break;
                                 case 2:
+                                    console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
                                     a.fin = b.fin;
+                                    console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
                                     flag = 1;
                                     // console.log(del.indexOf(j));
                                     if (del.indexOf(j) === -1) {
                                         del.push(j);
                                     }
+                                    console.log('​HorarioPeriodoClass -> del', del);
+
                                     break;
                                 case 3:
                                     a.fin = b.fin > a.fin ? b.fin : a.fin;
@@ -140,7 +147,11 @@ export class HorarioPeriodoClass {
             // console.log('​HorarioPeriodo -> del', del);
             if (del.length > 0) {
                 del.forEach(indice => {
-                    bloques = bloques.splice(indice - dif++, 1);
+
+                    console.log('​HorarioPeriodoClass -> indice - dif', indice - dif, bloques[indice - dif - 1].fin);
+                    bloques.splice(indice - dif++, 1);
+                    console.log('​HorarioPeriodoClass -> bloques', bloques);
+
                 });
             }
             // console.log('​HorarioPeriodo -> bloques', bloques);
@@ -161,7 +172,7 @@ export class HorarioPeriodoClass {
         return 0;
     }
     public compararBloques(a: BloqueHoras, b: BloqueHoras): number {
-        if (a.dia === b.dia) {
+        if (a.dia === b.dia && a.prioridad === b.prioridad) {
             // A esta por encima de B
             if (a.inicio > b.inicio) {
                 if (b.fin > a.inicio) {
@@ -170,11 +181,11 @@ export class HorarioPeriodoClass {
             } else {
                 // A esta por debajo de B
                 if (a.inicio < b.inicio) {
-                    if (a.fin > b.inicio) {
+                    if (a.fin >= b.inicio) {
                         return 2;
                     }
                 } else {
-                    if (a.inicio = b.inicio) {
+                    if (a.inicio === b.inicio) {
                         return 3;
                     }
                 }
