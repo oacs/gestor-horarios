@@ -178,13 +178,14 @@ body{
 
    text-transform: capitalize;
    color: #777676;
-   margin: 13px 0;
+   margin: 18px 0;
 
 }
 
 .content .content-info .sub-title{
     color: #908e8e;
     font-size: 19px;
+    margin: 0 0 25px 0;
 }
 
 
@@ -192,9 +193,10 @@ body{
 .content .content-info .disp-table{
    width: calc(85% - 25px);
    background: #E3E7E7;
-  margin: 15px 0;
-  border: 3px solid #AFDBD9;
-  border-radius: 3px;
+   color: #797575;
+    margin: 15px 0;
+    border: 3px solid #AFDBD9;
+    border-radius: 3px;
 }
 .content .content-info .disp-table tr{
    height: 25px;
@@ -234,6 +236,11 @@ body{
 .content .content-info .old-reference p{
    cursor: pointer;
    display: inline-block;
+    color: #777676;
+
+   i{
+       font-size: 25px;
+   }
 }
 
 
