@@ -58,39 +58,12 @@ export class PensumComponent implements OnInit {
 
   public materiaTemporal: Materia;
 
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    // console.log(event.target.innerWidth);
-    if (event.target.innerWidth > 1300) {
-      this.limite = 6;
-      this.actualizarInfo();
-      return;
-    }
-    if (event.target.innerWidth < 1300 && event.target.innerWidth > 1040) {
-      this.limite = 5;
-      this.actualizarInfo();
-      return;
-    }
-    if (event.target.innerWidth < 1040 && event.target.innerWidth > 700) {
-      this.limite = 4;
-      this.actualizarInfo();
-      return;
-    }
-    if (event.target.innerWidth < 700 && event.target.innerWidth > 580) {
-      this.limite = 3;
-      this.actualizarInfo();
-      return;
-    }
-    if (event.target.innerWidth < 580 && event.target.innerWidth > 400) {
-      this.limite = 2;
-      this.actualizarInfo();
-      return;
-    }
-    if (event.target.innerWidth < 400) {
-      this.limite = 1;
-      this.actualizarInfo();
-      return;
-    }
+    console.log(event.target.innerWidth);
+    this.calcularLimiteMateriasAMostrar(event.target.innerWidth);
+    this.actualizarInfo();
   }
 
   constructor(
@@ -334,7 +307,12 @@ export class PensumComponent implements OnInit {
      });+*/
   }
 
+  calcularLimiteMateriasAMostrar(width: number) {
+    this.limite = ((width * 0.8) / 163) - 1;
+  }
+
   ngOnInit() {
+
     this.servicioOpcionesPensum.pensumActivo.subscribe(pensumActivo => {
       this.pensumActivo = pensumActivo;
     });
@@ -357,8 +335,8 @@ export class PensumComponent implements OnInit {
     this.materias = [];
     this.materiasService.getMaterias().subscribe(data => {
       this.materias = data;
-      this.limite = 4;
       this.posicion = 0;
+      this.calcularLimiteMateriasAMostrar(window.innerWidth);
       this.actualizarInfo();
     });
 

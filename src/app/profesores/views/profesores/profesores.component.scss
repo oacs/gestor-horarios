@@ -174,13 +174,19 @@ body{
    padding-top: 25px;
 }
 
-.content .content-info .sub-title{
+.content .content-info .title{
 
    text-transform: capitalize;
-   color: #333;
+   color: #777676;
    margin: 13px 0;
 
 }
+
+.content .content-info .sub-title{
+    color: #908e8e;
+    font-size: 19px;
+}
+
 
 
 .content .content-info .disp-table{
@@ -269,8 +275,15 @@ body{
    align-items: center;
    cursor: pointer;
 }
-
 .rightColumn li:hover{
+    background: inherit;
+    .circularName{
+        background: #60b1ae;
+        color: #FFF;
+    }
+}
+
+.rightColumn li.active{
     background: #83ccae;
     border-radius: 10px;
     .circularName{
