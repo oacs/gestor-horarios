@@ -4,6 +4,9 @@ import { ProfesorService, Profesor } from '../../../providers/profesor/profesor.
 import { ProfesorClass } from '../../../providers/algoritmo/profesorClass';
 import { BloqueHoras } from '../../../providers/algoritmo/BloqueHoras';
 import { Hora } from '../../../providers/algoritmo/enum';
+import { HorarioPeriodoClass } from '../../../providers/algoritmo/HorarioPeriodoClass';
+import { BloqueHorasToString, DisponibilidadToString } from '../../../providers/databaseTransalations/datoToString';
+import { profesores } from '../../../providers/algoritmo/test';
 
 
 @Component({
@@ -21,11 +24,15 @@ export class ProfesoresComponent implements OnInit {
   public auxProfesores: Profesor[];
   public profesorForm: FormGroup;
   public horario: number[][];
+  public profesorActive : number;
+
+  public utilidades: HorarioPeriodoClass;
 
   constructor(
     private profesorService: ProfesorService,
     private fb: FormBuilder
   ) {
+    this.utilidades = new HorarioPeriodoClass();
     this.buscador = this.fb.group({ texto: [''] });
     this.newProfesor = false;
     this.profesorSeleccionado = new ProfesorClass(0, '', '', '');
@@ -68,16 +75,18 @@ export class ProfesoresComponent implements OnInit {
       this.newProfesor = true;
     }
   }
-
-  public selectProfesor(profesor: Profesor) {
+  public selectProfesor(profesor: Profesor, indice : number) {
     this.profesorSeleccionado = new ProfesorClass(profesor.id, profesor.nombre, profesor.correo, profesor.disp);
     console.log(this.profesorSeleccionado);
     this.clearHorario();
-    this.profesorSeleccionado.disponibilidad.forEach(bloque => {
-      for (let i = bloque.inicio; i !== bloque.fin + 1; i++) {
-        this.horario[bloque.dia][i] = bloque.prioridad;
-      }
-    });
+    if (this.profesorSeleccionado.disponibilidad.length > 0) {
+      this.profesorSeleccionado.disponibilidad.forEach(bloque => {
+        for (let i = bloque.inicio; i < bloque.fin; i++) {
+          this.horario[bloque.dia][i] = bloque.prioridad;
+        }
+      });
+    }
+    this.profesorActive = indice;
   }
   public cambiarPrioridad(cambio: number, i: number, j: number) {
     if (this.profesorSeleccionado.nombre !== '') {
@@ -97,6 +106,31 @@ export class ProfesoresComponent implements OnInit {
         bloque = 0;
       });
     }
+  }
+
+  public guardarHorario(): void {
+    let disp: BloqueHoras[] = [];
+    for (let i = 0; i < this.horario.length; i++) {
+      for (let j = 0; j < this.horario[i].length; j++) {
+        if (this.horario[i][j] !== 0) {
+
+          disp.push(new BloqueHoras(i, j, j + 1, this.horario[i][j]));
+        }
+      }
+    }
+
+    disp = this.utilidades.compactarBloques(disp);
+
+    DisponibilidadToString(disp);
+
+    this.profesorService.updateProfesor({
+      nombre: this.profesorSeleccionado.nombre,
+      disp: DisponibilidadToString(disp),
+      correo: this.profesorSeleccionado.correo,
+      id: this.profesorSeleccionado.id
+    }).subscribe(msj => {
+      this.profesorSeleccionado.disponibilidad = disp;
+    });
   }
 
   public guardarProfesor() {
