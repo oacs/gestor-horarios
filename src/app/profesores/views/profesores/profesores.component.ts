@@ -21,6 +21,8 @@ export class ProfesoresComponent implements OnInit {
   public auxProfesores: Profesor[];
   public profesorForm: FormGroup;
   public horario: number[][];
+  public profesorActive : number;
+
 
   constructor(
     private profesorService: ProfesorService,
@@ -68,8 +70,7 @@ export class ProfesoresComponent implements OnInit {
       this.newProfesor = true;
     }
   }
-
-  public selectProfesor(profesor: Profesor) {
+  public selectProfesor(profesor: Profesor, indice : number) {
     this.profesorSeleccionado = new ProfesorClass(profesor.id, profesor.nombre, profesor.correo, profesor.disp);
     console.log(this.profesorSeleccionado);
     this.clearHorario();
@@ -78,6 +79,7 @@ export class ProfesoresComponent implements OnInit {
         this.horario[bloque.dia][i] = bloque.prioridad;
       }
     });
+    this.profesorActive = indice;
   }
   public cambiarPrioridad(cambio: number, i: number, j: number) {
     if (this.profesorSeleccionado.nombre !== '') {

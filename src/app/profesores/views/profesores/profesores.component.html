@@ -32,9 +32,11 @@
 
 
   <div class="content-info">
-    <h2 class="sub-title">nombre del profesor: {{profesorSeleccionado.nombre}}</h2>
-    <h2 class="sub-title">correo electronico: {{profesorSeleccionado.correo}}</h2>
-    <h2 class="sub-title">disponibilidad: </h2>
+    <h2 class="title">nombre del profesor:</h2>
+    <h4 class="sub-title" style="text-transform: capitalize;">{{profesorSeleccionado.nombre}}</h4>
+    <h2 class="title">correo electronico:</h2>
+    <h4 class="sub-title"> {{profesorSeleccionado.correo}}</h4>
+    <h2 class="title">disponibilidad: </h2>
 
     <table class="disp-table noselect">
       <tr>
@@ -56,110 +58,7 @@
           <th (click)="cambiarPrioridad(1,j, i)" (auxclick)="cambiarPrioridad(-1, j ,i)" *ngIf="horario[j][i] == 0"></th>
         </ng-container>
       </tr>
-      <!-- <tr>
-        <th class="first-table">8:00 - 8:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">9:00 - 9:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">9:00 - 9:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">7:00 - 7:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">8:00 - 8:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">9:00 - 9:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">9:00 - 9:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">7:00 - 7:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">8:00 - 8:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">9:00 - 9:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">9:00 - 9:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">7:00 - 7:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th class="first-table">8:00 - 8:50</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr> -->
+     
     </table>
 
     <div class="old-reference">
@@ -205,21 +104,13 @@
 
 <div class="rightColumn">
   <ul>
-    <li *ngFor="let profesor of profesores" (click)="selectProfesor(profesor)">
+    <li *ngFor="let profesor of profesores; index as i" [ngClass]="
+      {
+      'active': profesorActive == i
+      }" 
+      (click)="selectProfesor(profesor, i)">
       <div class="circularName">{{profesor.nombre[0]}}</div>
       <p class="right-name">{{profesor.nombre}}</p>
     </li>
-    <!-- <li>
-      <div class="circularName">ac</div>
-      <p class="right-name">antonio cestari</p>
-    </li>
-    <li>
-      <div class="circularName">eg</div>
-      <p class="right-name">eduardo andres gonzalez</p>
-    </li>
-    <li>
-      <div class="circularName">oc</div>
-      <p class="right-name">oscar castillejo</p>
-    </li> -->
   </ul>
 </div>
