@@ -50,7 +50,11 @@ body{
    outline: none;
 }
 
-.contenedor-modal .form-modal button { margin-left: 1px; }
+.contenedor-modal .form-modal button { 
+    margin-left: 1px; 
+}
+
+
 .contenedor-modal .form-modal i.fa.fa-times { 
     cursor: pointer; 
     color: #a6a6a6; 
@@ -140,6 +144,20 @@ body{
    border-radius: 3px;
 }
 
+.content .top-menu .button.delete:hover{
+    background: #e88e8e;
+    color: #FFF;
+
+}
+
+.content .top-menu .button.new:hover{
+    
+    background: #83ccae;
+    color: #FFF;
+}
+
+
+
 .content .top-menu .button:focus{
    border: 2px solid #93cecc;
    outline: none;
@@ -183,6 +201,15 @@ body{
    border-bottom: 1px solid #FFF;
 }
 
+.content .content-info .disp-table th.class{
+    background: #AFDBD9;
+}
+
+.content .content-info .disp-table th.class2{
+    background: #ffff9e;
+}
+
+
 .content .content-info .disp-table th.first-table{
    background: #FFF;
    border-radius: 10px;
@@ -197,10 +224,6 @@ body{
    border-radius: 10px;
 }
 
-.content .content-info .old-reference{
-
-
-}
 
 .content .content-info .old-reference p{
    cursor: pointer;
@@ -230,6 +253,7 @@ body{
    color: #908e8e;
    font-weight: bold;
    margin: 15px 5px;
+   flex-shrink: 0;
 }
 
 .rightColumn ul{
@@ -245,6 +269,26 @@ body{
    align-items: center;
    cursor: pointer;
 }
+
+.rightColumn li:hover{
+    background: #83ccae;
+    border-radius: 10px;
+    .circularName{
+        background: #60b1ae;
+        color: #FFF;
+    }
+}
+
+.noselect{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 
 
 
