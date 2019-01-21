@@ -17,9 +17,12 @@
         hora[i][hora[i].length-1]}}</th>
       <ng-container *ngFor="let dia of [0,1,2,3,4]; let j = index">
 
-        <th (click)="cambiarPrioridad(1,j,i)" (auxclick)="cambiarPrioridad(-1, j, i)" *ngIf="horario[j][i] != 0"
-          [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}">{{horario[j][i]}}</th>
-        <th (click)="cambiarPrioridad(1,j, i)" (auxclick)="cambiarPrioridad(-1, j ,i)" *ngIf="horario[j][i] == 0"></th>
+        <th *ngIf="horario[j][i].length != 0" [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}">
+          <div *ngFor="let seccion of horario[i][j]">
+            {{seccion.id}}
+          </div>
+        </th>
+        <th *ngIf="horario[j][i] == 0"></th>
       </ng-container>
     </tr>
 

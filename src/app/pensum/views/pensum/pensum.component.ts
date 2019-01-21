@@ -80,7 +80,9 @@ export class PensumComponent implements OnInit {
     private materiasService: MateriaService,
     private materiasxpensumService: MateriasxpensumService,
     private formModal: FormBuilder,
-    private servicioOpcionesPensum: ServicioOpcionesPensumService) {
+    private servicioOpcionesPensum: ServicioOpcionesPensumService,
+    // private prelacionService: PrelacionSE
+  ) {
 
 
     this.asignandoRequisito = '';
@@ -274,11 +276,14 @@ export class PensumComponent implements OnInit {
         this.materiasxpensumService.insertMateriaxpensum({
           id_materia: materia.id,
           id_pensum: this.pensumActivo.id,
-          maxH: 4,
-          horas: 6,
+          maxH: 0,
+          horas: 0,
           semestre: semestre.numero
         }).subscribe(mensaje => {
           console.log(mensaje);
+        });
+        materia.prelaciones.forEach(prelacion => {
+
         });
       });
     });
@@ -293,8 +298,8 @@ export class PensumComponent implements OnInit {
       this.materiasxpensumService.insertMateriaxpensum({
         id_materia: materia.id,
         id_pensum: this.pensumActivo.id,
-        maxH: 4,
-        horas: 6,
+        maxH: 0,
+        horas: 0,
         semestre: 0
       }).subscribe(mensaje => {
         console.log(mensaje);
