@@ -23,7 +23,8 @@ export class ProfesoresComponent implements OnInit {
   // enums
   public dias = Dias;
   public hora = Hora;
-
+  public inputNombre: FormControl;
+  public inputCorreo: FormControl;
   public newProfesor: boolean;
   public mostrarHorarioPasado: boolean[];
   public mostrarInput: boolean[];
@@ -44,6 +45,8 @@ export class ProfesoresComponent implements OnInit {
     this.horariosPasados = [];
     this.mostrarHorarioPasado = [];
     this.mostrarInput = [false,false];
+    this.inputCorreo = new FormControl('');
+    this.inputNombre = new FormControl('');
     this.utilidades = new HorarioPeriodoClass();
     this.buscador = this.fb.group({ texto: [''] });
     this.newProfesor = false;
@@ -141,6 +144,10 @@ export class ProfesoresComponent implements OnInit {
       }
     }
 
+    this.profesorService.updateProfesor(this.profesorSeleccionado).subscribe( msj => {
+      console.log(msj);
+    });
+
     disp = this.utilidades.compactarBloques(disp);
 
     DisponibilidadToString(disp);
@@ -191,12 +198,16 @@ export class ProfesoresComponent implements OnInit {
   }
 
   public togleEdit(i:number){
+    this.profesorSeleccionado.nombre = this.inputNombre.value;
+    this.profesorSeleccionado.correo = this.inputCorreo.value; 
 
     if (this.mostrarInput[i]){
       this.mostrarInput[i] = false;
     }
     else{
       this.mostrarInput[i] = true;
+      this.inputNombre.setValue(this.profesorSeleccionado.nombre);
+      this.inputCorreo.setValue(this.profesorSeleccionado.correo);
 
     }
   }

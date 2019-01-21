@@ -35,10 +35,10 @@
   <div class="content-info">
     <h2 class="title">nombre del profesor</h2>
     <h4  *ngIf="mostrarInput[0] == false" (click)="togleEdit(0)" class="sub-title">{{profesorSeleccionado.nombre | titlecase}} <i class="fa fa-pencil" aria-hidden="true"></i></h4>
-    <input *ngIf="mostrarInput[0] == true" type="text" value="{{profesorSeleccionado.nombre}}" (focusout)="togleEdit(0)">
+    <input *ngIf="mostrarInput[0] == true" type="text" value="{{profesorSeleccionado.nombre}}" [formControl]="inputNombre" (focusout)="togleEdit(0)">
     <h2  class="title">correo electronico</h2>
     <h4 *ngIf="mostrarInput[1] == false" (click)="togleEdit(1)" class="sub-title"> {{profesorSeleccionado.correo}}  <i class="fa fa-pencil" aria-hidden="true"></i></h4>
-    <input *ngIf="mostrarInput[1] == true" type="text" value="{{profesorSeleccionado.correo}}" (focusout)="togleEdit(1)">
+    <input *ngIf="mostrarInput[1] == true" type="text" value="{{profesorSeleccionado.correo}}" [formControl]="inputCorreo" (focusout)="togleEdit(1)">
     <h2 class="title">disponibilidad </h2>
 
     <table class="disp-table noselect">
