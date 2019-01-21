@@ -19,6 +19,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  select{
+    width: 45%;
+    margin: 10px 0 0 0;
+    padding: 8px;
+    border: none;
+    color: #a1a1a1;
+  }
 }
 
 .content-center h2 {
@@ -184,7 +192,7 @@ a.float-left {
 }
 
 .disp-table {
-  width: calc(100% - 25px);
+  width: calc(85% - 25px);
   background: #E3E7E7;
   color: #797575;
   margin: 15px 0;
