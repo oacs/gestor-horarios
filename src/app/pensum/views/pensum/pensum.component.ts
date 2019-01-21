@@ -7,6 +7,7 @@ import { PensumService, Pensum } from '../../../providers/pensum/pensum.service'
 import { MateriaService, Materia } from '../../../providers/materia/materia.service';
 import { MateriasxpensumService } from '../../../providers/materiasxpensum/materiasxpensum.service';
 import { ServicioOpcionesPensumService } from '../../../providers/servicioOpcionesPensum/servicio-opciones-pensum.service';
+import { PrelacionService } from '../../../providers/prelacion/prelacion.service';
 
 interface Semestre {
   numero: number;
@@ -81,7 +82,7 @@ export class PensumComponent implements OnInit {
     private materiasxpensumService: MateriasxpensumService,
     private formModal: FormBuilder,
     private servicioOpcionesPensum: ServicioOpcionesPensumService,
-    // private prelacionService: PrelacionSE
+    private prelacionService: PrelacionService
   ) {
 
 
@@ -275,7 +276,7 @@ export class PensumComponent implements OnInit {
       semestre.materias.forEach((materia, j) => {
         this.materiasxpensumService.insertMateriaxpensum({
           id_materia: materia.id,
-          id_pensum: this.pensumActivo.id,
+          id_pensum: 2,
           maxH: 0,
           horas: 0,
           semestre: semestre.numero
@@ -283,7 +284,23 @@ export class PensumComponent implements OnInit {
           console.log(mensaje);
         });
         materia.prelaciones.forEach(prelacion => {
+          this.prelacionService.insertprelacion(
+            {
+              id_pensum: 2,
+              id_prelada: materia.id,
+              id_prelante: prelacion.id,
+              tipo: 0
+            });
+        });
 
+        materia.corequisitos.forEach(correquisito => {
+          this.prelacionService.insertprelacion(
+            {
+              id_pensum: 2,
+              id_prelada: materia.id,
+              id_prelante: correquisito.id,
+              tipo: 1
+            });
         });
       });
     });
@@ -297,7 +314,7 @@ export class PensumComponent implements OnInit {
     infoAux.forEach(materia => {
       this.materiasxpensumService.insertMateriaxpensum({
         id_materia: materia.id,
-        id_pensum: this.pensumActivo.id,
+        id_pensum: 2,
         maxH: 0,
         horas: 0,
         semestre: 0
@@ -308,19 +325,75 @@ export class PensumComponent implements OnInit {
   }
 
   cargarPensum() {
-    this.materiasxpensumService.getMateriasxPensumId(this.pensumActivo.id).subscribe(materiasxpensum => {
+    this.materiasxpensumService.getMateriasxPensumId(2).subscribe(materiasxpensum => {
       materiasxpensum.forEach(materia => {
+        console.log(materia.semestre);
         if (materia.semestre !== 0) {
-          this.semestres[materia.semestre - 1].materias.push(materia);
+          // this.semestres[materia.semestre - 1].materias.push(materia);
+          this.materiasService.getPrelantes(materia.id).subscribe(prelantes => {
+            const prelaciones: Materia[] = prelantes.filter(prelacion => prelacion.tipo === 0).map(prelacion => {
+              return {
+                id: prelacion.id_materia,
+                nombre: '',
+                semestre: prelacion.semestre
+              };
+            });
+            const corequisitos: Materia[] = prelantes.filter(corequisito => corequisito.tipo === 0).map(prelacion => {
+              return {
+                id: prelacion.id_materia,
+                nombre: '',
+                semestre: prelacion.semestre
+              };
+            });
+            console.log(corequisitos);
+            this.semestres[materia.semestre - 1].materias.push({
+              nombre: materia.nombre,
+              horas: materia.horas,
+              id: materia.id,
+              maxH: materia.maxH,
+              semestre: materia.semestre,
+              prelaciones: prelaciones,
+              corequisitos: corequisitos
+            });
+            this.posicion = 0;
+            this.calcularLimiteMateriasAMostrar(window.innerWidth);
+            this.actualizarInfo();
+
+          });
+        } else {
+          this.materiasService.getPrelantes(materia.id).subscribe(prelantes => {
+            const prelaciones: Materia[] = prelantes.filter(prelacion => prelacion.tipo === 0).map(prelacion => {
+              return {
+                id: prelacion.id_materia,
+                nombre: '',
+                semestre: prelacion.semestre
+              };
+            });
+            const corequisitos: Materia[] = prelantes.filter(corequisito => corequisito.tipo === 0).map(prelacion => {
+              return {
+                id: prelacion.id_materia,
+                nombre: '',
+                semestre: prelacion.semestre
+              };
+            });
+            console.log(corequisitos);
+            this.materias.push({
+              nombre: materia.nombre,
+              horas: materia.horas,
+              id: materia.id,
+              maxH: materia.maxH,
+              semestre: materia.semestre,
+              prelaciones: prelaciones,
+              corequisitos: corequisitos
+            });
+            this.posicion = 0;
+            this.calcularLimiteMateriasAMostrar(window.innerWidth);
+            this.actualizarInfo();
+
+          });
+
+
         }
-        this.materias.push({
-          nombre: materia.nombre,
-          horas: materia.horas,
-          id: materia.id,
-          maxH: materia.maxH,
-          semestre: materia.semestre,
-          prelaciones: []
-        });
       });
     });
   }
@@ -480,17 +553,17 @@ export class PensumComponent implements OnInit {
       { numero: 9, materias: [] },
       { numero: 10, materias: [] }];
     console.log(this.semestres);
-    this.materias = [];
-    this.materiasService.getMaterias().subscribe(data => {
-      this.materias = data;
-      this.materias.forEach(materia => {
-        materia.prelaciones = [];
-        materia.corequisitos = [];
-      });
-      this.posicion = 0;
-      this.calcularLimiteMateriasAMostrar(window.innerWidth);
-      this.actualizarInfo();
-    });
+    // this.materias = [];
+    // this.materiasService.getMaterias().subscribe(data => {
+    //   this.materias = data;
+    //   this.materias.forEach(materia => {
+    //     materia.prelaciones = [];
+    //     materia.corequisitos = [];
+    //   });
+    //   this.posicion = 0;
+    //   this.calcularLimiteMateriasAMostrar(window.innerWidth);
+    //   this.actualizarInfo();
+    // });
 
   }
 

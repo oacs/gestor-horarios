@@ -5,19 +5,11 @@ import { AppConfig } from '../../../environments/environment';
 
 export interface Prelacion {
   id_prelacion?: number;
-  id_prelada: string;
-  id_prelante: string;
-  id_pensum?: string;
+  id_prelada: number;
+  id_prelante: number;
+  id_pensum?: number;
+  tipo?: number;
 }
-
-// export interface Curso {
-//   id: number;
-//   semestre: string;
-//   seccion: string;
-//   id_prelacion: number;
-//   id_periodo: number;
-//   id_materia: number;
-// }
 
 // export interface Prelacion {
 //   id: number;

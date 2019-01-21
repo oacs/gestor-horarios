@@ -26,7 +26,7 @@ export class MateriasxpensumService {
   }
 
   public getMateriasxPensumId(idPensum: number): Observable<Materia[]> {
-    return this.http.get<Materia[]>(AppConfig.api + 'materia_x_pensum/' + idPensum);
+    return this.http.get<Materia[]>(AppConfig.api + 'materia_x_pensum/' + idPensum + '/byPensum');
   }
 
   public insertMateriaxpensum(materiaxpensum: Materiaxpensum): Observable<any> {
