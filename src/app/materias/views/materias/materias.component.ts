@@ -114,8 +114,8 @@ export class MateriasComponent implements OnInit {
     console.log(this.materiaTemporal);
     this.materiasService.deleteMateria(this.materiaTemporal).subscribe(data => {
       console.log(data);
-      if (data === null) {
-        this.materias.splice(this.materias.indexOf(this.materiaTemporal), 1);
+      if (data.msg != null) {
+        this.materias.splice(this.materias.findIndex(materia => this.materiaTemporal.id === materia.id), 1);
         this.updateMatter = false;
       }
 
