@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   openned: boolean;
+  titulo: string;
 
-
-  constructor() {
+  constructor(private router: Router) {
     this.openned = false;
+    this.router.events.subscribe((event: NavigationEnd) => {
+      if (event.url) {
+        if (event.url.split('/')[1]) {
+          this.titulo = 'Gestor ' + event.url.split('/')[1];
+        } else {
+          this.titulo = 'Menu Principal';
+        }
+      }
+    });
   }
 
   toggleMenu() {
