@@ -59,8 +59,11 @@ export class PensumComponent implements OnInit {
 
   public materiaTemporal: Materia;
 
-  public asignandoPrelaciones: boolean;
-  public materiaPrelaciones: Materia;
+  /* Asignacion de prelaciones y corequisitos */
+  public asignandoRequisito: string;
+  public materiaRequisitos: Materia;
+  public indexSemestreMatReq: number;
+  public indexMateriaMatReq: number;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -80,13 +83,16 @@ export class PensumComponent implements OnInit {
     private servicioOpcionesPensum: ServicioOpcionesPensumService) {
 
 
-      this.asignandoPrelaciones = false;
-      this.materiaPrelaciones = {
-        id: -1,
-        nombre: '',
-        semestre: -1,
-        prelaciones: []
-      };
+    this.asignandoRequisito = '';
+    this.materiaRequisitos = {
+      id: -1,
+      nombre: '',
+      semestre: -1,
+      prelaciones: [],
+      corequisitos: []
+    };
+    this.indexMateriaMatReq = 0;
+    this.indexSemestreMatReq = 0;
 
     this.pensumSevice.getPensums().subscribe(pensums => {
       this.pensums = pensums;
@@ -330,54 +336,78 @@ export class PensumComponent implements OnInit {
 
   /* GESTOR DE PRELACIONES */
 
-  abrirContextMenu(event: any) {
-    console.log('Context');
-    console.log(event);
+  abrirContextMenu(event: any, indexS: number, indexM: number) {
     event.stopPropagation();
-
     this.contextMenu.nativeElement.style.left = event.pageX + 'px';
     this.contextMenu.nativeElement.style.top = event.pageY + 'px';
     this.contextMenu.nativeElement.style.opacity = '1';
+
+    this.indexMateriaMatReq = indexM;
+    this.indexSemestreMatReq = indexS;
   }
 
-  abrirGestorPrelaciones(event: any, sIndex: number, mIndex: number) {
-    this.materiaPrelaciones = this.semestres[sIndex].materias[mIndex];
-    this.materiaPrelaciones.semestre = sIndex + 1;
-    this.asignandoPrelaciones = true;
-    console.log(this.materiaPrelaciones);
-    console.log(event);
+  abrirGestorRequisitos(req: string) {
+    this.materiaRequisitos = this.semestres[this.indexSemestreMatReq].materias[this.indexMateriaMatReq];
+    this.materiaRequisitos.semestre = this.indexSemestreMatReq + 1;
+    this.asignandoRequisito = req;
   }
 
-  esPrelacionDe(a: Materia, b: Materia) {
+  esPrelacionDe() {
+    const materia = this.semestres[this.indexSemestreMatReq].materias[this.indexMateriaMatReq];
     let esPrelacion = false;
-    b.prelaciones.forEach( preladora => {
-      if ( preladora.id === a.id) {
+    this.materiaRequisitos.prelaciones.forEach(preladora => {
+      if (preladora.id === materia.id) {
         esPrelacion = true;
-        return ;
+        return;
       }
     });
     return esPrelacion;
   }
 
+  esCorequisitoDe() {
+    let esCorequisito = false;
+    const materia = this.semestres[this.indexSemestreMatReq].materias[this.indexMateriaMatReq];
+    this.materiaRequisitos.corequisitos.forEach(corequisito => {
+      if (corequisito.id === materia.id) {
+        esCorequisito = true;
+        return;
+      }
+    });
+    return esCorequisito;
+  }
+
   esPosiblePrelacion(indiceSemestre: number) {
-    if (indiceSemestre + 1 < this.materiaPrelaciones.semestre) {
+    if (indiceSemestre + 1 < this.materiaRequisitos.semestre) {
       return true;
     } else {
       return false;
     }
   }
 
-  anadirAPrelaciones(indexSemestre: number, indexMateria: number) {
-    const materiaPreladora = this.semestres[indexSemestre].materias[indexMateria];
 
-    if  (this.asignandoPrelaciones) {
-      if (this.materiaPrelaciones.id !== materiaPreladora.id && !this.esPrelacionDe(materiaPreladora, this.materiaPrelaciones)) {
+  addRequisito(indexSemestre: number, indexMateria: number) {
+    const materiaRequisito = this.semestres[indexSemestre].materias[indexMateria];
 
-        this.materiaPrelaciones.prelaciones.push(this.semestres[indexSemestre].materias[indexMateria]);
 
+    /* Añadir consideraciones de si ya es una prelacion o un requisito, no hacer push */
+    if (this.asignandoRequisito === 'prelacion' || this.asignandoRequisito === 'corequisito') {
+      switch (this.asignandoRequisito) {
+        case 'prelacion': {
+          if (this.materiaRequisitos.id !== materiaRequisito.id) {
+            this.materiaRequisitos.prelaciones.push(this.semestres[indexSemestre].materias[indexMateria]);
+          }
+          break;
+        }
+        case 'corequisito': {
+          if (this.materiaRequisitos.id !== materiaRequisito.id) {
+            this.materiaRequisitos.corequisitos.push(this.semestres[indexSemestre].materias[indexMateria]);
+          }
+          break;
+        }
       }
+
     }
-    console.log(this.materiaPrelaciones.prelaciones.length);
+    console.log(this.materiaRequisitos.prelaciones.length);
   }
 
   ngOnInit() {
@@ -406,6 +436,7 @@ export class PensumComponent implements OnInit {
       this.materias = data;
       this.materias.forEach(materia => {
         materia.prelaciones = [];
+        materia.corequisitos = [];
       });
       this.posicion = 0;
       this.calcularLimiteMateriasAMostrar(window.innerWidth);

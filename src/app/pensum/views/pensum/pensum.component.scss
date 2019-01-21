@@ -177,8 +177,7 @@ div.card-prelacion {
 
 div.card-prelacion:after,
 div.card-corequisito:after,
-div.card-posible-prelacion:hover:after,
-div.card-posible-corequisito:hover:after {
+div.card-posible-prelacion:hover:after{
     width: 14px;
     height: 14px;
     font-size: 10px;
@@ -198,8 +197,7 @@ div.card-posible-prelacion:hover:after {
     color: #FFF;
 }
 
-div.card-posible-corequisito:after,
-div.card-posible-corequisito:hover:after {
+div.card-corequisito:after {
     content: 'C';
     background-color: #f4ff8c;
     color: #888888;
@@ -244,11 +242,13 @@ div.dark-blocker div.bottom {
 div.dark-blocker div.header {
     top: 0;
     left: 0;
+    animation: 0.2s appear ease-in;
 }
 
 div.dark-blocker div.bottom {
     bottom: 0;
     left: 0;
+    animation: 0.2s appear ease-in;
 }
 
 
@@ -273,4 +273,10 @@ div.context-menu a {
 
 div.context-menu a:hover {
     background-color: rgba(0,0,0,0.03)
+}
+
+
+@keyframes appear {
+    from { opacity: 0 }
+    to { opacity: 1}
 }

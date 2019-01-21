@@ -4,10 +4,11 @@
     [cdkDropListConnectedTo]="['list-two','list-1', 'list-2', 'list-3', 'list-4', 'list-5', 'list-6', 'list-7', 'list-8', 'list-9', 'list-10']">
     <h1>S{{semestre.numero}}</h1>
     <div cdkDrag [cdkDragData]="materia" *ngFor="let materia of semestre.materias; index as mIndex" class="card" 
-    (auxclick)="abrirGestorPrelaciones($event,sIndex, mIndex)" (click)="abrirContextMenu($event)"
+    (auxclick)="abrirContextMenu($event, sIndex, mIndex)" (click)="addRequisito(sIndex, mIndex)"
     [ngClass]="{
-      'card-posible-prelacion': esPosiblePrelacion(sIndex) && asignandoPrelaciones,
-      'card-prelacion': esPrelacionDe(materia, this.materiaPrelaciones) && asignandoPrelaciones
+      'card-posible-prelacion': esPosiblePrelacion(sIndex) && asignandoRequisito == 'prelacion',
+      'card-prelacion': esPrelacionDe() && asignandoRequisito == 'prelacion',
+      'card-corequisito': esCorequisitoDe() && asignandoRequisito == 'corequisito'
       }">
       {{materia.nombre}}
     </div>
@@ -32,18 +33,17 @@
   </div>
 </div>
 
-<div class="dark-blocker" *ngIf="asignandoPrelaciones">
+<div class="dark-blocker" *ngIf="asignandoRequisito == 'corequisito' || asignandoRequisito == 'prelacion' ">
   <div class="header"></div>
   <div class="bottom"></div>
   <div class="button-container">
     <button class="btn-white">GUARDAR</button>
-    <button class="btn-white" (click)="asignandoPrelaciones = false;">CANCELAR</button>
+    <button class="btn-white" (click)="asignandoRequisito = ''">CANCELAR</button>
   </div>
 </div>
 
 
-
 <div class="context-menu" #contextMenu>
-  <a>Modificar prelaciones</a>
-  <a>Modificar otros requisitos</a>
+  <a (click)="abrirGestorRequisitos('prelacion')" >Modificar prelaciones</a>
+  <a (click)="abrirGestorRequisitos('corequisito')">Modificar otros requisitos</a>
 </div>
