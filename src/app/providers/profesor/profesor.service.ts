@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AppConfig } from '../../../environments/environment';
+import { BloqueHoras } from '../algoritmo/BloqueHoras';
+import { stringToDisponibilidad } from '../databaseTransalations/stringToData';
 
 export interface Profesor {
   id?: number;
@@ -9,7 +12,15 @@ export interface Profesor {
   nombre: string;
   correo: string;
 }
+export interface HorarioPrevioIn {
+  horario: string;
+  periodo: string;
+}
 
+export interface HorarioPrevio {
+  horario: BloqueHoras[];
+  periodo: string;
+}
 // export interface Curso {
 //   id: number;
 //   semestre: string;
@@ -53,8 +64,19 @@ export class ProfesorService {
     return this.http.get<Profesor>(AppConfig.api + 'profesores/' + id);
   }
 
-  public getHorariosAnteriores(id: number): Observable<Profesor> {
-    return this.http.get<Profesor>(AppConfig.api + 'profesores/' + id + '/horariosAnteriores');
+  public getHorariosAnteriores(id: number): Observable<HorarioPrevio[]> {
+    return this.http.get<HorarioPrevioIn[]>(AppConfig.api + 'profesores/' + id + '/horariosAnteriores').pipe(
+      map(items => {
+        const horariosPrev: HorarioPrevio[] = [];
+        items.forEach(item => {
+          horariosPrev.push({
+            horario: stringToDisponibilidad(item.horario),
+            periodo: item.periodo
+          });
+        });
+        return horariosPrev;
+      })
+    );
   }
 
   public deleteProfesor(id: number): Observable<Profesor> {
