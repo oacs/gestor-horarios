@@ -48,7 +48,7 @@
     <div class="form-modal">
       <i class="fa fa-times" (click)="this.updateMatter = false;"></i>
       <h2>Actualizar materia</h2>
-      <form [formGroup]="updateMatterForm" (click)="submitFormUpdateMatter()">
+      <form [formGroup]="updateMatterForm" (ngSubmit)="submitFormUpdateMatter()">
         <label class="form-group">
           Nombre
           <input type="text" class="input-text-form" formControlName="nombre" required>
