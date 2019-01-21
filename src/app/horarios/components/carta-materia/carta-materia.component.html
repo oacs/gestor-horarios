@@ -2,8 +2,8 @@
   <p>{{materia.nombre | titlecase }}</p>
   <div class="input-group">
     <p>N° secciones:</p>
-    <input type="number" [value]="materia.secciones.length">
-    <button (click)="cambiarSeccion(1)">Arriba</button>
-    <button (click)="cambiarSeccion(-1)">Abajo</button>
+    <div>{{materia.secciones.length}}</div>
+    <button (click)="cambiarSeccion(1)"><i class="fa fa-angle-up"></i></button>
+    <button (click)="cambiarSeccion(-1)"><i class="fa fa-angle-down"></i></button>
   </div>
 </div>
