@@ -21,6 +21,7 @@ import { profesores } from '../../../providers/algoritmo/test';
 export class ProfesoresComponent implements OnInit {
 
   newProfesor: boolean;
+  mostrarHorarioPasado: boolean[];
   public hora = Hora;
   public buscador: FormGroup;
   public profesorSeleccionado: ProfesorClass;
@@ -37,6 +38,7 @@ export class ProfesoresComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.horariosPasados = [];
+    this.mostrarHorarioPasado = [];
     this.utilidades = new HorarioPeriodoClass();
     this.buscador = this.fb.group({ texto: [''] });
     this.newProfesor = false;
@@ -171,6 +173,11 @@ export class ProfesoresComponent implements OnInit {
       // this.profesores.splice(this.profesores.indexOf(this.profesorSeleccionado), 1);
       this.profesorSeleccionado = new ProfesorClass(0, '', '', '');
     });
+  }
+
+
+  public mostrarTabla(i: number) {
+    this.mostrarHorarioPasado[i] = true;
   }
 
 }
