@@ -3,6 +3,7 @@ import { HorarioPeriodoClass } from '../../../providers/algoritmo/HorarioPeriodo
 import { ProfesorClass } from '../../../providers/algoritmo/profesorClass';
 // tslint:disable-next-line:max-line-length
 import { ServicioConfiguracionHorariosService } from '../../../providers/servicioConfiguracionHorarios/servicio-configuracion-horarios.service';
+import { Dias, Hora } from '../../../providers/algoritmo/enum';
 
 @Component({
   selector: 'app-gestor-horarios',
@@ -13,7 +14,18 @@ export class GestorHorariosComponent implements OnInit {
   horarioActivo: HorarioPeriodoClass;
   listaProfesores: ProfesorClass[];
 
-  constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) { }
+  // enums
+  public dias = Dias;
+  public hora = Hora;
+
+  public horario: number[][];
+
+  constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) {
+    this.horario = [];
+    for (let i = 0; i < 7; i++) {
+      this.horario.push([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    }
+  }
 
   ngOnInit() {
     this.servicioConfiguracionHorario.horarioActual.subscribe(horario => {
