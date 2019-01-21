@@ -110,7 +110,7 @@ export class ProfesoresComponent implements OnInit {
       this.horariosPasados.forEach(i => {
         this.mostrarHorarioPasado.push(false);
       });
-      console.log(horarios);
+      // console.log(horarios);
     });
   }
   public cambiarPrioridad(cambio: number, i: number, j: number) {
@@ -143,8 +143,9 @@ export class ProfesoresComponent implements OnInit {
         }
       }
     }
-    this.profesorSeleccionado.nombre = this.inputNombre.value;
-    this.profesorSeleccionado.correo = this.inputCorreo.value;
+
+    this.profesorSeleccionado.nombre = this.inputNombre.value !== '' ? this.inputNombre.value : this.profesorSeleccionado.nombre;
+    this.profesorSeleccionado.correo = this.inputCorreo.value !== '' ? this.inputCorreo.value : this.profesorSeleccionado.correo;
 
     disp = this.utilidades.compactarBloques(disp);
 
@@ -156,6 +157,7 @@ export class ProfesoresComponent implements OnInit {
       correo: this.profesorSeleccionado.correo,
       id: this.profesorSeleccionado.id
     }).subscribe(msj => {
+      console.log(msj);
       this.profesorSeleccionado.disponibilidad = disp;
     });
   }
