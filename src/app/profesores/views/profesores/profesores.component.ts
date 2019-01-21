@@ -3,7 +3,7 @@ import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { ProfesorService, Profesor, HorarioPrevio } from '../../../providers/profesor/profesor.service';
 import { ProfesorClass } from '../../../providers/algoritmo/profesorClass';
 import { BloqueHoras } from '../../../providers/algoritmo/BloqueHoras';
-import { Hora } from '../../../providers/algoritmo/enum';
+import { Hora, Dias } from '../../../providers/algoritmo/enum';
 import { HorarioPeriodoClass } from '../../../providers/algoritmo/HorarioPeriodoClass';
 import { BloqueHorasToString, DisponibilidadToString } from '../../../providers/databaseTransalations/datoToString';
 import { profesores } from '../../../providers/algoritmo/test';
@@ -19,10 +19,12 @@ import { profesores } from '../../../providers/algoritmo/test';
   styleUrls: ['./profesores.component.scss']
 })
 export class ProfesoresComponent implements OnInit {
-
-  newProfesor: boolean;
-  mostrarHorarioPasado: boolean[];
+  // enums
+  public dias = Dias;
   public hora = Hora;
+
+  public newProfesor: boolean;
+  public mostrarHorarioPasado: boolean[];
   public buscador: FormGroup;
   public profesorSeleccionado: ProfesorClass;
   public profesores: Profesor[];
@@ -98,6 +100,11 @@ export class ProfesoresComponent implements OnInit {
 
     this.profesorService.getHorariosAnteriores(profesor.id).subscribe(horarios => {
       this.horariosPasados = horarios;
+      this.mostrarHorarioPasado = [];
+      this.horariosPasados.forEach(i => {
+        this.mostrarHorarioPasado.push(false);
+      });
+      console.log(horarios);
     });
   }
   public cambiarPrioridad(cambio: number, i: number, j: number) {
@@ -177,7 +184,7 @@ export class ProfesoresComponent implements OnInit {
 
 
   public mostrarTabla(i: number) {
-    this.mostrarHorarioPasado[i] = true;
+    this.mostrarHorarioPasado[i] = !this.mostrarHorarioPasado[i];
   }
 
 }

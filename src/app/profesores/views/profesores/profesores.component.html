@@ -59,29 +59,26 @@
           <th (click)="cambiarPrioridad(1,j, i)" (auxclick)="cambiarPrioridad(-1, j ,i)" *ngIf="horario[j][i] == 0"></th>
         </ng-container>
       </tr>
-     
+
     </table>
 
     <div class="old-reference">
       <div *ngFor="let horarioPasado of horariosPasados; let i = index">
 
-        <p (click)="mostrarTabla(i)">Periodo XXXX-PP "
+        <p (click)="mostrarTabla(i)">Periodo {{horarioPasado.periodo}}
           <i *ngIf="mostrarHorarioPasado[i] == false" class="fa fa-angle-down"></i>
           <i *ngIf="mostrarHorarioPasado[i] == true" class="fa fa-angle-right"></i>
         </p>
-        
+
         <table *ngIf="mostrarHorarioPasado[i] == true" class="disp-table">
           <tr>
             <th>Dia</th>
             <th>Hora</th>
           </tr>
-          <tr>
-            <th>lunes</th>
-            <th>6-8</th>
-          </tr>
-          <tr>
-            <th>miercoles</th>
-            <th>2-3</th>
+          <tr *ngFor="let horario of horarioPasado.horario">
+            <th>{{dias[horario.dia] | titlecase}}</th>
+            <th>{{hora[horario.inicio]}} - {{hora[horario.fin].split(':')[0]}}:50{{hora[i][hora[i].length-2] +
+              hora[i][hora[i].length-1]}}</th>
           </tr>
         </table>
       </div>
@@ -96,7 +93,7 @@
     <li *ngFor="let profesor of profesores; index as i" [ngClass]="
       {
       'active': profesorActive == i
-      }" 
+      }"
       (click)="selectProfesor(profesor, i)">
       <div class="circularName">{{profesor.nombre[0]}}</div>
       <p class="right-name">{{profesor.nombre}}</p>
