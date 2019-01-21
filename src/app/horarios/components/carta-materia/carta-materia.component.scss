@@ -7,7 +7,7 @@ div.card {
   text-align: center;
   box-shadow: 0 0.5px 0.75px 0 rgba(0, 0, 0, 0.02);
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -15,12 +15,27 @@ div.card p {
   font-size: 15px;
   color: #93cecc;
   font-weight: 600;
+  width: 100px;
 }
 
-div.card div.input-group input[type="number"] {
+div.card div.input-group div{
+  display: inline-block;
   background-color: none;
   border: none;
   margin-left: 10%;
   width: 30%;
   text-align: center;
+}
+
+div.card div.input-group button{
+  border: none;
+  background: inherit;
+  color: #a8a7a7;
+  font-size: 20px;
+}
+
+div.card div.input-group button:hover{
+  border: none;
+  background: #EEE;
+  color: #4c4b4b;
 }
