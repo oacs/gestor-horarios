@@ -159,6 +159,8 @@ export class ProfesoresComponent implements OnInit {
     }).subscribe(msj => {
       console.log(msj);
       this.profesorSeleccionado.disponibilidad = disp;
+      const i = this.profesores.findIndex(profesor => profesor.id === this.profesorSeleccionado.id);
+      this.profesores[i].disp = DisponibilidadToString(disp);
     });
   }
 
