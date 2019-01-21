@@ -71,7 +71,7 @@ export class ProfesorService {
         items.forEach(item => {
           horariosPrev.push({
             horario: stringToDisponibilidad(item.horario),
-            periodo: item.horario
+            periodo: item.periodo
           });
         });
         return horariosPrev;
