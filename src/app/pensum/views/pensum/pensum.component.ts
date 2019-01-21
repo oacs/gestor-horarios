@@ -68,6 +68,10 @@ export class PensumComponent implements OnInit {
     this.actualizarInfo();
   }
 
+  @HostListener('document:click', ['$event']) clickedOutside($event) {
+    this.contextMenu.nativeElement.style.opacity = 0;
+  }
+
   constructor(
     private pensumSevice: PensumService,
     private materiasService: MateriaService,
@@ -329,6 +333,8 @@ export class PensumComponent implements OnInit {
   abrirContextMenu(event: any) {
     console.log('Context');
     console.log(event);
+    event.stopPropagation();
+
     this.contextMenu.nativeElement.style.left = event.pageX + 'px';
     this.contextMenu.nativeElement.style.top = event.pageY + 'px';
     this.contextMenu.nativeElement.style.opacity = '1';
