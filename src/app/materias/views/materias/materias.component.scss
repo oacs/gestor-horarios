@@ -3,7 +3,7 @@ body{
 }
 
 .contenedorMaterias {
-    height: auto;
+    height: calc(100% - 100px);
     width: auto;
     margin: 0% 10% 0% 10%;
     background-color: inherit;
