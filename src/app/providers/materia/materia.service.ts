@@ -11,6 +11,7 @@ export interface Materia {
   horas?: number;
   maxH?: number;
   prelaciones?: Materia[];
+  corequisitos?: Materia[];
 }
 
 // Listo
