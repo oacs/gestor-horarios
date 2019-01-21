@@ -1,12 +1,12 @@
 <div class="contenedorMaterias">
 
-  <div class="materias-top-cotainer">
+  <div class="materias-top-container">
     <input class="campoTexto" type="text" name="buscar" placeholder="Buscar..." [formControl]="search">
     <!-- <i class="fa fa-filter" aria-hidden="true"></i> -->
     <button class="button" style="float:right" (click)="showNewModal()">Nuevo</button>
   </div>
 
-  <div class="materias-cotainer">
+  <div class="materias-container">
     <div class="materia" *ngFor="let materia of info" (click)="showUpdateModal(materia)">
       <p> {{materia.nombre | titlecase }} </p>
     </div>

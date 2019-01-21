@@ -2,6 +2,7 @@
 div.container {
     overflow-y: auto;
     height: calc(100vh - 120px);
+    animation: 0.3s appear ease-in-out;
 }
 
 div.header {
@@ -117,3 +118,7 @@ a.float i.fa.fa-arrow-right {
     font-size: 23px;
 }
 
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

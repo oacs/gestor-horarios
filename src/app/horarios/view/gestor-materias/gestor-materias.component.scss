@@ -31,6 +31,7 @@ a.float-left {
 
 div.view {
     overflow: hidden;
+    animation: 0.3s appear ease-in-out;
 }
 
 div.container {
@@ -38,7 +39,7 @@ div.container {
     color: #333333;
     font-size: 15px;
     height: calc(100vh - 100px);
-    margin-top: 20px;
+    //margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -126,4 +127,9 @@ div.container div.info div.info-container select {
 div.container div.info div.info-container select:hover {
     border: 1px solid #93cecc;    
     cursor: pointer;    
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
