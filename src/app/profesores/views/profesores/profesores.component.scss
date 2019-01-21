@@ -184,14 +184,37 @@ body{
 
 .content .content-info .sub-title{
     color: #908e8e;
-    font-size: 19px;
+    font-size: 14px;
     margin: 0 0 25px 0;
+
+    i{
+        display: none;
+    }
+}
+
+.content .content-info input{
+    padding: 8px;
+    border-radius: 10px;
+    color: #777676;
+    border: 1px solid #908e8e;
+}
+
+.content .content-info .sub-title:hover{
+    color: #89b2e6;
+    margin: 0 0 25px 0;
+    cursor: pointer;
+
+    i{
+        display: inline-block;
+        margin: 0 5px;
+        cursor: pointer;
+    }
 }
 
 
 
 .content .content-info .disp-table{
-   width: calc(85% - 25px);
+   width: calc(100% - 25px);
    background: #E3E7E7;
    color: #797575;
     margin: 15px 0;
@@ -207,6 +230,7 @@ body{
 
    border-right: 1px solid #FFF;
    border-bottom: 1px solid #FFF;
+   width: 16.6%;
 }
 
 .content .content-info .disp-table th.class{
