@@ -3,20 +3,27 @@ body{
 }
 
 .contenedorMaterias {
-    height: auto;
+    height: calc(100% - 100px);
     width: auto;
     margin: 0% 10% 0% 10%;
     background-color: inherit;
     overflow-y: auto;
 }
 
-.contenedorMaterias .materias-top-cotainer{
+.contenedorMaterias .materias-container{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+
+.contenedorMaterias .materias-top-container{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 0 10px;
 }
 
-.contenedorMaterias .materias-top-cotainer .campoTexto{
+.contenedorMaterias .materias-top-container .campoTexto{
     padding-left: 20px;
     width: 20%;
     height: 40px;
@@ -29,18 +36,18 @@ body{
     font-weight: bold;
 }
 
-.contenedorMaterias .materias-top-cotainer .fa-filter{
+.contenedorMaterias .materias-top-container .fa-filter{
     margin-left: 15px;
     font-size: 25px;
     color: #a6a6a6;
 }
 
-.contenedorMaterias .materias-top-cotainer .fa-filter:hover{
+.contenedorMaterias .materias-top-container .fa-filter:hover{
     color: #000;
     cursor: pointer;
 }
 
-.contenedorMaterias .materias-top-cotainer .button{
+.contenedorMaterias .materias-top-container .button{
     margin-left: 2.5%;
     margin-right: 2.5%;
     width: 15%;
@@ -55,14 +62,16 @@ body{
     cursor: pointer;
 }
 
-.contenedorMaterias .materias-top-cotainer .button:hover{
+.contenedorMaterias .materias-top-container .button:hover{
     transform: scale(1.001);
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
 }
 
 
-.contenedorMaterias .materias-cotainer .materia{
-    display: inline-block;
+.contenedorMaterias .materias-container .materia{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 285px;
     cursor: pointer;
     height: 185px;
@@ -74,7 +83,7 @@ body{
 }
 
 
-.contenedorMaterias .materias-cotainer .materia:hover{
+.contenedorMaterias .materias-container .materia:hover{
     transform: scale(1.001);
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.13);
 }

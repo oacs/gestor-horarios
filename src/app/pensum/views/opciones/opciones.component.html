@@ -4,7 +4,7 @@
     <div class="opcion" (click)="this.activeNuevoPensum = true;">
       <div class="title">Nuevo pensum</div>
       <div *ngIf="this.activeNuevoPensum" class="inputNuevo">
-        <form [formGroup]="createPensumForm">
+        <form [formGroup]="createPensumForm" class="animateIn">
           <label class="form-group">
             Nombre
             <input type="text" placeholder="Nombre del pensum" formControlName="nombre" required>
@@ -18,7 +18,7 @@
     <div class="opcion" (click)="this.activeModificarPensum = true">
       <div class="title">Modificar pensum existente</div>
       <div *ngIf="this.activeModificarPensum" class="inputModificar">
-        <form [formGroup]="modifyPensumForm">
+        <form [formGroup]="modifyPensumForm" class="animateIn">
 
           <label class="form-group">
             Nombre de pensum
