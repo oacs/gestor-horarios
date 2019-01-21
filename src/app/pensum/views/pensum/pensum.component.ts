@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -26,6 +26,7 @@ interface Semestre {
 })
 
 export class PensumComponent implements OnInit {
+  @ViewChild('contextMenu') contextMenu: ElementRef;
 
   public pensums: Pensum[];
   public pensumActivo: Pensum;
@@ -58,10 +59,11 @@ export class PensumComponent implements OnInit {
 
   public materiaTemporal: Materia;
 
+  public asignandoPrelaciones: boolean;
+  public materiaPrelaciones: Materia;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    console.log(event.target.innerWidth);
     this.calcularLimiteMateriasAMostrar(event.target.innerWidth);
     this.actualizarInfo();
   }
@@ -72,6 +74,15 @@ export class PensumComponent implements OnInit {
     private materiasxpensumService: MateriasxpensumService,
     private formModal: FormBuilder,
     private servicioOpcionesPensum: ServicioOpcionesPensumService) {
+
+
+      this.asignandoPrelaciones = false;
+      this.materiaPrelaciones = {
+        id: -1,
+        nombre: '',
+        semestre: -1,
+        prelaciones: []
+      };
 
     this.pensumSevice.getPensums().subscribe(pensums => {
       this.pensums = pensums;
@@ -184,6 +195,7 @@ export class PensumComponent implements OnInit {
     const aux: Materia[] = [];
     this.semestres.forEach(semestre => {
       semestre.materias.forEach(materia => {
+        materia.semestre = -1;
         aux.push(materia);
       });
     });
@@ -311,6 +323,57 @@ export class PensumComponent implements OnInit {
     this.limite = ((width * 0.8) / 163) - 1;
   }
 
+
+  /* GESTOR DE PRELACIONES */
+
+  abrirContextMenu(event: any) {
+    console.log('Context');
+    console.log(event);
+    this.contextMenu.nativeElement.style.left = event.pageX + 'px';
+    this.contextMenu.nativeElement.style.top = event.pageY + 'px';
+    this.contextMenu.nativeElement.style.opacity = '1';
+  }
+
+  abrirGestorPrelaciones(event: any, sIndex: number, mIndex: number) {
+    this.materiaPrelaciones = this.semestres[sIndex].materias[mIndex];
+    this.materiaPrelaciones.semestre = sIndex + 1;
+    this.asignandoPrelaciones = true;
+    console.log(this.materiaPrelaciones);
+    console.log(event);
+  }
+
+  esPrelacionDe(a: Materia, b: Materia) {
+    let esPrelacion = false;
+    b.prelaciones.forEach( preladora => {
+      if ( preladora.id === a.id) {
+        esPrelacion = true;
+        return ;
+      }
+    });
+    return esPrelacion;
+  }
+
+  esPosiblePrelacion(indiceSemestre: number) {
+    if (indiceSemestre + 1 < this.materiaPrelaciones.semestre) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  anadirAPrelaciones(indexSemestre: number, indexMateria: number) {
+    const materiaPreladora = this.semestres[indexSemestre].materias[indexMateria];
+
+    if  (this.asignandoPrelaciones) {
+      if (this.materiaPrelaciones.id !== materiaPreladora.id && !this.esPrelacionDe(materiaPreladora, this.materiaPrelaciones)) {
+
+        this.materiaPrelaciones.prelaciones.push(this.semestres[indexSemestre].materias[indexMateria]);
+
+      }
+    }
+    console.log(this.materiaPrelaciones.prelaciones.length);
+  }
+
   ngOnInit() {
 
     this.servicioOpcionesPensum.pensumActivo.subscribe(pensumActivo => {
@@ -335,6 +398,9 @@ export class PensumComponent implements OnInit {
     this.materias = [];
     this.materiasService.getMaterias().subscribe(data => {
       this.materias = data;
+      this.materias.forEach(materia => {
+        materia.prelaciones = [];
+      });
       this.posicion = 0;
       this.calcularLimiteMateriasAMostrar(window.innerWidth);
       this.actualizarInfo();
