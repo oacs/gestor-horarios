@@ -107,8 +107,8 @@ export class HorarioPeriodoClass {
                     bloques.forEach((b, j) => {
                         if (i !== j && a.dia === b.dia) {
 
-                            console.log('​a, b', a, b);
-                            console.log('compararBloques(a, b)', this.compararBloques(a, b));
+                            // console.log('​a, b', a, b);
+                            // console.log('compararBloques(a, b)', this.compararBloques(a, b));
                             switch (this.compararBloques(a, b)) {
                                 case 1:
                                     a.inicio = b.inicio;
@@ -119,15 +119,15 @@ export class HorarioPeriodoClass {
                                     }
                                     break;
                                 case 2:
-                                    console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
+                                    // console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
                                     a.fin = b.fin;
-                                    console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
+                                    // console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
                                     flag = 1;
                                     // console.log(del.indexOf(j));
                                     if (del.indexOf(j) === -1) {
                                         del.push(j);
                                     }
-                                    console.log('​HorarioPeriodoClass -> del', del);
+                                    // console.log('​HorarioPeriodoClass -> del', del);
 
                                     break;
                                 case 3:
@@ -148,9 +148,9 @@ export class HorarioPeriodoClass {
             if (del.length > 0) {
                 del.forEach(indice => {
 
-                    console.log('​HorarioPeriodoClass -> indice - dif', indice - dif, bloques[indice - dif - 1].fin);
+                    // console.log('​HorarioPeriodoClass -> indice - dif', indice - dif, bloques[indice - dif - 1].fin);
                     bloques.splice(indice - dif++, 1);
-                    console.log('​HorarioPeriodoClass -> bloques', bloques);
+                    // console.log('​HorarioPeriodoClass -> bloques', bloques);
 
                 });
             }
