@@ -74,6 +74,10 @@
   bottom: 5%;
 }
 
+.menu div.option {
+  animation: 0.3s appear ease-in;
+}
+
 .menu div.option:nth-of-type(1) {
   grid-area: o1;
 }
@@ -88,4 +92,9 @@
 
 .menu div.option:nth-of-type(4) {
   grid-area: o4;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: scale(1.01)}
+  to { opacity: 1; transform: scale(1) }
 }
