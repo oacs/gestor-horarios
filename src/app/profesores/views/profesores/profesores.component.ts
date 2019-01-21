@@ -44,7 +44,7 @@ export class ProfesoresComponent implements OnInit {
   ) {
     this.horariosPasados = [];
     this.mostrarHorarioPasado = [];
-    this.mostrarInput = [false,false];
+    this.mostrarInput = [false, false];
     this.inputCorreo = new FormControl('');
     this.inputNombre = new FormControl('');
     this.utilidades = new HorarioPeriodoClass();
@@ -143,10 +143,8 @@ export class ProfesoresComponent implements OnInit {
         }
       }
     }
-
-    this.profesorService.updateProfesor(this.profesorSeleccionado).subscribe( msj => {
-      console.log(msj);
-    });
+    this.profesorSeleccionado.nombre = this.inputNombre.value;
+    this.profesorSeleccionado.correo = this.inputCorreo.value;
 
     disp = this.utilidades.compactarBloques(disp);
 
@@ -197,20 +195,19 @@ export class ProfesoresComponent implements OnInit {
     this.mostrarHorarioPasado[i] = !this.mostrarHorarioPasado[i];
   }
 
-  public togleEdit(i:number){
-    this.profesorSeleccionado.nombre = this.inputNombre.value;
-    this.profesorSeleccionado.correo = this.inputCorreo.value; 
+  public togleEdit(i: number) {
 
-    if (this.mostrarInput[i]){
+    if (this.mostrarInput[i]) {
+      this.profesorSeleccionado.nombre = this.inputNombre.value;
+      this.profesorSeleccionado.correo = this.inputCorreo.value;
       this.mostrarInput[i] = false;
-    }
-    else{
+    } else {
       this.mostrarInput[i] = true;
       this.inputNombre.setValue(this.profesorSeleccionado.nombre);
       this.inputCorreo.setValue(this.profesorSeleccionado.correo);
 
     }
   }
-  
+
 
 }
