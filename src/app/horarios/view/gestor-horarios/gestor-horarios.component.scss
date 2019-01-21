@@ -19,6 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: 0.3s appear ease-in-out;
 
   select{
     width: 45%;
@@ -245,4 +246,10 @@ a.float-left {
   i {
     font-size: 25px;
   }
+}
+
+
+@keyframes appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
