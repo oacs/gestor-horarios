@@ -188,7 +188,7 @@ export class ProfesoresComponent implements OnInit {
   public eliminarProfesor() {
     this.profesorService.deleteProfesor(this.profesorSeleccionado.id).subscribe(res => {
       console.log(res);
-      this.auxProfesores.splice(this.auxProfesores.indexOf(this.profesorSeleccionado) - 1, 1);
+      this.auxProfesores.splice(this.auxProfesores.findIndex(profesor => this.profesorSeleccionado.id === profesor.id), 1);
       // this.profesores.splice(this.profesores.indexOf(this.profesorSeleccionado), 1);
       this.profesorSeleccionado = new ProfesorClass(0, '', '', '');
     });
