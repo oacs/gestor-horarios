@@ -14,7 +14,15 @@ export class TablaHorarioComponent implements OnInit {
   public hora = Hora;
 
   @Input() horario: SeccionClass[][][];
-  constructor() { }
+  constructor() {
+    this.horario = [];
+    for (let i = 0; i < 7; i++) {
+      // 7 dias con 14 bloques
+      this.horario.push([[], [], [], [], [], [], [], [], [], [], [], [], [], []]);
+    }
+    this.horario[0][0].push(new SeccionClass('401'));
+    console.log('​GestorHorariosComponent -> constructor -> this.horario[0][0].length', this.horario[0][0]);
+  }
 
   ngOnInit() {
   }
