@@ -40,6 +40,7 @@ export class TablaHorarioComponent implements OnInit {
         seccion.id === this.seccionActiva.id && seccion.idMateria === this.seccionActiva.idMateria);
       if (index < 0) {
         this.seccionActiva.BloqueHorasFinal.push(new BloqueHoras(i, j, (j + 1)));
+        console.log('​this.seccionActiva.BloqueHorasFinal', this.seccionActiva.BloqueHorasFinal);
         this.seccionActiva.BloqueHorasFinal = this.utilidades.compactarBloques(this.seccionActiva.BloqueHorasFinal);
         const disp = this.seccionActiva.profesor.disponibilidad;
         let aux: BloqueHoras[] = [];

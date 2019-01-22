@@ -22,7 +22,7 @@
       <i class="fa fa-print" aria-hidden="true"></i>
     </div>
     <div class="card-container" id="list-two">
-      <div class="newCard" (click)="abrirModal('nuevaMateria');">
+      <div class="newCard">
         <div class="icono">+</div>
       </div>
       <div *ngFor="let seccion of seccionesSemestre" (click)="selectSeccion(seccion)" class="card">

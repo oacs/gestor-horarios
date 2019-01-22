@@ -48,39 +48,51 @@ export class HorarioPeriodoClass {
     //     });
     // }
     public obtenerBloquesPosibles(idMateria: number, semestre: number, idSeccion: string): BloqueHoras[] {
+        const noDisponible: BloqueHoras[] = [];
         const seccionAux = this.obtenerSeccion(idMateria, semestre, idSeccion);
-        // console.log('​HorarioPeriodoClass -> seccionAux', seccionAux);
         const materiaAux = this.obtenerMateria(idMateria, semestre);
-        let noDisponible: BloqueHoras[] = [];
-        const disponible: BloqueHoras[] = [];
-        console.log('No disponible comienzo:');
-        console.log(noDisponible);
-        noDisponible.length = (0);
-        console.log('No disponible comienzo:');
-        console.log(noDisponible);
+        let disponible: BloqueHoras[] = [];
+        let cont = disponible.length;
+        console.log('inicio -> cont', cont);
         // Semestre previo
+        // console.log('Semestre previo');
         if (semestre > 1 && this.materiasPorSemestre[semestre - 2] != null) {
             this.materiasPorSemestre[semestre - 2].forEach(materia => {
                 if (materiaAux.prelaciones.findIndex(prelacion => prelacion.id === materia.id) < 0) {
                     materia.secciones.forEach(seccion => {
-                        console.log('Semestre prev -> seccion', seccion);
+                        // console.log('Semestre prev -> seccion', seccion);
                         seccion.BloqueHorasFinal.forEach(bloque => {
-                            noDisponible.push(JSON.parse(JSON.stringify(bloque)));
+                            noDisponible.push(bloque);
+                            noDisponible.push(bloque);
+
+                            console.log('previo -> bloque', bloque);
+                            console.log('previo -> cont', cont);
+                            cont++;
+                            // console.log('json', JSON.parse(JSON.stringify(bloque)));
+                            // console.log(noDisponible);
                         });
-                        console.log(noDisponible);
+                        // console.log(noDisponible);
                     });
                 }
             });
         }
         // Semestre actual
+        // console.log('Semestre actual');
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
             materia.secciones.forEach(seccion => {
                 if (materia.id !== materiaAux.id || (materia.id === materiaAux.id && seccion.profesor === seccionAux.profesor)) {
-                    console.log('​Semestre actual -> seccion', seccion);
+                    // console.log('​Semestre actual -> seccion', seccion);
                     seccion.BloqueHorasFinal.forEach(bloque => {
-                        noDisponible.push(JSON.parse(JSON.stringify(bloque)));
+                        noDisponible.push(bloque);
+                        // noDisponible.push(bloque);
+
+                        console.log('actual -> bloque', bloque);
+                        console.log('actual -> cont', cont);
+                        cont++;
+                        // console.log('json', JSON.parse(JSON.stringify(bloque)));
+                        // console.log(noDisponible);
                     });
-                    console.log(noDisponible);
+                    // console.log(noDisponible);
                 }
             });
         });
@@ -89,11 +101,16 @@ export class HorarioPeriodoClass {
             this.materiasPorSemestre[semestre].forEach(materia => {
                 if (materia.prelaciones.findIndex(prelacion => prelacion.id === materiaAux.id) < 0) {
                     materia.secciones.forEach(seccion => {
-                        console.log('Semestre sig -> seccion', seccion);
+                        // console.log('Semestre sig -> seccion', seccion);
                         seccion.BloqueHorasFinal.forEach(bloque => {
-                            noDisponible.push(JSON.parse(JSON.stringify(bloque)));
+                            noDisponible.push(bloque);
+                            // noDisponible.push(bloque);
+
+                            console.log('siguiente -> bloque', bloque);
+                            console.log('siguiente -> cont', cont);
+                            cont++;
                         });
-                        console.log(noDisponible);
+                        // console.log(noDisponible);
                     });
                 }
             });
@@ -101,29 +118,52 @@ export class HorarioPeriodoClass {
         materiaAux.correquisito.forEach(materia => {
             materia.secciones.forEach(seccion => {
                 seccion.BloqueHorasFinal.forEach(bloque => {
-                    noDisponible.push(JSON.parse(JSON.stringify(bloque)));
+                    noDisponible.push((bloque));
+                    // noDisponible.push((bloque));
+                    console.log('correquisito -> bloque', bloque);
+                    console.log('correquisito -> cont', cont);
+                    cont++;
                 });
             });
         });
 
         // console.log(seccionAux.profesor.disponibilidad);
-        // console.log(this.invertirBloques(ordenarPorDia(seccionAux.profesor.disponibilidad)));
-        this.invertirBloques(seccionAux.profesor.disponibilidad).forEach(bloque => {
-            noDisponible.push(JSON.parse(JSON.stringify(bloque)));
+        console.log(this.invertirBloques(ordenarPorDia(seccionAux.profesor.disponibilidad.slice(0))));
+        this.invertirBloques(seccionAux.profesor.disponibilidad.slice(0)).forEach(bloque => {
+            noDisponible.push({
+                dia: bloque.dia + 0,
+                inicio: bloque.inicio + 0,
+                fin: bloque.fin + 0,
+            });
+            console.log(bloque.fin);
+            // noDisponible.push(bloque);
+
+            console.log(bloque);
+            console.log('disponibilidad -> cont', cont);
+            cont++;
         });
-        console.log('no disp dirty ----\n');
+        console.log('cont', cont);
+        // console.log('no disp dirty ----\n');
         console.log(noDisponible);
-        noDisponible = ordenarPorDia(JSON.parse(JSON.stringify(noDisponible)));
-        noDisponible = this.compactarBloques(JSON.parse(JSON.stringify(noDisponible)));
-        console.log('no disp compactado -----\n');
-        console.log(noDisponible);
+        // noDisponible = ;
+        // console.log('​ordenarPorDia ', ordenarPorDia(noDisponible.slice(0)));
+        let auxD: BloqueHoras[] = ordenarPorDia(noDisponible.slice(0));
+        // console.log('​HorarioPeriodoClass -> auxD', auxD);
+
+        auxD = this.compactarBloques(auxD);
+        // console.log('no disp compactado -----\n');
+        // console.log(noDisponible);
         // console.log(' -----\n');
-        console.log('disp\n');
-        console.log(this.invertirBloques(JSON.parse(JSON.stringify(noDisponible))));
+        // console.log('disp\n');
+        // console.log(this.invertirBloques(JSON.parse(JSON.stringify(noDisponible))));
         // console.log('--------------\n');
-        return this.compactarBloques(this.invertirBloques(JSON.parse(JSON.stringify(noDisponible)))).slice();
+        disponible = this.compactarBloques(this.invertirBloques(auxD.slice(0)).slice(0)).slice(0);
+        // noDisponible.splice(0, noDisponible.length)
+        return disponible;
     }
-    public compactarBloques(bloques: BloqueHoras[]): BloqueHoras[] {
+    public compactarBloques(bloquesIn: BloqueHoras[]): BloqueHoras[] {
+        console.log('Antes de compactar -----------', bloquesIn);
+        const bloques = bloquesIn.slice(0);
         let flag = -1;
         let del: number[] = [];
         while (flag !== 0) {
@@ -134,7 +174,7 @@ export class HorarioPeriodoClass {
                     bloques.forEach((b, j) => {
                         if (i !== j && a.dia === b.dia) {
 
-                            // console.log('​a, b', a, b);
+                            // // console.log('​a, b', a, b);
                             // console.log('compararBloques(a, b)', this.compararBloques(a, b));
                             switch (this.compararBloques(a, b)) {
                                 case 1:
@@ -146,15 +186,15 @@ export class HorarioPeriodoClass {
                                     }
                                     break;
                                 case 2:
-                                    // console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
+                                    // // console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
                                     a.fin = b.fin;
-                                    // console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
+                                    // // console.log('​HorarioPeriodoClass -> a.fin ', a.fin);
                                     flag = 1;
                                     // console.log(del.indexOf(j));
                                     if (del.indexOf(j) === -1) {
                                         del.push(j);
                                     }
-                                    // console.log('​HorarioPeriodoClass -> del', del);
+                                    // // console.log('​HorarioPeriodoClass -> del', del);
 
                                     break;
                                 case 3:
@@ -171,20 +211,21 @@ export class HorarioPeriodoClass {
                 }
             });
             let dif = 0;
-            // console.log('​HorarioPeriodo -> del', del);
+            // // console.log('​HorarioPeriodo -> del', del);
             if (del.length > 0) {
                 del.forEach(indice => {
 
-                    // console.log('​HorarioPeriodoClass -> indice - dif', indice - dif, bloques[indice - dif - 1].fin);
+                    // // console.log('​HorarioPeriodoClass -> indice - dif', indice - dif, bloques[indice - dif - 1].fin);
                     bloques.splice(indice - dif++, 1);
-                    // console.log('​HorarioPeriodoClass -> bloques', bloques);
+                    // // console.log('​HorarioPeriodoClass -> bloques', bloques);
 
                 });
             }
-            // console.log('​HorarioPeriodo -> bloques', bloques);
+            // // console.log('​HorarioPeriodo -> bloques', bloques);
             del = [];
         }
         // console.log('Resultado -> bloques', bloques);
+        console.log('Despues de compactar -----------', bloques);
         return bloques;
     }
     public compararBloquesDeHora(a: BloqueHoras[], b: BloqueHoras[]): number {
@@ -264,6 +305,7 @@ export class HorarioPeriodoClass {
 
     public invertirBloques(bloques: BloqueHoras[]): BloqueHoras[] {
         const buffer: BloqueHoras[] = [];
+        console.log(bloques);
         let dia = -1;
         let prev = 0;
         const diasUtilizados: number[] = [];
