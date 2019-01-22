@@ -13,7 +13,7 @@
       hora[i][hora[i].length-1]}}</th>
     <ng-container *ngFor="let dia of [0,1,2,3,4]; let j = index">
 
-      <th *ngIf="horario[j][i].length != 0" [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}">
+      <th *ngIf="horario[j][i].length != 0" [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}" class="ordinaryCel">
         <div *ngFor="let seccion of horario[i][j]">
           {{seccion.id}}
         </div>

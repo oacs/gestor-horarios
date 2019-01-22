@@ -1,5 +1,5 @@
 .disp-table {
-  width: calc(85% - 25px);
+  width: 100%;
   background: #E3E7E7;
   color: #797575;
   margin: 15px 0;
@@ -12,12 +12,15 @@
 
 
   th {
-
     border-right: 1px solid #FFF;
     border-bottom: 1px solid #FFF;
     width: 16.6%;
+
   }
 
+  th.ordinaryCel{
+    display: flex;
+  }
   th.class {
     background: #AFDBD9;
   }
