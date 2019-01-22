@@ -177,16 +177,50 @@ div.upload {
   position: absolute;
   display: flex;
   flex-direction: column;
-  bottom: 10px;
-  left: 50px;
+  bottom: 5%;
+  left: 5%;
 
-  i {
-    color: white;
-    opacity: 0.5;
-    font-size: 23px;
-    border: solid white 2px;
-    padding: 5px;
-    margin: 3px;
+  i{
+
+    font-size: 30px;
+    cursor: pointer;
+    color: #eee;
+  }
+
+  i:hover{
+    color:#777676;
+  }
+
+  div{
+
+    position: absolute;
+    bottom: 70px;
+    left: -25px;
+
+    i {
+      color: #a4a4a4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+      background: white;
+      border-radius: 50%;
+      padding: 5px;
+      margin: 5px 0;
+    }
+
+    i.fa-save:hover{
+      color: #89b2e6;
+    }
+    i.fa-print:hover{
+      color:#a1d1d0;
+    }
+    i.fa-file-excel-o:hover{
+      color: #83ccae;
+    }
+
   }
 
 }

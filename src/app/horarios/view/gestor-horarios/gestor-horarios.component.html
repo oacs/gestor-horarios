@@ -18,8 +18,12 @@
   <div class="blue"></div>
   <div class="green">
     <div class="upload">
-      <i class="fa fa-save" aria-hidden="true"></i>
-      <i class="fa fa-print" aria-hidden="true"></i>
+      <i (click)="togleMinimenu();" class="fa fa-ellipsis-v" aria-hidden="true"></i>
+      <div *ngIf="minimenu == true">
+        <i class="fa fa-save" aria-hidden="true"></i>
+        <i class="fa fa-print" aria-hidden="true"></i>
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+      </div>
     </div>
     <div class="card-container" id="list-two">
       <div class="newCard" (click)="abrirModal('nuevaMateria');">
