@@ -9,6 +9,7 @@ import { MateriaClass } from '../../../providers/algoritmo/materiaClass';
 import { SeccionClass } from '../../../providers/algoritmo/seccionClass';
 import { ProfesorService } from '../../../providers/profesor/profesor.service';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestor-materias',
@@ -29,7 +30,8 @@ export class GestorMateriasComponent implements OnInit {
   constructor(
     private servicioConfiguracionHorario: ServicioConfiguracionHorariosService,
     private profesoresService: ProfesorService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     // this.listaMateria = [];
     this.semestreActivo = 0;
@@ -101,4 +103,13 @@ export class GestorMateriasComponent implements OnInit {
     console.log(this.horarioActivo.materiasPorSemestre[this.semestreActivo][this.posicion]);
   }
 
+  public siguientePaso() {
+    // this.listaMateria.forEach(materia => {
+    //   if (materia.secciones.length <= 0) {
+    //     console.log('Alerta: Faltan materias con secciones en 0');
+    //   }
+    // });
+    this.servicioConfiguracionHorario.updateHorarioActual(this.horarioActivo);
+    this.router.navigate(['horarios', 'paso3']);
+  }
 }

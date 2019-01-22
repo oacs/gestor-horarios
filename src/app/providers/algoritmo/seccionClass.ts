@@ -28,6 +28,8 @@ export class SeccionClass {
      * @param {string} id id de la seccion
      * @memberof Seccion
      */
+
+    public idMateria?: number;
     constructor(id: string, profesor?: ProfesorClass) {
         this.id = id;
         this.BloqueHorasFinal = [];

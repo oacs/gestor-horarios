@@ -1,6 +1,7 @@
 <div class="content-center">
   <h1 style="font-size: 30px; margin: 15px 0 0 10%; align-self: flex-start;">Paso 3</h1>
-  <p style="font-size: 15px; text-align: justify; align-self: flex-start; margin: 5px 0 0 10%">A continuación podrá asignar las materias a sus respectivos semestres y horas de clase.</p>
+  <p style="font-size: 15px; text-align: justify; align-self: flex-start; margin: 5px 0 0 10%">A continuación podrá
+    asignar las materias a sus respectivos semestres y horas de clase.</p>
   <div class="selectorSemestre">
     <a><i (click)="changeSemestre(-1)" class="fa fa-caret-left" aria-hidden="true"></i></a>
     <span class="semestre-activo">{{ (semestreActivo+1) }}</span>
@@ -8,7 +9,7 @@
   </div>
   <p style="text-align: center; font-size: 12px; margin-top: -12px">Semestre</p>
 
-  <app-tabla-horario></app-tabla-horario>
+  <app-tabla-horario [seccionActiva]="SeccionActiva" [horario]="horario" [disponibilidad]="disponibilidad"></app-tabla-horario>
 
 
 </div>
@@ -24,8 +25,12 @@
       <div class="newCard" (click)="abrirModal('nuevaMateria');">
         <div class="icono">+</div>
       </div>
-      <div class="card">
+      <div *ngFor="let seccion of seccionesSemestre" (click)="selectSeccion(seccion)" class="card">
         <div class="infoMateria">
+
+          {{seccion.id}}
+          {{seccion.profesor.nombre}}
+
         </div>
       </div>
     </div>

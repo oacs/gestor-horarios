@@ -2,6 +2,7 @@ import { MateriaClass } from './materiaClass';
 import { SeccionClass } from './seccionClass';
 import { BloqueHoras } from './BloqueHoras';
 import { ordenarPorDia } from '../databaseTransalations/datoToString';
+import { Dias } from './enum';
 
 export const CANTIDAD_DE_SEMESTRES = 10;
 
@@ -48,17 +49,25 @@ export class HorarioPeriodoClass {
     // }
     public obtenerBloquesPosibles(idMateria: number, semestre: number, idSeccion: string): BloqueHoras[] {
         const seccionAux = this.obtenerSeccion(idMateria, semestre, idSeccion);
+        // console.log('​HorarioPeriodoClass -> seccionAux', seccionAux);
         const materiaAux = this.obtenerMateria(idMateria, semestre);
         let noDisponible: BloqueHoras[] = [];
         const disponible: BloqueHoras[] = [];
+        console.log('No disponible comienzo:');
+        console.log(noDisponible);
+        noDisponible.length = (0);
+        console.log('No disponible comienzo:');
+        console.log(noDisponible);
         // Semestre previo
         if (semestre > 1 && this.materiasPorSemestre[semestre - 2] != null) {
             this.materiasPorSemestre[semestre - 2].forEach(materia => {
                 if (materiaAux.prelaciones.findIndex(prelacion => prelacion.id === materia.id) < 0) {
                     materia.secciones.forEach(seccion => {
+                        console.log('Semestre prev -> seccion', seccion);
                         seccion.BloqueHorasFinal.forEach(bloque => {
-                            noDisponible.push(bloque);
+                            noDisponible.push(JSON.parse(JSON.stringify(bloque)));
                         });
+                        console.log(noDisponible);
                     });
                 }
             });
@@ -67,9 +76,11 @@ export class HorarioPeriodoClass {
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
             materia.secciones.forEach(seccion => {
                 if (materia.id !== materiaAux.id || (materia.id === materiaAux.id && seccion.profesor === seccionAux.profesor)) {
+                    console.log('​Semestre actual -> seccion', seccion);
                     seccion.BloqueHorasFinal.forEach(bloque => {
-                        noDisponible.push(bloque);
+                        noDisponible.push(JSON.parse(JSON.stringify(bloque)));
                     });
+                    console.log(noDisponible);
                 }
             });
         });
@@ -78,9 +89,11 @@ export class HorarioPeriodoClass {
             this.materiasPorSemestre[semestre].forEach(materia => {
                 if (materia.prelaciones.findIndex(prelacion => prelacion.id === materiaAux.id) < 0) {
                     materia.secciones.forEach(seccion => {
+                        console.log('Semestre sig -> seccion', seccion);
                         seccion.BloqueHorasFinal.forEach(bloque => {
-                            noDisponible.push(bloque);
+                            noDisponible.push(JSON.parse(JSON.stringify(bloque)));
                         });
+                        console.log(noDisponible);
                     });
                 }
             });
@@ -88,24 +101,27 @@ export class HorarioPeriodoClass {
         materiaAux.correquisito.forEach(materia => {
             materia.secciones.forEach(seccion => {
                 seccion.BloqueHorasFinal.forEach(bloque => {
-                    noDisponible.push(bloque);
+                    noDisponible.push(JSON.parse(JSON.stringify(bloque)));
                 });
             });
         });
+
+        // console.log(seccionAux.profesor.disponibilidad);
+        // console.log(this.invertirBloques(ordenarPorDia(seccionAux.profesor.disponibilidad)));
         this.invertirBloques(seccionAux.profesor.disponibilidad).forEach(bloque => {
-            noDisponible.push(bloque);
+            noDisponible.push(JSON.parse(JSON.stringify(bloque)));
         });
         console.log('no disp dirty ----\n');
         console.log(noDisponible);
-        noDisponible = ordenarPorDia(noDisponible);
-        noDisponible = this.compactarBloques(noDisponible);
+        noDisponible = ordenarPorDia(JSON.parse(JSON.stringify(noDisponible)));
+        noDisponible = this.compactarBloques(JSON.parse(JSON.stringify(noDisponible)));
         console.log('no disp compactado -----\n');
         console.log(noDisponible);
         // console.log(' -----\n');
-        // console.log('disp\n');
-        // console.log(this.invertirBloques(noDisponible));
+        console.log('disp\n');
+        console.log(this.invertirBloques(JSON.parse(JSON.stringify(noDisponible))));
         // console.log('--------------\n');
-        return this.invertirBloques(noDisponible);
+        return this.compactarBloques(this.invertirBloques(JSON.parse(JSON.stringify(noDisponible)))).slice();
     }
     public compactarBloques(bloques: BloqueHoras[]): BloqueHoras[] {
         let flag = -1;
@@ -204,25 +220,83 @@ export class HorarioPeriodoClass {
         }
         return 0;
     }
+    // public invertirBloques(bloques: BloqueHoras[]): BloqueHoras[] {
+    //     let buffer: BloqueHoras[] = [];
+    //     let prev = 0;
+    //     let diaPrev = bloques[0].dia;
+    //     const diasUtilizados: number[] = [];
+    //     diasUtilizados.push(diaPrev);
+    //     bloques.forEach(bloque => {
+    //         if (bloque.dia === diaPrev) {
+    //             if (prev !== bloque.inicio) {
+
+    //                 buffer.push(new BloqueHoras(diaPrev, prev, bloque.inicio));
+    //             } else {
+    //                 buffer.push(new BloqueHoras(diaPrev, prev, bloque.fin));
+    //             }
+    //             prev = bloque.fin;
+    //         } else {
+    //             buffer.push(new BloqueHoras(diaPrev, prev, 14));
+    //             diaPrev = bloque.dia;
+    //             diasUtilizados.push(diaPrev);
+    //             prev = 0;
+    //             if (prev !== bloque.inicio) {
+
+    //                 buffer.push(new BloqueHoras(diaPrev, prev, bloque.inicio));
+    //             } else {
+    //                 buffer.push(new BloqueHoras(diaPrev, prev, bloque.fin));
+    //             }
+    //             prev = bloque.fin;
+    //         }
+    //     });
+    //     if (diasUtilizados.length !== 7) {
+    //         for (let i = 0; i < 7; i++) {
+    //             if (diasUtilizados.indexOf(i) === -1) {
+    //                 buffer.push(new BloqueHoras(i, 0, 14));
+    //             }
+    //         }
+    //     }
+    //     buffer.push(new BloqueHoras(diaPrev, prev, 14));
+    //     // console.log('Invertir -> buffer', buffer);
+    //     buffer = ordenarPorDia(buffer);
+    //     return buffer;
+    // }
+
     public invertirBloques(bloques: BloqueHoras[]): BloqueHoras[] {
-        let buffer: BloqueHoras[] = [];
+        const buffer: BloqueHoras[] = [];
+        let dia = -1;
         let prev = 0;
-        let diaPrev = bloques[0].dia;
         const diasUtilizados: number[] = [];
-        diasUtilizados.push(diaPrev);
         bloques.forEach(bloque => {
-            if (bloque.dia === diaPrev) {
-                buffer.push(new BloqueHoras(diaPrev, prev, bloque.inicio));
-                prev = bloque.fin;
+            if (dia === -1) {
+                dia = bloque.dia;
+                diasUtilizados.push(dia);
+            }
+            if (dia === bloque.dia) {
+                if (prev === bloque.inicio) {
+                    prev = bloque.fin;
+                } else {
+                    buffer.push(new BloqueHoras(dia, prev, bloque.inicio));
+                    prev = bloque.fin;
+                }
             } else {
-                buffer.push(new BloqueHoras(diaPrev, prev, 14));
-                diaPrev = bloque.dia;
-                diasUtilizados.push(diaPrev);
+                if (prev !== 14) {
+                    buffer.push(new BloqueHoras(dia, prev, 14));
+                }
+                dia = bloque.dia;
+                diasUtilizados.push(dia);
                 prev = 0;
-                buffer.push(new BloqueHoras(diaPrev, prev, bloque.inicio));
-                prev = bloque.fin;
+                if (prev === bloque.inicio) {
+                    prev = bloque.fin;
+                } else {
+                    buffer.push(new BloqueHoras(dia, prev, bloque.inicio));
+                    prev = bloque.fin;
+                }
             }
         });
+        if (prev !== 14) {
+            buffer.push(new BloqueHoras(dia, prev, 14));
+        }
         if (diasUtilizados.length !== 7) {
             for (let i = 0; i < 7; i++) {
                 if (diasUtilizados.indexOf(i) === -1) {
@@ -230,20 +304,23 @@ export class HorarioPeriodoClass {
                 }
             }
         }
-        buffer.push(new BloqueHoras(diaPrev, prev, 14));
-        // console.log('Invertir -> buffer', buffer);
-        buffer = ordenarPorDia(buffer);
+        if (buffer == null) {
+            console.log('buffer vacio');
+        }
         return buffer;
     }
     public obtenerSeccion(idMateria: number, semestre: number, idSeccion: string): SeccionClass {
         let seccionAux: SeccionClass = null;
         this.materiasPorSemestre[semestre - 1].forEach(materia => {
-            materia.secciones.forEach(seccion => {
-                if (seccion.id === idSeccion) {
-                    seccionAux = seccion;
-                    return seccionAux;
-                }
-            });
+            if (materia.id === idMateria) {
+
+                materia.secciones.forEach(seccion => {
+                    if (seccion.id === idSeccion) {
+                        seccionAux = seccion;
+                        return seccionAux;
+                    }
+                });
+            }
         });
         return seccionAux;
     }
@@ -255,6 +332,22 @@ export class HorarioPeriodoClass {
                 aux = materia;
                 return materia;
             }
+        });
+        return aux;
+    }
+    public obtenerMateriaSinSemetre(idMateria: number): MateriaClass {
+        let aux: MateriaClass = null;
+        this.materiasPorSemestre.forEach(semestre => {
+            semestre.forEach(materia => {
+                if (materia.id === idMateria) {
+                    // console.log(materia);
+                    aux = materia;
+                    return materia;
+                }
+                if (aux != null) {
+                    return;
+                }
+            });
         });
         return aux;
     }
