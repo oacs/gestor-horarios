@@ -1,0 +1,89 @@
+div.container {
+    bottom: 20px;
+    left: 1%;
+    position: absolute;
+    width: 300px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+div.container div.notification {
+    width: 100%;
+    height: 50px;
+    border-radius: 3px;
+    margin-top: 10px;
+    color: #606060;
+    background-color: rgba(255, 255, 255, 0.95);;
+    //background-color: gray;
+    opacity: 0;
+    animation: 0.3s appear ease-in forwards;
+    box-shadow: 0 0.8px 0.75px 0 rgba(0, 0, 0, 0.02);
+    display: flex;
+    user-select: none;
+}
+
+div.container div.notification div.icon {
+    //background-color: rgba(0, 0, 0, 0.8);
+    //background-color: rgba(0, 0, 0, 0.8);
+    //color: white;
+    //color: #93cecc;
+    border-radius: 2px;
+    width: 57px;
+    height: 50px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+div.container div.notification div.message {
+    //color: #93cecc;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    width: 178px;
+}
+
+div.container div.notification div.close {
+    //background-color: rgba(0, 0, 0, 0.8);
+    //color: #93cecc;
+    font-size: 16px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+div.container div.notification div.close i.fa.fa-times {
+    display: inline-block;
+    border-left: 1px solid rgba(0, 0, 0, 0.25);
+    padding-left: 17px;
+}
+
+div.container div.notification div.close i.fa.fa-times:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+div.container div.notification div.icon i.fa.fa-bell-o {
+    display: inline-block;
+    border-right: 1px solid rgba(0, 0, 0, 0.25);
+    padding-right: 17px;
+}
+
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

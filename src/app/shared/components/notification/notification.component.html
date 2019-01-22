@@ -1,0 +1,13 @@
+<div class="container">
+  <div *ngFor="let notification of notifications; index as nIndex" class="notification">
+    <div class="icon">
+        <i class="fa fa-bell-o" aria-hidden="true"></i>
+    </div>
+    <div class="message">
+      {{notification}}
+    </div>
+    <div class="close">
+      <i class="fa fa-times" aria-hidden="true" (click)="dismiss(nIndex)"></i>
+    </div>
+  </div>
+</div>
