@@ -9,6 +9,7 @@ import { MateriaService, Materia } from '../../../providers/materia/materia.serv
 import { MateriasxpensumService } from '../../../providers/materiasxpensum/materiasxpensum.service';
 import { MateriaClass } from '../../../providers/algoritmo/materiaClass';
 import { Router } from '@angular/router';
+import { SeccionClass } from '../../../providers/algoritmo/seccionClass';
 
 @Component({
   selector: 'app-gestor-secciones',
@@ -16,8 +17,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./gestor-secciones.component.scss']
 })
 export class GestorSeccionesComponent implements OnInit {
-  horarioActivo: HorarioPeriodoClass;
-  listaProfesores: ProfesorClass[];
+  public horarioActivo: HorarioPeriodoClass;
+  public listaProfesores: ProfesorClass[];
 
 
   public selectPensum: FormControl;
@@ -40,13 +41,15 @@ export class GestorSeccionesComponent implements OnInit {
       this.materiaxPensumService.getMateriasxPensumId(id).subscribe(materias => {
         this.listaMateria = [];
         materias.forEach(materia => {
-          this.listaMateria.push(new MateriaClass(
+          const materiaAux = new MateriaClass(
             materia.nombre,
             materia.id,
             materia.semestre,
             materia.horas,
             materia.maxH
-          ));
+          );
+          materiaAux.secciones.push(new SeccionClass('401'));
+          this.listaMateria.push(materiaAux);
         });
       });
     });

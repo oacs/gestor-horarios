@@ -13,12 +13,16 @@
       hora[i][hora[i].length-1]}}</th>
     <ng-container *ngFor="let dia of [0,1,2,3,4]; let j = index">
 
-      <th *ngIf="horario[j][i].length != 0" [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}" class="ordinaryCel">
-        <div *ngFor="let seccion of horario[i][j]">
-          {{seccion.id}}
+      <th *ngIf="horario[j][i].length != 0" [ngClass]="{'verde': disponibilidad != null && disponibilidad[j] != null && disponibilidad[j][i] != null && disponibilidad[j][i] == 1, 'rojo': disponibilidad != null && disponibilidad[j] != null && disponibilidad[j][i] != null && disponibilidad[j][i] == 2}">
+        <div class="ordinaryCel" (click)="agregarSeccion(j, i)">
+          <div *ngFor="let seccion of horario[j][i]">
+            {{seccion.id}}
+            {{seccion.profesor.nombre}}
+          </div>
         </div>
       </th>
-      <th *ngIf="horario[j][i] == 0"></th>
+      <th (click)="agregarSeccion(j, i)" [ngClass]="{'verde': disponibilidad != null && disponibilidad[j] != null && disponibilidad[j][i] != null && disponibilidad[j][i] == 1, 'rojo': disponibilidad != null && disponibilidad[j] != null && disponibilidad[j][i] != null && disponibilidad[j][i] == 2}"
+        *ngIf="horario[j][i] == 0"></th>
     </ng-container>
   </tr>
 
