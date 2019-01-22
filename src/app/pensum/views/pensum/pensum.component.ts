@@ -431,10 +431,22 @@ export class PensumComponent implements OnInit {
   }
 
   abrirGestorRequisitos(req: string) {
-    this.materiaRequisitos = {} as Materia;
-    this.materiaRequisitos = this.semestres[this.indexSemestreMatReq].materias[this.indexMateriaMatReq];
+    // this.materiaRequisitos = {} as Materia;
+    const aux = this.semestres[this.indexSemestreMatReq].materias[this.indexMateriaMatReq];
+    const prel = aux.prelaciones.slice();
+    const core = aux.corequisitos.slice();
+    this.materiaRequisitos = {
+      id: aux.id,
+      nombre: aux.nombre,
+      semestre: aux.semestre,
+      prelaciones: prel,
+      corequisitos: core,
+      horas: 0,
+      maxH: 0,
+    };
     this.materiaRequisitos.semestre = this.indexSemestreMatReq + 1;
     this.asignandoRequisito = req;
+    console.log(this.semestres);
   }
 
   esPrelacionDe() {
