@@ -1,0 +1,39 @@
+.disp-table {
+  width: 100%;
+  background: #E3E7E7;
+  color: #797575;
+  margin: 15px 0;
+  border: 3px solid #AFDBD9;
+  border-radius: 3px;
+
+  tr {
+    height: 25px;
+  }
+
+
+  th {
+    border-right: 1px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    width: 16.6%;
+
+  }
+
+  th.ordinaryCel{
+    display: flex;
+  }
+  th.class {
+    background: #AFDBD9;
+  }
+
+  th.class2 {
+    background: #ffff9e;
+  }
+
+
+  th.first-table {
+    background: #FFF;
+    border-radius: 10px;
+    border: none;
+    color: #B5B5B5;
+  }
+}

@@ -54,11 +54,13 @@ export class HorarioPeriodoClass {
         // Semestre previo
         if (semestre > 1 && this.materiasPorSemestre[semestre - 2] != null) {
             this.materiasPorSemestre[semestre - 2].forEach(materia => {
-                materia.secciones.forEach(seccion => {
-                    seccion.BloqueHorasFinal.forEach(bloque => {
-                        noDisponible.push(bloque);
+                if (materiaAux.prelaciones.findIndex(prelacion => prelacion.id === materia.id) < 0) {
+                    materia.secciones.forEach(seccion => {
+                        seccion.BloqueHorasFinal.forEach(bloque => {
+                            noDisponible.push(bloque);
+                        });
                     });
-                });
+                }
             });
         }
         // Semestre actual
@@ -74,20 +76,29 @@ export class HorarioPeriodoClass {
         // Semestre siguiente
         if (semestre < 10 && this.materiasPorSemestre[semestre] != null) {
             this.materiasPorSemestre[semestre].forEach(materia => {
-                materia.secciones.forEach(seccion => {
-                    seccion.BloqueHorasFinal.forEach(bloque => {
-                        noDisponible.push(bloque);
+                if (materia.prelaciones.findIndex(prelacion => prelacion.id === materiaAux.id) < 0) {
+                    materia.secciones.forEach(seccion => {
+                        seccion.BloqueHorasFinal.forEach(bloque => {
+                            noDisponible.push(bloque);
+                        });
                     });
-                });
+                }
             });
         }
+        materiaAux.correquisito.forEach(materia => {
+            materia.secciones.forEach(seccion => {
+                seccion.BloqueHorasFinal.forEach(bloque => {
+                    noDisponible.push(bloque);
+                });
+            });
+        });
         this.invertirBloques(seccionAux.profesor.disponibilidad).forEach(bloque => {
             noDisponible.push(bloque);
         });
         console.log('no disp dirty ----\n');
         console.log(noDisponible);
         noDisponible = ordenarPorDia(noDisponible);
-        // noDisponible = this.compactarBloques(noDisponible);
+        noDisponible = this.compactarBloques(noDisponible);
         console.log('no disp compactado -----\n');
         console.log(noDisponible);
         // console.log(' -----\n');

@@ -24,7 +24,8 @@ export class MateriaClass {
     /**
      * @description Materias que prelan esta materia
      * */
-    public prelaciones: MateriaClass[];
+    public prelaciones: MateriaClass[] = [];
+    public correquisito: MateriaClass[] = [];
     /**
      *  @description Secciones que posee la materia
      * */
@@ -48,6 +49,7 @@ export class MateriaClass {
         this.horasMax = horasMax;
         this.prelaciones = [];
         this.secciones = [];
+        this.correquisito = [];
     }
 
 

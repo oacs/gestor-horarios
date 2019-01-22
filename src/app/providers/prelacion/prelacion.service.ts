@@ -49,6 +49,10 @@ export class PrelacionService {
     return this.http.delete<Prelacion>(AppConfig.api + 'prelacion/' + id);
   }
 
+  public deleteprelacionByPensum(id: number): Observable<Prelacion> {
+    return this.http.delete<Prelacion>(AppConfig.api + 'prelacion/' + id + '/byPensum');
+  }
+
   public updateprelacion(prelacion: Prelacion): Observable<any> {
     return this.http.put(AppConfig.api + 'prelacion/' + prelacion, prelacion);
   }

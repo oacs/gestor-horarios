@@ -1,32 +1,15 @@
 <div class="content-center">
+  <h1 style="font-size: 30px; margin: 15px 0 0 10%; align-self: flex-start;">Paso 3</h1>
+  <p style="font-size: 15px; text-align: justify; align-self: flex-start; margin: 5px 0 0 10%">A continuación podrá asignar las materias a sus respectivos semestres y horas de clase.</p>
+  <div class="selectorSemestre">
+    <a><i (click)="changeSemestre(-1)" class="fa fa-caret-left" aria-hidden="true"></i></a>
+    <span class="semestre-activo">{{ (semestreActivo+1) }}</span>
+    <a><i (click)="changeSemestre(1)" class="fa fa-caret-right" aria-hidden="true"></i></a>
+  </div>
+  <p style="text-align: center; font-size: 12px; margin-top: -12px">Semestre</p>
 
-  <select name="" id=""></select>
+  <app-tabla-horario></app-tabla-horario>
 
-  <table class="disp-table noselect">
-    <tr>
-      <th style="border: none;"></th>
-      <th class="first-table">Lunes</th>
-      <th class="first-table">Martes</th>
-      <th class="first-table">Miercoles</th>
-      <th class="first-table">Jueves</th>
-      <th class="first-table">Viernes</th>
-
-    </tr>
-    <tr *ngFor="let bloque of horario[0]; let i = index">
-      <th class="first-table">{{hora[i]}} - {{hora[i].split(':')[0]}}:50{{hora[i][hora[i].length-2] +
-        hora[i][hora[i].length-1]}}</th>
-      <ng-container *ngFor="let dia of [0,1,2,3,4]; let j = index">
-
-        <th *ngIf="horario[j][i].length != 0" [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}">
-          <div *ngFor="let seccion of horario[i][j]">
-            {{seccion.id}}
-          </div>
-        </th>
-        <th *ngIf="horario[j][i] == 0"></th>
-      </ng-container>
-    </tr>
-
-  </table>
 
 </div>
 
@@ -35,6 +18,7 @@
   <div class="green">
     <div class="upload">
       <i class="fa fa-save" aria-hidden="true"></i>
+      <i class="fa fa-print" aria-hidden="true"></i>
     </div>
     <div class="card-container" id="list-two">
       <div class="newCard" (click)="abrirModal('nuevaMateria');">
