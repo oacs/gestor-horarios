@@ -266,59 +266,60 @@ export class PensumComponent implements OnInit {
     this.pensumActivo = {} as Pensum;
     this.pensumActivo.id = 2;
     this.materiasxpensumService.deleteMateriaxpensumByPensum(2).subscribe(msj => {
+      this.prelacionService.deleteprelacionByPensum(2).subscribe(msj3 => {
+        this.semestres.forEach((semestre, i) => {
+          semestre.materias.forEach((materia, j) => {
+            this.materiasxpensumService.insertMateriaxpensum({
+              id_materia: materia.id,
+              id_pensum: 2,
+              maxH: 0,
+              horas: 0,
+              semestre: semestre.numero
+            }).subscribe(mensaje => {
+              console.log(mensaje);
+            });
+            materia.prelaciones.forEach(prelacion => {
+              this.prelacionService.insertprelacion(
+                {
+                  id_pensum: 2,
+                  id_prelada: materia.id,
+                  id_prelante: prelacion.id,
+                  tipo: 0
+                }).subscribe(msj2 => {
+                  console.log(msj2);
+                });
+            });
 
-      this.semestres.forEach((semestre, i) => {
-        semestre.materias.forEach((materia, j) => {
+            materia.corequisitos.forEach(correquisito => {
+              this.prelacionService.insertprelacion(
+                {
+                  id_pensum: 2,
+                  id_prelada: materia.id,
+                  id_prelante: correquisito.id,
+                  tipo: 1
+                }).subscribe(msj2 => {
+                  console.log(msj2);
+                });
+            });
+          });
+        });
+        const aux: Materia[] = [];
+        this.semestres.forEach(semestre => {
+          semestre.materias.forEach(materia => {
+            aux.push(materia);
+          });
+        });
+        const infoAux: Materia[] = this.materias.filter(mat => !aux.includes(mat));
+        infoAux.forEach(materia => {
           this.materiasxpensumService.insertMateriaxpensum({
             id_materia: materia.id,
             id_pensum: 2,
             maxH: 0,
             horas: 0,
-            semestre: semestre.numero
+            semestre: 0
           }).subscribe(mensaje => {
             console.log(mensaje);
           });
-          materia.prelaciones.forEach(prelacion => {
-            this.prelacionService.insertprelacion(
-              {
-                id_pensum: 2,
-                id_prelada: materia.id,
-                id_prelante: prelacion.id,
-                tipo: 0
-              }).subscribe(msj2 => {
-                console.log(msj2);
-              });
-          });
-
-          materia.corequisitos.forEach(correquisito => {
-            this.prelacionService.insertprelacion(
-              {
-                id_pensum: 2,
-                id_prelada: materia.id,
-                id_prelante: correquisito.id,
-                tipo: 1
-              }).subscribe(msj2 => {
-                console.log(msj2);
-              });
-          });
-        });
-      });
-      const aux: Materia[] = [];
-      this.semestres.forEach(semestre => {
-        semestre.materias.forEach(materia => {
-          aux.push(materia);
-        });
-      });
-      const infoAux: Materia[] = this.materias.filter(mat => !aux.includes(mat));
-      infoAux.forEach(materia => {
-        this.materiasxpensumService.insertMateriaxpensum({
-          id_materia: materia.id,
-          id_pensum: 2,
-          maxH: 0,
-          horas: 0,
-          semestre: 0
-        }).subscribe(mensaje => {
-          console.log(mensaje);
         });
       });
     });
@@ -365,18 +366,18 @@ export class PensumComponent implements OnInit {
 
           });
         } else {
-          this.materiasService.getPrelantes(materia.id).subscribe(prelantes => {
+          this.materiasService.getPrelantes(materia.id, 2).subscribe(prelantes => {
             const prelaciones: Materia[] = prelantes.filter(prelacion => prelacion.tipo === 0).map(prelacion => {
               return {
-                id: prelacion.id_materia,
-                nombre: '',
+                id: prelacion.id_prelante,
+                nombre: prelacion.nombre,
                 semestre: prelacion.semestre
               };
             });
-            const corequisitos: Materia[] = prelantes.filter(corequisito => corequisito.tipo === 0).map(prelacion => {
+            const corequisitos: Materia[] = prelantes.filter(corequisito => corequisito.tipo === 1).map(prelacion => {
               return {
-                id: prelacion.id_materia,
-                nombre: '',
+                id: prelacion.id_prelante,
+                nombre: prelacion.nombre,
                 semestre: prelacion.semestre
               };
             });
