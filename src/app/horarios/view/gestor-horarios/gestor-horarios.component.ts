@@ -15,6 +15,7 @@ export class GestorHorariosComponent implements OnInit {
   horarioActivo: HorarioPeriodoClass;
   listaProfesores: ProfesorClass[];
   public semestreActivo: number;
+  public minimenu: boolean;
 
   // enums
   public dias = Dias;
@@ -27,6 +28,7 @@ export class GestorHorariosComponent implements OnInit {
   constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) {
     this.horario = [];
     this.semestreActivo = 0;
+    this.minimenu = false;
     for (let i = 0; i < 7; i++) {
       // 7 dias con 14 bloques
       this.horario.push([[], [], [], [], [], [], [], [], [], [], [], [], [], []]);
@@ -54,6 +56,14 @@ export class GestorHorariosComponent implements OnInit {
       } else {
         this.semestreActivo += numero;
       }
+    }
+  }
+
+  togleMinimenu() {
+    if (this.minimenu) {
+      this.minimenu = false;
+    } else {
+      this.minimenu = true;
     }
   }
 
