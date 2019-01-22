@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { test } from '../../../providers/algoritmo/test';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
     /*this.dbService.getProfesores().subscribe( data => {
       console.log(data);
     });*/
+    test();
   }
 
 }
