@@ -2,8 +2,9 @@
 
   <div class="top-menu">
     <button class="button new" (click)="showNewModal()"><i class="fa fa-plus" aria-hidden="true"></i></button>
-    <button class="button delete" (click)="guardarHorario()"><i class="fa fa-minus" aria-hidden="true"></i></button>
-    <button *ngIf="profesorSeleccionado.nombre != ''" class="button save" (click)="eliminarProfesor()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+    <button class="button delete" (click)="eliminarProfesor()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+    <button *ngIf="profesorSeleccionado.nombre != ''" class="button save" (click)="guardarHorario()"><i class="fa fa-floppy-o"
+        aria-hidden="true"></i></button>
   </div>
   <!--
   Modal para crear nueva materia
@@ -33,13 +34,17 @@
     <div class="content-top">
       <div>
         <h2 class="title">nombre del profesor</h2>
-        <h4  *ngIf="mostrarInput[0] == false" (click)="togleEdit(0)" class="sub-title">{{profesorSeleccionado.nombre | titlecase}} <i class="fa fa-pencil" aria-hidden="true"></i></h4>
-        <input *ngIf="mostrarInput[0] == true" type="text" value="{{profesorSeleccionado.nombre}}" [formControl]="inputNombre" (focusout)="togleEdit(0)">
+        <h4 *ngIf="mostrarInput[0] == false" (click)="togleEdit(0)" class="sub-title">{{profesorSeleccionado.nombre |
+          titlecase}} <i class="fa fa-pencil" aria-hidden="true"></i></h4>
+        <input *ngIf="mostrarInput[0] == true" type="text" value="{{profesorSeleccionado.nombre}}" [formControl]="inputNombre"
+          (focusout)="togleEdit(0)">
       </div>
       <div style="text-align: right;">
-        <h2  class="title">correo electronico</h2>
-        <h4 *ngIf="mostrarInput[1] == false" (click)="togleEdit(1)" class="sub-title"> {{profesorSeleccionado.correo}}  <i class="fa fa-pencil" aria-hidden="true"></i></h4>
-        <input *ngIf="mostrarInput[1] == true" type="text" value="{{profesorSeleccionado.correo}}" [formControl]="inputCorreo" (focusout)="togleEdit(1)">
+        <h2 class="title">correo electronico</h2>
+        <h4 *ngIf="mostrarInput[1] == false" (click)="togleEdit(1)" class="sub-title"> {{profesorSeleccionado.correo}}
+          <i class="fa fa-pencil" aria-hidden="true"></i></h4>
+        <input *ngIf="mostrarInput[1] == true" type="text" value="{{profesorSeleccionado.correo}}" [formControl]="inputCorreo"
+          (focusout)="togleEdit(1)">
       </div>
     </div>
     <div class="disponibilidad-row">
@@ -69,11 +74,11 @@
 
     </table>
     <div class="box-inputFile">
-        <input type="file" class="inputFile" id="input-file">
-        <label for="input-file">
-            <i class="fa fa-upload" aria-hidden="true"></i><span>Seleccione un archivo</span>
-        </label>
-      </div>
+      <input type="file" class="inputFile" id="input-file">
+      <label for="input-file">
+        <i class="fa fa-upload" aria-hidden="true"></i><span>Seleccione un archivo</span>
+      </label>
+    </div>
 
     <div class="old-reference">
       <div *ngFor="let horarioPasado of horariosPasados; let i = index">
@@ -104,7 +109,7 @@
 <div class="rightColumn">
   <form [formGroup]="buscador">
     <input type="text" class="finder" formControlName="texto" placeholder="Buscar...">
-  </form> 
+  </form>
   <ul>
     <li *ngFor="let profesor of profesores; index as i" [ngClass]="
       {
