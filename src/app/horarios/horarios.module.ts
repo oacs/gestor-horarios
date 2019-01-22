@@ -6,6 +6,7 @@ import { GestorHorariosComponent } from './view/gestor-horarios/gestor-horarios.
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartaMateriaComponent } from './components/carta-materia/carta-materia.component';
+import { TablaHorarioComponent } from './components/tabla-horario/tabla-horario.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [GestorMateriasComponent, GestorSeccionesComponent, GestorHorariosComponent, CartaMateriaComponent],
+  declarations: [GestorMateriasComponent, GestorSeccionesComponent, GestorHorariosComponent, CartaMateriaComponent, TablaHorarioComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -21,7 +21,7 @@ body {
   align-items: center;
   animation: 0.3s appear ease-in-out;
 
-  select{
+  select {
     width: 45%;
     margin: 10px 0 0 0;
     padding: 8px;
@@ -192,42 +192,7 @@ a.float-left {
   left: 3%;
 }
 
-.disp-table {
-  width: calc(85% - 25px);
-  background: #E3E7E7;
-  color: #797575;
-  margin: 15px 0;
-  border: 3px solid #AFDBD9;
-  border-radius: 3px;
 
-  tr {
-    height: 25px;
-  }
-
-
-  th {
-
-    border-right: 1px solid #FFF;
-    border-bottom: 1px solid #FFF;
-    width: 16.6%;
-  }
-
-  th.class {
-    background: #AFDBD9;
-  }
-
-  th.class2 {
-    background: #ffff9e;
-  }
-
-
-  th.first-table {
-    background: #FFF;
-    border-radius: 10px;
-    border: none;
-    color: #B5B5B5;
-  }
-}
 
 
 
@@ -250,6 +215,11 @@ a.float-left {
 
 
 @keyframes appear {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

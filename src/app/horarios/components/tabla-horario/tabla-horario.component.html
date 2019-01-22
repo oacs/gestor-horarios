@@ -1,0 +1,25 @@
+<table class="disp-table noselect">
+  <tr>
+    <th style="border: none;"></th>
+    <th class="first-table">Lunes</th>
+    <th class="first-table">Martes</th>
+    <th class="first-table">Miercoles</th>
+    <th class="first-table">Jueves</th>
+    <th class="first-table">Viernes</th>
+
+  </tr>
+  <tr *ngFor="let bloque of horario[0]; let i = index">
+    <th class="first-table">{{hora[i]}} - {{hora[i].split(':')[0]}}:50{{hora[i][hora[i].length-2] +
+      hora[i][hora[i].length-1]}}</th>
+    <ng-container *ngFor="let dia of [0,1,2,3,4]; let j = index">
+
+      <th *ngIf="horario[j][i].length != 0" [ngClass]="{'class': horario[j][i] == 1, 'class2': horario[j][i] == 2}">
+        <div *ngFor="let seccion of horario[i][j]">
+          {{seccion.id}}
+        </div>
+      </th>
+      <th *ngIf="horario[j][i] == 0"></th>
+    </ng-container>
+  </tr>
+
+</table>
