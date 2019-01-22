@@ -16,6 +16,7 @@ export class GestorHorariosComponent implements OnInit {
   horarioActivo: HorarioPeriodoClass;
   listaProfesores: ProfesorClass[];
   public semestreActivo: number;
+  public minimenu: boolean;
 
   // enums
   public dias = Dias;
@@ -34,6 +35,7 @@ export class GestorHorariosComponent implements OnInit {
     this.horario = [];
     this.disponibilidad = [];
     this.semestreActivo = 0;
+    this.minimenu = false;
     for (let i = 0; i < 7; i++) {
       // 7 dias con 14 bloques
       this.disponibilidad.push([]);
@@ -81,6 +83,13 @@ export class GestorHorariosComponent implements OnInit {
     }
   }
 
+  togleMinimenu() {
+    if (this.minimenu) {
+      this.minimenu = false;
+    } else {
+      this.minimenu = true;
+    }
+  }
   selectSeccion(seccion: SeccionClass) {
     // this.materiaActiva = this.horarioActivo.obtenerMateria(seccion.idMateria, )
     this.SeccionActiva = seccion;

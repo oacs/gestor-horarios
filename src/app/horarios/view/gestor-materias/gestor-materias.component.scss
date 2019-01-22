@@ -2,6 +2,11 @@
     outline: none;
 }
 
+div.scroll-fix {
+    overflow: scroll;
+    height: calc(100vh - 100px);
+}
+
 a.float-right,
 a.float-left {
     display: block;
