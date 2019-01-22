@@ -14,6 +14,7 @@ import { SeccionClass } from '../../../providers/algoritmo/seccionClass';
 export class GestorHorariosComponent implements OnInit {
   horarioActivo: HorarioPeriodoClass;
   listaProfesores: ProfesorClass[];
+  public semestreActivo: number;
 
   // enums
   public dias = Dias;
@@ -25,6 +26,7 @@ export class GestorHorariosComponent implements OnInit {
 
   constructor(private servicioConfiguracionHorario: ServicioConfiguracionHorariosService) {
     this.horario = [];
+    this.semestreActivo = 0;
     for (let i = 0; i < 7; i++) {
       // 7 dias con 14 bloques
       this.horario.push([[], [], [], [], [], [], [], [], [], [], [], [], [], []]);
@@ -41,6 +43,18 @@ export class GestorHorariosComponent implements OnInit {
     this.servicioConfiguracionHorario.listaProfesoresActual.subscribe(lista => {
       this.listaProfesores = lista;
     });
+  }
+
+  changeSemestre(numero: number) {
+    if (this.semestreActivo + numero < 0) {
+      this.semestreActivo = 0;
+    } else {
+      if (this.semestreActivo + numero > 9) {
+        this.semestreActivo = 9;
+      } else {
+        this.semestreActivo += numero;
+      }
+    }
   }
 
 }

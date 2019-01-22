@@ -14,7 +14,28 @@ header {
 body {
   background: #FFF;
 }
+.content-center div.selectorSemestre {
+  display: flex;
+    justify-content: center;
+    margin: 5px 0px 10px 0px;
+    color: #333333;
+}
 
+.content-center div.selectorSemestre a {
+  padding: 0px 20px;
+  text-decoration: none;
+  font-size: 35px;
+  color: #9c9c9c;
+}
+
+.content-center div.selectorSemestre a:hover {
+  color: #333333;
+}
+
+.content-center div.selectorSemestre span.semestre-activo {
+  font-size: 35px;
+  font-weight: 600;
+}
 .content-center {
   display: flex;
   flex-direction: column;
@@ -152,16 +173,24 @@ div.arrows i:hover {
   opacity: 1
 }
 
-div.upload i {
+div.upload {
   position: absolute;
-  left: 5%;
-  bottom: 40px;
-  color: white;
-  opacity: 0.5;
-  font-size: 23px;
-  border: solid white 2px;
-  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  bottom: 10px;
+  left: 50px;
+
+  i {
+    color: white;
+    opacity: 0.5;
+    font-size: 23px;
+    border: solid white 2px;
+    padding: 5px;
+    margin: 3px;
+  }
+
 }
+
 
 div.upload i:hover {
   opacity: 1;
