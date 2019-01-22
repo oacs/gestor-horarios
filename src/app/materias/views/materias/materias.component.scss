@@ -2,12 +2,16 @@ body{
     background: #f0f7f7;
 }
 
+.fix-scroll {
+    overflow-y: scroll;
+    height: calc(100% - 100px);
+}
+
 .contenedorMaterias {
     height: calc(100% - 100px);
     width: auto;
     margin: 0% 10% 0% 10%;
     background-color: inherit;
-    overflow-y: auto;
 }
 
 .contenedorMaterias .materias-container{
